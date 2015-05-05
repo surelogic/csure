@@ -23,6 +23,10 @@ class ExampleVisitor : public RecursiveASTVisitor<ExampleVisitor> {
 private:
     ASTContext *astContext; // used for getting additional AST info
 
+    ~ExampleVisitor() {
+    	// What is there to do?
+    }
+
 public:
     explicit ExampleVisitor(CompilerInstance *CI) 
       : astContext(&(CI->getASTContext())) // initialize private members
