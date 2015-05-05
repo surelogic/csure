@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 void do_math(int *x) {
   *x += 5;
 }

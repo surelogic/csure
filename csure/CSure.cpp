@@ -1,4 +1,5 @@
 #include <memory>
+#include <utility>
 #include "bits/unique_ptr.h"
 #include "clang/Driver/Options.h"
 #include "clang/AST/AST.h"
@@ -10,6 +11,7 @@
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/Frontend/FrontendPluginRegistry.h"
 #include "clang/Rewrite/Core/Rewriter.h"
+#include "clang/Lex/Preprocessor.h"
 
 using namespace std;
 using namespace clang;
@@ -24,7 +26,7 @@ private:
     ASTContext *astContext; // used for getting additional AST info
 
     ~ExampleVisitor() {
-    	// What is there to do?
+    	// What is there to do here?
     }
 
 public:
@@ -103,16 +105,43 @@ public:
 */
 };
 
+class CSurePreprocessorInfo : public clang::PPCallbacks {
+	~CSurePreprocessorInfo() {
+		// What to do here?
+	}
+
+	virtual void InclusionDirective(SourceLocation HashLoc,
+	                                  const Token &IncludeTok,
+	                                  StringRef FileName,
+	                                  bool IsAngled,
+	                                  CharSourceRange FilenameRange,
+	                                  const FileEntry *File,
+	                                  StringRef SearchPath,
+	                                  StringRef RelativePath,
+	                                  const Module *Imported) override {
+		errs() << "** Including " << SearchPath << '/' << RelativePath << "\n";
+	}
+};
+
 class PluginExampleAction : public PluginASTAction {
 protected:
     // this gets called by Clang when it invokes our Plugin
 	std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, StringRef file) {
+		CSurePreprocessorInfo* preprocessor_consumer = new CSurePreprocessorInfo();
+
+	    CI.getPreprocessor().addPPCallbacks(std::unique_ptr<PPCallbacks>(preprocessor_consumer));
         return std::unique_ptr<ASTConsumer>(new ExampleASTConsumer(&CI));
     }
 
     // implement this function if you want to parse custom cmd-line args
     bool ParseArgs(const CompilerInstance &CI, const vector<string> &args) {
         return true;
+    }
+
+    virtual  bool BeginSourceFileAction(CompilerInstance &CI,
+                                        StringRef Filename) override {
+       errs() << "** Looking at " << Filename << "\n";
+       return PluginASTAction::BeginSourceFileAction(CI, Filename);
     }
 };
 
