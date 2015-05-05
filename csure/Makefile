@@ -1,9 +1,9 @@
 CLANG_LEVEL := ../..
-LIBRARYNAME = PluginExample
+LIBRARYNAME = CSure
 
 LINK_LIBS_IN_SHARED = 1
 SHARED_LIBRARY = 1
 
-SOURCES := PluginExample.cpp
+SOURCES := CSure.cpp
 
 include $(CLANG_LEVEL)/Makefile
