@@ -39,6 +39,12 @@ public:
     virtual bool VisitFunctionDecl(FunctionDecl *func) {
         numFunctions++;
         string funcName = func->getNameInfo().getName().getAsString();
+        SourceRange range = func->getSourceRange();
+        errs() << "** " << funcName << ": "
+        	   << range.getBegin().printToString(rewriter.getSourceMgr())
+			   << ", "
+			   << range.getEnd().printToString(rewriter.getSourceMgr())
+			   << "\n";
         if (funcName == "do_math") {
             rewriter.ReplaceText(func->getLocation(), funcName.length(), "add5");
             errs() << "** Rewrote function def: " << funcName << "\n";
