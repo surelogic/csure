@@ -141,6 +141,7 @@ protected:
 
     // implement this function if you want to parse custom cmd-line args
     bool ParseArgs(const CompilerInstance &CI, const vector<string> &args) {
+    	errs() << "** Output going to " << CI.getFrontendOpts().OutputFile << "\n";
         return true;
     }
 
