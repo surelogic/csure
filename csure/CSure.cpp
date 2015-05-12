@@ -5,7 +5,9 @@
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/ASTConsumer.h"
+#include "clang/AST/Attr.h"
 #include "clang/AST/RecursiveASTVisitor.h"
+#include "clang/Basic/AttrKinds.h"
 #include "clang/Frontend/ASTConsumers.h"
 #include "clang/Frontend/FrontendActions.h"
 #include "clang/Frontend/CompilerInstance.h"
@@ -36,18 +38,37 @@ public:
         rewriter.setSourceMgr(astContext->getSourceManager(), astContext->getLangOpts());
     }
 
+    virtual bool VisitAttr(Attr *a) /*override*/ {
+    	errs() << "** Looking at attr: " << a->getSpelling() << "\n";
+    	return true;
+    }
+
     virtual bool VisitFunctionDecl(FunctionDecl *func) {
         numFunctions++;
         string funcName = func->getNameInfo().getName().getAsString();
         SourceRange range = func->getSourceRange();
-        errs() << "** " << funcName << ": "
-        	   << range.getBegin().printToString(rewriter.getSourceMgr())
-			   << ", "
-			   << range.getEnd().printToString(rewriter.getSourceMgr())
-			   << "\n";
         if (funcName == "do_math") {
+            errs() << "** " << funcName << ": "
+            	   << range.getBegin().printToString(rewriter.getSourceMgr())
+    			   << ", "
+    			   << range.getEnd().printToString(rewriter.getSourceMgr())
+    			   << "\n";
+
             rewriter.ReplaceText(func->getLocation(), funcName.length(), "add5");
             errs() << "** Rewrote function def: " << funcName << "\n";
+
+            for(auto a : func->attrs()) {
+            	errs() << "** Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
+            	switch (a->getKind()) {
+            	default:
+            		break;
+            	case attr::SureLogicStarts:
+            		SureLogicStartsAttr* sa =  func->getAttr<SureLogicStartsAttr>();
+            		errs() << "** Got @Starts: " << sa->getValue() << "\n";
+            		break;
+            	}
+            }
+            //
         }    
         return true;
     }
@@ -141,6 +162,7 @@ protected:
 
     // implement this function if you want to parse custom cmd-line args
     bool ParseArgs(const CompilerInstance &CI, const vector<string> &args) {
+    	errs() << "** Working dir? " << CI.getFileSystemOpts().WorkingDir << "\n";
     	errs() << "** Output going to " << CI.getFrontendOpts().OutputFile << "\n";
         return true;
     }
