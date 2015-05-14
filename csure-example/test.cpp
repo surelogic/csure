@@ -11,6 +11,6 @@ int main(void) {
   return result;
 }
 
-class [[valueObject]] Foo {
+class [[valueObject]] [[referenceObject]] Foo {
 
 };
