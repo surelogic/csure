@@ -19,7 +19,7 @@ using namespace std;
 using namespace clang;
 using namespace llvm;
 
-Rewriter rewriter;
+//Rewriter rewriter;
 int numFunctions = 0;
 
 
@@ -35,7 +35,7 @@ public:
     explicit ExampleVisitor(CompilerInstance *CI) 
       : astContext(&(CI->getASTContext())) // initialize private members
     {
-        rewriter.setSourceMgr(astContext->getSourceManager(), astContext->getLangOpts());
+        //rewriter.setSourceMgr(astContext->getSourceManager(), astContext->getLangOpts());
     }
 
     virtual bool VisitAttr(Attr *a) /*override*/ {
@@ -46,8 +46,9 @@ public:
     virtual bool VisitFunctionDecl(FunctionDecl *func) {
         numFunctions++;
         string funcName = func->getNameInfo().getName().getAsString();
-        SourceRange range = func->getSourceRange();
-        if (funcName == "do_math") {
+        //SourceRange range = func->getSourceRange();
+        if (true || funcName == "do_math") {
+        	/*
             errs() << "** " << funcName << ": "
             	   << range.getBegin().printToString(rewriter.getSourceMgr())
     			   << ", "
@@ -55,7 +56,8 @@ public:
     			   << "\n";
 
             rewriter.ReplaceText(func->getLocation(), funcName.length(), "add5");
-            errs() << "** Rewrote function def: " << funcName << "\n";
+            */
+            errs() << "** Looking at function def: " << funcName << "\n";
 
             for(auto a : func->attrs()) {
             	errs() << "** Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
@@ -73,7 +75,24 @@ public:
         return true;
     }
 
+    virtual bool VisitCallExpr(CallExpr *c) {
+    	errs() << "** Looking at call:\n";
+    	c->dump(errs(), astContext->getSourceManager());
+    	errs() << "\n";
+
+    	errs() << "Callee decl:\n:";
+    	Decl* d = c->getCalleeDecl();
+    	d->dump(errs());
+    	errs() << "\n";
+
+    	for(auto a : d->attrs()) {
+    	 	errs() << "** Looking at attr on callee decl:" << a->getSpelling() << "\n";
+    	}
+    	return true;
+    }
+
     virtual bool VisitStmt(Stmt *st) {
+    	/*
         if (ReturnStmt *ret = dyn_cast<ReturnStmt>(st)) {
             rewriter.ReplaceText(ret->getRetValue()->getLocStart(), 6, "val");
             errs() << "** Rewrote ReturnStmt\n";
@@ -82,6 +101,7 @@ public:
             rewriter.ReplaceText(call->getLocStart(), 7, "add5");
             errs() << "** Rewrote function call\n";
         }
+        */
         return true;
     }
 
@@ -98,6 +118,16 @@ public:
         return true;
     }
 */
+
+    virtual bool VisitRecordDecl(RecordDecl *r) {
+    	errs() << "Found record: " << r->getDeclName().getAsString() << "\n";
+    	return true;
+    }
+
+    virtual bool VisitCXXRecordDecl(CXXRecordDecl *r) {
+    	errs() << "Found CXX record: " << r->getDeclName().getAsString() << "\n";
+    	return true;
+    }
 };
 
 
