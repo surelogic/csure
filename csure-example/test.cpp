@@ -5,12 +5,21 @@
   *x += 5;
 }
 
+void do_math(int* y);
+
+class [[valueObject]] [[referenceObject]] Foo {
+public:
+	[[starts("nothing")]] int bar(int i) {
+		return 0;
+	}
+};
+
 int main(void) {
   int result = -1, val = 4;
   do_math(&val);
+
+  Foo f;
+  f.bar(0);
   return result;
 }
 
-class [[valueObject]] [[referenceObject]] Foo {
-
-};
