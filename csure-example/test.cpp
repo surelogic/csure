@@ -1,25 +1,28 @@
 #include <stdio.h>
 
-//void do_math(int *x) __attribute__((clangShouldntKnowAboutThis)) {
-[[starts("nothing")]] void do_math(int *x) /*__attribute__((deprecated))*/ {
-  *x += 5;
-}
+class [[valueObject]] Point {
+	const int x, y;
 
-void do_math(int* y);
-
-class [[valueObject]] [[referenceObject]] Foo {
 public:
-	[[starts("nothing")]] int bar(int i) {
-		return 0;
+	Point(int i, int j) : x(i), y(j) {
+		// Nothing else to do
+	}
+
+	[[starts("nothing")]] int getX() {
+		return x;
+	}
+
+	[[starts("nothing")]] int getY() {
+		return y;
 	}
 };
 
-int main(void) {
-  int result = -1, val = 4;
-  do_math(&val);
+class [[referenceObject]] UniqueID {
 
-  Foo f;
-  f.bar(0);
-  return result;
+};
+
+int main(void) {
+  Point p(1, 2);
+  return p.getX();
 }
 

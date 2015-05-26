@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-void do_math(int *x) /*__attribute__((clangShouldntKnowAboutThis)) */
+//void do_math(int *x) __attribute__((clangShouldntKnowAboutThis)) {
+//[[starts("nothing")]]
+void do_math(int *x) /*__attribute__((deprecated))*/ {
 {
   *x += 5;
 }
