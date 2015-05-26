@@ -38,16 +38,36 @@ public:
         //rewriter.setSourceMgr(astContext->getSourceManager(), astContext->getLangOpts());
     }
 
+    bool isInLocalFile(SourceRange range) {
+        FileID file = astContext->getSourceManager().getFileID(range.getBegin());
+        const FileEntry* entry = astContext->getSourceManager().getFileEntryForID(file);
+        if (entry == NULL) {
+        	/*
+            errs() << "** Unable to get file entry for " <<
+            		range.getBegin().printToString(astContext->getSourceManager()) << "\n";
+            */
+        	return false;
+        }
+        const char* name = entry->getName();
+        if (name == NULL) {
+        	return false;
+        }
+        return (name[0] != '/');
+    }
+
     virtual bool VisitAttr(Attr *a) /*override*/ {
-    	errs() << "** Looking at attr: " << a->getSpelling() << "\n";
+    	if (isInLocalFile(a->getRange())) {
+    		errs() << "** Looking at attr: " << a->getSpelling() << "\n";
+    	}
     	return true;
     }
 
     virtual bool VisitFunctionDecl(FunctionDecl *func) {
         numFunctions++;
         string funcName = func->getNameInfo().getName().getAsString();
-        //SourceRange range = func->getSourceRange();
-        if (true || funcName == "do_math") {
+        SourceRange range = func->getSourceRange();
+
+        if (isInLocalFile(range)) {
         	/*
             errs() << "** " << funcName << ": "
             	   << range.getBegin().printToString(rewriter.getSourceMgr())
@@ -119,13 +139,17 @@ public:
     }
 */
 
+    /*
     virtual bool VisitRecordDecl(RecordDecl *r) {
     	errs() << "Found record: " << r->getDeclName().getAsString() << "\n";
     	return true;
     }
+    */
 
     virtual bool VisitCXXRecordDecl(CXXRecordDecl *r) {
-    	errs() << "Found CXX record: " << r->getDeclName().getAsString() << "\n";
+    	if (isInLocalFile(r->getSourceRange())) {
+    		errs() << "Found CXX record: " << r->getDeclName().getAsString() << "\n";
+    	}
     	return true;
     }
 };
