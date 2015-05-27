@@ -1,6 +1,6 @@
 #include <memory>
 #include <utility>
-#include "bits/unique_ptr.h"
+//#include "bits/unique_ptr.h"
 #include "clang/Driver/Options.h"
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTContext.h"
@@ -80,13 +80,13 @@ public:
             errs() << "** Looking at function def: " << funcName << "\n";
 
             for(auto a : func->attrs()) {
-            	errs() << "** Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
+            	errs() << "  ** Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
             	switch (a->getKind()) {
             	default:
             		break;
             	case attr::SureLogicStarts:
             		SureLogicStartsAttr* sa =  func->getAttr<SureLogicStartsAttr>();
-            		errs() << "** Got @Starts: " << sa->getValue() << "\n";
+            		errs() << "  ** Got @Starts: " << sa->getValue() << "\n";
             		break;
             	}
             }
