@@ -1,0 +1,102 @@
+Index: clang/CMakeLists.txt
+===================================================================
+--- clang/CMakeLists.txt	(revision 235525)
++++ clang/CMakeLists.txt	(working copy)
+@@ -532,3 +532,5 @@
+     ${CLANG_BINARY_DIR}/share/clang/cmake/ClangConfig.cmake
+     COPYONLY)
+ endif ()
++
++add_subdirectory(csure)
+Index: clang/include/clang/Basic/Attr.td
+===================================================================
+--- clang/include/clang/Basic/Attr.td	(revision 235525)
++++ clang/include/clang/Basic/Attr.td	(working copy)
+@@ -1975,3 +1975,25 @@
+   let SemaHandler = 0;
+   let Documentation = [Undocumented];
+ }
++
++def SureLogicStarts : InheritableAttr {
++  let Spellings = [GNU<"starts">,
++                   CXX11<"","starts", 200809>];
++  let Subjects = SubjectList<[Function]>;                   
++  let Args = [StringArgument<"Value">];
++  let Documentation = [Undocumented];
++}
++
++def ValueObject : InheritableAttr {
++  let Spellings = [GNU<"valueObject">,
++                   CXX11<"","valueObject", 200809>];
++  let Subjects = SubjectList<[Record]>;                   
++  let Documentation = [Undocumented];
++}
++
++def ReferenceObject : InheritableAttr {
++  let Spellings = [GNU<"referenceObject">,
++                   CXX11<"","referenceObject", 200809>];
++  let Subjects = SubjectList<[Record]>;                   
++  let Documentation = [Undocumented];
++}
+\ No newline at end of file
+Index: clang/lib/Sema/SemaDeclAttr.cpp
+===================================================================
+--- clang/lib/Sema/SemaDeclAttr.cpp	(revision 235525)
++++ clang/lib/Sema/SemaDeclAttr.cpp	(working copy)
+@@ -592,6 +592,40 @@
+   return true;
+ }
+ 
++static void handleValueObject(Sema &S, Decl *D, const AttributeList &Attr) {
++  if (Attr.getNumArgs() != 0) {
++	  // TODO
++	  return;
++  }
++
++  D->addAttr(::new (S.Context) ValueObjectAttr(Attr.getRange(), S.Context,
++		  Attr.getAttributeSpellingListIndex()));
++}
++
++static void handleReferenceObject(Sema &S, Decl *D, const AttributeList &Attr) {
++  if (Attr.getNumArgs() != 0) {
++	  // TODO
++	  return;
++  }
++
++  D->addAttr(::new (S.Context) ReferenceObjectAttr(Attr.getRange(), S.Context,
++		  Attr.getAttributeSpellingListIndex()));
++}
++
++static void handleSureLogicStarts(Sema &S, Decl *D, const AttributeList &Attr) {
++  if (Attr.getNumArgs() != 1) {
++	// TODO
++    return;
++  }
++
++  StringRef value;
++  if (!S.checkStringLiteralArgumentAttr(Attr, 0, value))
++    return;
++
++  D->addAttr(::new (S.Context) SureLogicStartsAttr(Attr.getRange(), S.Context, value,
++		                                Attr.getAttributeSpellingListIndex()));
++}
++
+ static void handleGuardedByAttr(Sema &S, Decl *D, const AttributeList &Attr) {
+   Expr *Arg = nullptr;
+   if (!checkGuardedByAttrCommon(S, D, Attr, Arg))
+@@ -4780,6 +4814,15 @@
+   case AttributeList::AT_TypeTagForDatatype:
+     handleTypeTagForDatatypeAttr(S, D, Attr);
+     break;
++  case AttributeList::AT_SureLogicStarts:
++	handleSureLogicStarts(S, D, Attr);
++	break;
++  case AttributeList::AT_ValueObject:
++	handleValueObject(S, D, Attr);
++	break;
++  case AttributeList::AT_ReferenceObject:
++	handleReferenceObject(S, D, Attr);
++	break;
+   }
+ }
+ 
