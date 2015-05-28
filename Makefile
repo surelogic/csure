@@ -1,4 +1,4 @@
-##===- examples/Makefile -----------------------------------*- Makefile -*-===##
+##===---------- Makefile -----------------------------------*- Makefile -*-===##
 #
 #                     The LLVM Compiler Infrastructure
 #
@@ -9,6 +9,6 @@
 
 CLANG_LEVEL := ..
 
-PARALLEL_DIRS := csure
+PARALLEL_DIRS := tool plugin include lib
 
 include $(CLANG_LEVEL)/Makefile
