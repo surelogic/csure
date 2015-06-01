@@ -14,6 +14,7 @@
 #include "clang/Frontend/FrontendPluginRegistry.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Lex/Preprocessor.h"
+#include "../../include/Analysis/CSure.h"
 
 using namespace std;
 using namespace clang;
@@ -204,6 +205,7 @@ class CSurePreprocessorInfo : public clang::PPCallbacks {
 	}
 };
 
+/*
 class PluginExampleAction : public PluginASTAction {
 protected:
     // this gets called by Clang when it invokes our Plugin
@@ -227,6 +229,27 @@ protected:
        return PluginASTAction::BeginSourceFileAction(CI, Filename);
     }
 };
+*/
 
+// this gets called by Clang when it invokes our Plugin
+std::unique_ptr<ASTConsumer> PluginExampleAction::CreateASTConsumer(CompilerInstance &CI, StringRef file) {
+	CSurePreprocessorInfo* preprocessor_consumer = new CSurePreprocessorInfo();
 
-static FrontendPluginRegistry::Add<PluginExampleAction> X("-example-plugin", "simple Plugin example");
+    CI.getPreprocessor().addPPCallbacks(std::unique_ptr<PPCallbacks>(preprocessor_consumer));
+    return std::unique_ptr<ASTConsumer>(new ExampleASTConsumer(&CI));
+}
+
+// implement this function if you want to parse custom cmd-line args
+bool PluginExampleAction::ParseArgs(const CompilerInstance &CI, const vector<string> &args) {
+	errs() << "** Working dir? " << CI.getFileSystemOpts().WorkingDir << "\n";
+	errs() << "** Output going to " << CI.getFrontendOpts().OutputFile << "\n";
+    return true;
+}
+
+bool PluginExampleAction::BeginSourceFileAction(CompilerInstance &CI,
+                                    StringRef Filename) {
+   errs() << "** Looking at " << Filename << "\n";
+   return PluginASTAction::BeginSourceFileAction(CI, Filename);
+}
+
+//static FrontendPluginRegistry::Add<PluginExampleAction> X("-example-plugin", "simple Plugin example");

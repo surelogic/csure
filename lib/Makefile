@@ -1,5 +1,7 @@
 CLANG_LEVEL := ../..
-LIBRARYNAME := csure
+
+PARALLEL_DIRS = Analysis
+
+include $(CLANG_LEVEL)/../../Makefile.config
 
 include $(CLANG_LEVEL)/Makefile
-

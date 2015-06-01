@@ -9,7 +9,10 @@ if( NOT MSVC ) # MSVC mangles symbols differently, and
   endif()
 endif()
 
-add_llvm_loadable_module(CSurePlugin plugin.cpp)
+add_llvm_loadable_module(CSurePlugin plugin.cpp
+  LINK_LIBS
+  csureAnalysis
+)
 
 if(LLVM_ENABLE_PLUGINS AND (WIN32 OR CYGWIN))
   target_link_libraries(CSurePlugin ${cmake_2_8_12_PRIVATE}
@@ -17,5 +20,6 @@ if(LLVM_ENABLE_PLUGINS AND (WIN32 OR CYGWIN))
     clangBasic
     clangFrontend
     LLVMSupport
+    csureAnalysis
     )
 endif()
