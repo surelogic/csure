@@ -8,6 +8,9 @@
 #ifndef TOOLS_CLANG_CSURE_INCLUDE_ANALYSIS_CSURE_H_
 #define TOOLS_CLANG_CSURE_INCLUDE_ANALYSIS_CSURE_H_
 
+#include <memory>
+#include <vector>
+#include <string>
 #include "clang/AST/ASTConsumer.h"
 #include "clang/Frontend/FrontendActions.h"
 
