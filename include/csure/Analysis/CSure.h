@@ -1,12 +1,4 @@
-/*
- * CSure.h
- *
- *  Created on: May 29, 2015
- *      Author: edwin
- */
-
-#ifndef TOOLS_CLANG_CSURE_INCLUDE_ANALYSIS_CSURE_H_
-#define TOOLS_CLANG_CSURE_INCLUDE_ANALYSIS_CSURE_H_
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -30,5 +22,3 @@ protected:
     virtual  bool BeginSourceFileAction(CompilerInstance &CI,
                                         StringRef Filename) override ;
 };
-
-#endif /* TOOLS_CLANG_CSURE_INCLUDE_ANALYSIS_CSURE_H_ */
