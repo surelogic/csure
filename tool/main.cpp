@@ -10,7 +10,7 @@
 #include "llvm/Support/CommandLine.h"
 #include "clang/Tooling/Tooling.h"
 #include "clang/Rewrite/Core/Rewriter.h"
-#include "../include/Analysis/CSure.h"
+#include "csure/Analysis/CSure.h"
 
 using namespace std;
 using namespace clang;

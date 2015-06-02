@@ -1,6 +1,5 @@
 #include <memory>
 #include <utility>
-//#include "bits/unique_ptr.h"
 #include "clang/Driver/Options.h"
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTContext.h"
@@ -14,7 +13,8 @@
 #include "clang/Frontend/FrontendPluginRegistry.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Lex/Preprocessor.h"
-#include "../../include/Analysis/CSure.h"
+
+#include "csure/Analysis/CSure.h"
 
 using namespace std;
 using namespace clang;
