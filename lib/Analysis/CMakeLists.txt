@@ -14,4 +14,4 @@ add_clang_library(csureAnalysis
   
   ADDITIONAL_HEADERS
   ${headers}
-  )
+)
