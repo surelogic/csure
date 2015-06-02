@@ -14,7 +14,7 @@
 #include "clang/Frontend/FrontendPluginRegistry.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Lex/Preprocessor.h"
-#include "../include/Analysis/CSure.h"
+#include "csure/Analysis/CSure.h"
 
 using namespace std;
 using namespace clang;
