@@ -2,12 +2,13 @@
 
 #include "sl/Tooling/CSureToolAction.h"
 #include "sl/Tooling/CSurePreprocessorConsumer.h"
+#include "sl/Tooling/CSureASTConsumer.h"
 
 namespace sl {
 
 	std::unique_ptr<clang::ASTConsumer>  CSureToolAction::CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef file) {
 		CI.getPreprocessor().addPPCallbacks(std::unique_ptr < clang::PPCallbacks > {new CSurePreprocessorConsumer()});
-		return nullptr;//std::unique_ptr<clang::ASTConsumer>(new ExampleASTConsumer(&CI));
+		return std::unique_ptr<clang::ASTConsumer>(new CSureASTConsumer());
 	}
 
 	bool CSureToolAction::ParseArgs(const clang::CompilerInstance &CI, const std::vector<std::string> &args) {

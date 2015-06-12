@@ -23,8 +23,8 @@ using namespace llvm;
 namespace sl {
 
 	bool ExampleVisitor::isInLocalFile(SourceRange range) {
-		FileID file = astContext->getSourceManager().getFileID(range.getBegin());
-		const FileEntry* entry = astContext->getSourceManager().getFileEntryForID(file);
+		FileID file = astContext.getSourceManager().getFileID(range.getBegin());
+		const FileEntry* entry = astContext.getSourceManager().getFileEntryForID(file);
 		if (entry == NULL) {
 			/*
 			errs() << "** Unable to get file entry for " <<
@@ -80,7 +80,7 @@ namespace sl {
 
 	bool ExampleVisitor::VisitCallExpr(CallExpr *c) {
 		errs() << "** Looking at call:\n";
-		c->dump(errs(), astContext->getSourceManager());
+		c->dump(errs(), astContext.getSourceManager());
 		errs() << "\n";
 
 		errs() << "Callee decl:\n:";

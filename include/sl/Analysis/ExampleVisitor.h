@@ -22,14 +22,14 @@ namespace sl {
 
 	class ExampleVisitor : public clang::RecursiveASTVisitor < ExampleVisitor > {
 	private:
-		ASTContext *astContext; // used for getting additional AST info
+		ASTContext &astContext; // used for getting additional AST info
 
-		~ExampleVisitor() {
-			// What is there to do here?
-		}
+		
 
 	public:
-		explicit ExampleVisitor(CompilerInstance *CI) : astContext{ &(CI->getASTContext()) } {}
+		explicit ExampleVisitor(ASTContext &Ctx) : astContext{ Ctx } {}
+
+		~ExampleVisitor() {}
 
 		bool isInLocalFile(SourceRange range);
 
@@ -37,7 +37,7 @@ namespace sl {
 
 		virtual bool VisitFunctionDecl(FunctionDecl *func);
 
-		virtual bool VisitCallExpr(CallExpr *c) override;
+		virtual bool VisitCallExpr(CallExpr *c);
 
 		virtual bool VisitStmt(Stmt *st);
 
