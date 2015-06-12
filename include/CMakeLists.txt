@@ -1,1 +1,1 @@
-add_subdirectory(csure)
+add_subdirectory(sl)
