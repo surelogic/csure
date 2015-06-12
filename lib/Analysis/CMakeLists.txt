@@ -1,11 +1,11 @@
 set(LLVM_LINK_COMPONENTS support)
 
 file( GLOB_RECURSE headers
-    ../../include/csure/Analysis/*.h
+    ../../include/sl/Analysis/*.h
 )
 
 add_clang_library(csureAnalysis
-  CSure.cpp
+  ExampleVisitor.cc
 
   LINK_LIBS
   clangAST

@@ -6,15 +6,17 @@
 
 #include "clang/AST/ASTConsumer.h"
 #include "clang/Frontend/FrontendActions.h"
+#include "clang/Frontend/CompilerInstance.h"
 
-class CSureToolAction : public clang::PluginASTAction {
-protected:
-	// this gets called by Clang when it invokes CSure
-	std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef file);
+namespace sl {
 
-	// implement this function if you want to parse custom cmd-line args
-	bool ParseArgs(const clang::CompilerInstance &CI, const std::vector<std::string> &args);
+	class CSureToolAction : public clang::PluginASTAction {
+	protected:
+		std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef file) override;
 
-	virtual  bool BeginSourceFileAction(clang::CompilerInstance &CI, llvm::StringRef Filename) override;
-};
+		bool ParseArgs(const clang::CompilerInstance &CI, const std::vector<std::string> &args) override;
 
+		virtual bool BeginSourceFileAction(clang::CompilerInstance &CI, llvm::StringRef Filename) override;
+	};
+
+}
