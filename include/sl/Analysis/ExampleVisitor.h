@@ -29,7 +29,7 @@ namespace sl {
 	public:
 		explicit ExampleVisitor(ASTContext &Ctx) : astContext{ Ctx } {}
 
-		~ExampleVisitor() {}
+		virtual ~ExampleVisitor() {}
 
 		bool isInLocalFile(SourceRange range);
 

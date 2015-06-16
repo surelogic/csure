@@ -16,10 +16,6 @@
 
 #include "sl/Analysis/ExampleVisitor.h"
 
-using namespace std;
-using namespace clang;
-using namespace llvm;
-
 namespace sl {
 
 	bool ExampleVisitor::isInLocalFile(SourceRange range) {
