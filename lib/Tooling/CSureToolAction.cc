@@ -1,4 +1,4 @@
-#include "clang/lex/Preprocessor.h"
+#include "clang/Lex/Preprocessor.h"
 
 #include "sl/Tooling/CSureToolAction.h"
 #include "sl/Tooling/CSurePreprocessorConsumer.h"
