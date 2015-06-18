@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include <utility>
 #include "clang/Driver/Options.h"
@@ -14,33 +16,27 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Lex/Preprocessor.h"
 
-using namespace std;
-using namespace clang;
-using namespace llvm;
-
 namespace sl {
 
 	class ExampleVisitor : public clang::RecursiveASTVisitor < ExampleVisitor > {
 	private:
-		ASTContext &astContext; // used for getting additional AST info
-
-		
+		clang::ASTContext &astContext; // used for getting additional AST info
 
 	public:
-		explicit ExampleVisitor(ASTContext &Ctx) : astContext{ Ctx } {}
+		explicit ExampleVisitor(clang::ASTContext &Ctx) : astContext{ Ctx } {}
 
 		virtual ~ExampleVisitor() {}
 
-		bool isInLocalFile(SourceRange range);
+		bool isInLocalFile(clang::SourceRange range);
 
-		virtual bool VisitAttr(Attr *a);
+		virtual bool VisitAttr(clang::Attr *a);
 
-		virtual bool VisitFunctionDecl(FunctionDecl *func);
+		virtual bool VisitFunctionDecl(clang::FunctionDecl *func);
 
-		virtual bool VisitCallExpr(CallExpr *c);
+		virtual bool VisitCallExpr(clang::CallExpr *c);
 
-		virtual bool VisitStmt(Stmt *st);
+		virtual bool VisitStmt(clang::Stmt *st);
 
-		virtual bool VisitCXXRecordDecl(CXXRecordDecl *r);
+		virtual bool VisitCXXRecordDecl(clang::CXXRecordDecl *r);
 	};
 }

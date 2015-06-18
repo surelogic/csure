@@ -1,0 +1,619 @@
+Source file C:\Users\Tim\Source\cwork-3.6.1\llvm\tools\clang\csure\stuff\csure-example\test.cpp
+#include of C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include/stdio.h
+#include of C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include/crtdefs.h
+#include of C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include/sal.h
+#include of C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include/ConcurrencySal.h
+#include of C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include/vadefs.h
+#include of C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include/vadefs.h
+#include of C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include/swprintf.inl
+#include of C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include/vadefs.h
+ - VisitFunctionDecl _invalid_parameter_noinfo
+ - VisitFunctionDecl _invalid_parameter_noinfo_noreturn
+ - VisitFunctionDecl _invoke_watson
+ - VisitCXXRecordDecl threadlocaleinfostruct
+ - VisitCXXRecordDecl threadmbcinfostruct
+ - VisitCXXRecordDecl __lc_time_data
+ - VisitCXXRecordDecl localeinfo_struct
+ - VisitCXXRecordDecl localerefcount
+ - VisitCXXRecordDecl threadlocaleinfostruct
+ - VisitCXXRecordDecl lconv
+ - VisitCXXRecordDecl _iobuf
+ - VisitFunctionDecl __iob_func
+ - VisitFunctionDecl _filbuf
+ - VisitFunctionDecl _flsbuf
+ - VisitFunctionDecl _fsopen
+ - VisitFunctionDecl clearerr
+ - VisitFunctionDecl clearerr_s
+ - VisitFunctionDecl fclose
+ - VisitFunctionDecl _fcloseall
+ - VisitFunctionDecl _fdopen
+ - VisitFunctionDecl feof
+ - VisitFunctionDecl ferror
+ - VisitFunctionDecl fflush
+ - VisitFunctionDecl fgetc
+ - VisitFunctionDecl _fgetchar
+ - VisitFunctionDecl fgetpos
+ - VisitFunctionDecl fgets
+ - VisitFunctionDecl _fileno
+ - VisitFunctionDecl _tempnam
+ - VisitFunctionDecl _flushall
+ - VisitFunctionDecl fopen_s
+ - VisitFunctionDecl fprintf
+   - Looking at attr on fprintf: format
+ - VisitAttr format
+ - VisitFunctionDecl fprintf_s
+ - VisitFunctionDecl fputc
+ - VisitFunctionDecl _fputchar
+ - VisitFunctionDecl fputs
+ - VisitFunctionDecl fread
+ - VisitFunctionDecl fread_s
+ - VisitFunctionDecl freopen_s
+ - VisitAttr format
+ - VisitFunctionDecl fscanf_s
+ - VisitFunctionDecl _fscanf_s_l
+ - VisitFunctionDecl fsetpos
+ - VisitFunctionDecl fseek
+ - VisitFunctionDecl ftell
+ - VisitFunctionDecl _fseeki64
+ - VisitFunctionDecl _ftelli64
+ - VisitFunctionDecl fwrite
+ - VisitFunctionDecl getc
+ - VisitFunctionDecl getchar
+ - VisitFunctionDecl _getmaxstdio
+ - VisitFunctionDecl gets_s
+ - VisitFunctionDecl _getw
+ - VisitFunctionDecl perror
+ - VisitFunctionDecl _pclose
+ - VisitFunctionDecl _popen
+ - VisitFunctionDecl printf
+   - Looking at attr on printf: format
+ - VisitAttr format
+ - VisitFunctionDecl printf_s
+ - VisitFunctionDecl putc
+ - VisitFunctionDecl putchar
+ - VisitFunctionDecl puts
+ - VisitFunctionDecl _putw
+ - VisitFunctionDecl remove
+ - VisitFunctionDecl rename
+ - VisitFunctionDecl _unlink
+ - VisitFunctionDecl rewind
+ - VisitFunctionDecl _rmtmp
+ - VisitAttr format
+ - VisitFunctionDecl scanf_s
+ - VisitFunctionDecl _scanf_s_l
+ - VisitFunctionDecl _setmaxstdio
+ - VisitFunctionDecl _set_output_format
+ - VisitFunctionDecl _get_output_format
+ - VisitFunctionDecl setvbuf
+ - VisitFunctionDecl _snprintf_s
+ - VisitFunctionDecl sprintf_s
+ - VisitFunctionDecl _scprintf
+ - VisitAttr format
+ - VisitFunctionDecl sscanf_s
+ - VisitFunctionDecl _sscanf_s_l
+ - VisitFunctionDecl _snscanf_s
+ - VisitFunctionDecl _snscanf_s_l
+ - VisitFunctionDecl tmpfile_s
+ - VisitFunctionDecl tmpnam_s
+ - VisitFunctionDecl ungetc
+ - VisitFunctionDecl vfprintf
+ - VisitFunctionDecl vfscanf
+   - Looking at attr on vfscanf: format
+ - VisitAttr format
+ - VisitFunctionDecl vfprintf_s
+ - VisitFunctionDecl vfscanf_s
+ - VisitFunctionDecl vprintf
+   - Looking at attr on vprintf: format
+ - VisitAttr format
+ - VisitFunctionDecl vscanf
+   - Looking at attr on vscanf: format
+ - VisitAttr format
+ - VisitFunctionDecl vprintf_s
+ - VisitFunctionDecl vscanf_s
+ - VisitAttr format
+ - VisitFunctionDecl vsnprintf_s
+ - VisitFunctionDecl _vsnprintf_s
+ - VisitFunctionDecl vsprintf_s
+ - VisitFunctionDecl vsscanf_s
+ - VisitFunctionDecl vsscanf
+   - Looking at attr on vsscanf: format
+ - VisitAttr format
+ - VisitFunctionDecl _vscprintf
+ - VisitFunctionDecl _snprintf_c
+ - VisitFunctionDecl _vsnprintf_c
+ - VisitFunctionDecl _fprintf_p
+ - VisitFunctionDecl _printf_p
+ - VisitFunctionDecl _sprintf_p
+ - VisitFunctionDecl _vfprintf_p
+ - VisitFunctionDecl _vprintf_p
+ - VisitFunctionDecl _vsprintf_p
+ - VisitFunctionDecl _scprintf_p
+ - VisitFunctionDecl _vscprintf_p
+ - VisitFunctionDecl _set_printf_count_output
+ - VisitFunctionDecl _get_printf_count_output
+ - VisitFunctionDecl _printf_l
+ - VisitFunctionDecl _printf_p_l
+ - VisitFunctionDecl _printf_s_l
+ - VisitFunctionDecl _vprintf_l
+ - VisitFunctionDecl _vprintf_p_l
+ - VisitFunctionDecl _vprintf_s_l
+ - VisitFunctionDecl _fprintf_l
+ - VisitFunctionDecl _fprintf_p_l
+ - VisitFunctionDecl _fprintf_s_l
+ - VisitFunctionDecl _vfprintf_l
+ - VisitFunctionDecl _vfprintf_p_l
+ - VisitFunctionDecl _vfprintf_s_l
+ - VisitFunctionDecl _sprintf_p_l
+ - VisitFunctionDecl _sprintf_s_l
+ - VisitFunctionDecl _vsprintf_p_l
+ - VisitFunctionDecl _vsprintf_s_l
+ - VisitFunctionDecl _scprintf_l
+ - VisitFunctionDecl _scprintf_p_l
+ - VisitFunctionDecl _vscprintf_l
+ - VisitFunctionDecl _vscprintf_p_l
+ - VisitFunctionDecl _snprintf_c_l
+ - VisitFunctionDecl _snprintf_s_l
+ - VisitFunctionDecl _vsnprintf_c_l
+ - VisitFunctionDecl _vsnprintf_s_l
+ - VisitFunctionDecl _wfsopen
+ - VisitFunctionDecl fgetwc
+ - VisitFunctionDecl _fgetwchar
+ - VisitFunctionDecl fputwc
+ - VisitFunctionDecl _fputwchar
+ - VisitFunctionDecl getwc
+ - VisitFunctionDecl getwchar
+ - VisitFunctionDecl putwc
+ - VisitFunctionDecl putwchar
+ - VisitFunctionDecl ungetwc
+ - VisitFunctionDecl fgetws
+ - VisitFunctionDecl fputws
+ - VisitFunctionDecl _getws_s
+ - VisitFunctionDecl _putws
+ - VisitFunctionDecl fwprintf
+ - VisitFunctionDecl fwprintf_s
+ - VisitFunctionDecl wprintf
+ - VisitFunctionDecl wprintf_s
+ - VisitFunctionDecl _scwprintf
+ - VisitFunctionDecl vfwprintf
+ - VisitFunctionDecl vfwscanf
+ - VisitFunctionDecl vfwprintf_s
+ - VisitFunctionDecl vfwscanf_s
+ - VisitFunctionDecl vwprintf
+ - VisitFunctionDecl vwscanf
+ - VisitFunctionDecl vwprintf_s
+ - VisitFunctionDecl vwscanf_s
+ - VisitFunctionDecl swprintf_s
+ - VisitFunctionDecl vswprintf_s
+ - VisitFunctionDecl vswscanf_s
+ - VisitFunctionDecl vswscanf
+ - VisitFunctionDecl _swprintf_c
+ - VisitFunctionDecl _vswprintf_c
+ - VisitFunctionDecl _snwprintf_s
+ - VisitFunctionDecl _vsnwprintf_s
+ - VisitFunctionDecl _fwprintf_p
+ - VisitFunctionDecl _wprintf_p
+ - VisitFunctionDecl _vfwprintf_p
+ - VisitFunctionDecl _vwprintf_p
+ - VisitFunctionDecl _swprintf_p
+ - VisitFunctionDecl _vswprintf_p
+ - VisitFunctionDecl _scwprintf_p
+ - VisitFunctionDecl _vscwprintf_p
+ - VisitFunctionDecl _wprintf_l
+ - VisitFunctionDecl _wprintf_p_l
+ - VisitFunctionDecl _wprintf_s_l
+ - VisitFunctionDecl _vwprintf_l
+ - VisitFunctionDecl _vwprintf_p_l
+ - VisitFunctionDecl _vwprintf_s_l
+ - VisitFunctionDecl _fwprintf_l
+ - VisitFunctionDecl _fwprintf_p_l
+ - VisitFunctionDecl _fwprintf_s_l
+ - VisitFunctionDecl _vfwprintf_l
+ - VisitFunctionDecl _vfwprintf_p_l
+ - VisitFunctionDecl _vfwprintf_s_l
+ - VisitFunctionDecl _swprintf_c_l
+ - VisitFunctionDecl _swprintf_p_l
+ - VisitFunctionDecl _swprintf_s_l
+ - VisitFunctionDecl _vswprintf_c_l
+ - VisitFunctionDecl _vswprintf_p_l
+ - VisitFunctionDecl _vswprintf_s_l
+ - VisitFunctionDecl _scwprintf_l
+ - VisitFunctionDecl _scwprintf_p_l
+ - VisitFunctionDecl _vscwprintf_p_l
+ - VisitFunctionDecl _snwprintf_s_l
+ - VisitFunctionDecl _vsnwprintf_s_l
+ - VisitFunctionDecl swprintf
+ - VisitCallExpr CallExpr 0x4104ce8 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34, col:62> 'void'
+|-ImplicitCastExpr 0x4104cd8 <col:34> 'void (*)(__builtin_va_list &, ...)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x4104c4c <col:34> '<builtin fn type>' Function 0x4104b70 '__builtin_va_start' 'void (__builtin_va_list &, ...)'
+|-DeclRefExpr 0x4104c64 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:40:19> 'va_list':'char *' lvalue Var 0x4104a20 '_Arglist' 'va_list':'char *'
+`-DeclRefExpr 0x4104c7c <col:29> 'const wchar_t *' lvalue ParmVar 0x4104930 '_Format' 'const wchar_t *'
+
+   - Callee decl:
+:FunctionDecl 0x4104b70 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34> col:34 implicit used __builtin_va_start 'void (__builtin_va_list &, ...)' extern
+|-ParmVarDecl 0x4104be0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4104c20 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitCallExpr CallExpr 0x4104e48 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:41:12, col:67> 'int'
+|-ImplicitCastExpr 0x4104e38 <col:12> 'int (*)(wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x4104de0 <col:12> 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)' lvalue Function 0x4100180 '_vswprintf_c_l' 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ImplicitCastExpr 0x4104e78 <col:27> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4104d60 <col:27> 'wchar_t *' lvalue ParmVar 0x41048b0 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x4104e88 <col:36> 'size_t':'unsigned int' <LValueToRValue>
+| `-DeclRefExpr 0x4104d78 <col:36> 'size_t':'unsigned int' lvalue ParmVar 0x41048f0 '_Count' 'size_t':'unsigned int'
+|-ImplicitCastExpr 0x4104e98 <col:44> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4104d90 <col:44> 'const wchar_t *' lvalue ParmVar 0x4104930 '_Format' 'const wchar_t *'
+|-ImplicitCastExpr 0x4104ea8 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:118:17> '_locale_t':'struct localeinfo_struct *' <NullToPointer>
+| `-IntegerLiteral 0x4104da8 <col:17> 'int' 0
+`-ImplicitCastExpr 0x4104eb8 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:41:59> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x4104dc8 <col:59> 'va_list':'char *' lvalue Var 0x4104a20 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4100180 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:506:28, col:232> col:40 used _vswprintf_c_l 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ParmVarDecl 0x40bd790 <col:81, col:91> col:91 _DstBuf 'wchar_t *'
+|-ParmVarDecl 0x40bd7d0 <col:105, col:112> col:112 _MaxCount 'size_t':'unsigned int'
+|-ParmVarDecl 0x40bd810 <col:163, col:179> col:179 _Format 'const wchar_t *'
+|-ParmVarDecl 0x40bd850 <col:197, col:207> col:207 _Locale '_locale_t':'struct localeinfo_struct *'
+`-ParmVarDecl 0x4100090 <col:216, col:224> col:224 _ArgList 'va_list':'char *'
+
+ - VisitCallExpr CallExpr 0x41050b8 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34, col:53> 'void'
+|-ImplicitCastExpr 0x41050a8 <col:34> 'void (*)(__builtin_va_list &)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x410503c <col:34> '<builtin fn type>' Function 0x4104f60 '__builtin_va_end' 'void (__builtin_va_list &)'
+`-DeclRefExpr 0x4105054 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:42:17> 'va_list':'char *' lvalue Var 0x4104a20 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4104f60 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34> col:34 implicit used __builtin_va_end 'void (__builtin_va_list &)' extern
+|-ParmVarDecl 0x4104fd0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4105010 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitFunctionDecl vswprintf
+ - VisitCallExpr CallExpr 0x41053e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:51:12, col:62> 'int'
+|-ImplicitCastExpr 0x41053d0 <col:12> 'int (*)(wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x41053b8 <col:12> 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)' lvalue Function 0x4100180 '_vswprintf_c_l' 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ImplicitCastExpr 0x4105410 <col:27> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4105338 <col:27> 'wchar_t *' lvalue ParmVar 0x4105150 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x4105420 <col:36> 'size_t':'unsigned int' <LValueToRValue>
+| `-DeclRefExpr 0x4105350 <col:36> 'size_t':'unsigned int' lvalue ParmVar 0x4105190 '_Count' 'size_t':'unsigned int'
+|-ImplicitCastExpr 0x4105430 <col:44> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4105368 <col:44> 'const wchar_t *' lvalue ParmVar 0x41051d0 '_Format' 'const wchar_t *'
+|-ImplicitCastExpr 0x4105440 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:118:17> '_locale_t':'struct localeinfo_struct *' <NullToPointer>
+| `-IntegerLiteral 0x4105380 <col:17> 'int' 0
+`-ImplicitCastExpr 0x4105450 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:51:59> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x41053a0 <col:59> 'va_list':'char *' lvalue ParmVar 0x4105210 '_Ap' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4100180 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:506:28, col:232> col:40 used _vswprintf_c_l 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ParmVarDecl 0x40bd790 <col:81, col:91> col:91 _DstBuf 'wchar_t *'
+|-ParmVarDecl 0x40bd7d0 <col:105, col:112> col:112 _MaxCount 'size_t':'unsigned int'
+|-ParmVarDecl 0x40bd810 <col:163, col:179> col:179 _Format 'const wchar_t *'
+|-ParmVarDecl 0x40bd850 <col:197, col:207> col:207 _Locale '_locale_t':'struct localeinfo_struct *'
+`-ParmVarDecl 0x4100090 <col:216, col:224> col:224 _ArgList 'va_list':'char *'
+
+ - VisitFunctionDecl _swprintf_l
+ - VisitCallExpr CallExpr 0x4105848 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34, col:62> 'void'
+|-ImplicitCastExpr 0x4105838 <col:34> 'void (*)(__builtin_va_list &, ...)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x41057f0 <col:34> '<builtin fn type>' Function 0x4104b70 '__builtin_va_start' 'void (__builtin_va_list &, ...)'
+|-DeclRefExpr 0x4105808 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:64:19> 'va_list':'char *' lvalue Var 0x4105760 '_Arglist' 'va_list':'char *'
+`-DeclRefExpr 0x4105820 <col:29> '_locale_t':'struct localeinfo_struct *' lvalue ParmVar 0x4105670 '_Plocinfo' '_locale_t':'struct localeinfo_struct *'
+
+   - Callee decl:
+:FunctionDecl 0x4104b70 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34> col:34 implicit used __builtin_va_start 'void (__builtin_va_list &, ...)' extern
+|-ParmVarDecl 0x4104be0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4104c20 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitCallExpr CallExpr 0x4105960 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:65:12, col:72> 'int'
+|-ImplicitCastExpr 0x4105950 <col:12> 'int (*)(wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x4105938 <col:12> 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)' lvalue Function 0x4100180 '_vswprintf_c_l' 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ImplicitCastExpr 0x4105990 <col:27> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x41058c0 <col:27> 'wchar_t *' lvalue ParmVar 0x41055b0 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x41059a0 <col:36> 'size_t':'unsigned int' <LValueToRValue>
+| `-DeclRefExpr 0x41058d8 <col:36> 'size_t':'unsigned int' lvalue ParmVar 0x41055f0 '_Count' 'size_t':'unsigned int'
+|-ImplicitCastExpr 0x41059b0 <col:44> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x41058f0 <col:44> 'const wchar_t *' lvalue ParmVar 0x4105630 '_Format' 'const wchar_t *'
+|-ImplicitCastExpr 0x41059c0 <col:53> '_locale_t':'struct localeinfo_struct *' <LValueToRValue>
+| `-DeclRefExpr 0x4105908 <col:53> '_locale_t':'struct localeinfo_struct *' lvalue ParmVar 0x4105670 '_Plocinfo' '_locale_t':'struct localeinfo_struct *'
+`-ImplicitCastExpr 0x41059d0 <col:64> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x4105920 <col:64> 'va_list':'char *' lvalue Var 0x4105760 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4100180 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:506:28, col:232> col:40 used _vswprintf_c_l 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ParmVarDecl 0x40bd790 <col:81, col:91> col:91 _DstBuf 'wchar_t *'
+|-ParmVarDecl 0x40bd7d0 <col:105, col:112> col:112 _MaxCount 'size_t':'unsigned int'
+|-ParmVarDecl 0x40bd810 <col:163, col:179> col:179 _Format 'const wchar_t *'
+|-ParmVarDecl 0x40bd850 <col:197, col:207> col:207 _Locale '_locale_t':'struct localeinfo_struct *'
+`-ParmVarDecl 0x4100090 <col:216, col:224> col:224 _ArgList 'va_list':'char *'
+
+ - VisitCallExpr CallExpr 0x4105a38 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34, col:53> 'void'
+|-ImplicitCastExpr 0x4105a28 <col:34> 'void (*)(__builtin_va_list &)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x41059f8 <col:34> '<builtin fn type>' Function 0x4104f60 '__builtin_va_end' 'void (__builtin_va_list &)'
+`-DeclRefExpr 0x4105a10 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:66:17> 'va_list':'char *' lvalue Var 0x4105760 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4104f60 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34> col:34 implicit used __builtin_va_end 'void (__builtin_va_list &)' extern
+|-ParmVarDecl 0x4104fd0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4105010 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitFunctionDecl _vswprintf_l
+ - VisitCallExpr CallExpr 0x4105db0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:75:12, col:67> 'int'
+|-ImplicitCastExpr 0x4105da0 <col:12> 'int (*)(wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x4105d88 <col:12> 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)' lvalue Function 0x4100180 '_vswprintf_c_l' 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ImplicitCastExpr 0x4105de0 <col:27> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4105d10 <col:27> 'wchar_t *' lvalue ParmVar 0x4105ad0 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x4105df0 <col:36> 'size_t':'unsigned int' <LValueToRValue>
+| `-DeclRefExpr 0x4105d28 <col:36> 'size_t':'unsigned int' lvalue ParmVar 0x4105b10 '_Count' 'size_t':'unsigned int'
+|-ImplicitCastExpr 0x4105e00 <col:44> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4105d40 <col:44> 'const wchar_t *' lvalue ParmVar 0x4105b50 '_Format' 'const wchar_t *'
+|-ImplicitCastExpr 0x4105e10 <col:53> '_locale_t':'struct localeinfo_struct *' <LValueToRValue>
+| `-DeclRefExpr 0x4105d58 <col:53> '_locale_t':'struct localeinfo_struct *' lvalue ParmVar 0x4105b90 '_Plocinfo' '_locale_t':'struct localeinfo_struct *'
+`-ImplicitCastExpr 0x4105e20 <col:64> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x4105d70 <col:64> 'va_list':'char *' lvalue ParmVar 0x4105bd0 '_Ap' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4100180 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:506:28, col:232> col:40 used _vswprintf_c_l 'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, size_t, const wchar_t *, _locale_t, va_list)'
+|-ParmVarDecl 0x40bd790 <col:81, col:91> col:91 _DstBuf 'wchar_t *'
+|-ParmVarDecl 0x40bd7d0 <col:105, col:112> col:112 _MaxCount 'size_t':'unsigned int'
+|-ParmVarDecl 0x40bd810 <col:163, col:179> col:179 _Format 'const wchar_t *'
+|-ParmVarDecl 0x40bd850 <col:197, col:207> col:207 _Locale '_locale_t':'struct localeinfo_struct *'
+`-ParmVarDecl 0x4100090 <col:216, col:224> col:224 _ArgList 'va_list':'char *'
+
+ - VisitCallExpr CallExpr 0x41063d8 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34, col:62> 'void'
+|-ImplicitCastExpr 0x41063c8 <col:34> 'void (*)(__builtin_va_list &, ...)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x4106380 <col:34> '<builtin fn type>' Function 0x4104b70 '__builtin_va_start' 'void (__builtin_va_list &, ...)'
+|-DeclRefExpr 0x4106398 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:88:19> 'va_list':'char *' lvalue Var 0x4106340 '_Arglist' 'va_list':'char *'
+`-DeclRefExpr 0x41063b0 <col:29> 'const wchar_t *' lvalue ParmVar 0x41060a0 '_Format' 'const wchar_t *'
+
+   - Callee decl:
+:FunctionDecl 0x4104b70 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34> col:34 implicit used __builtin_va_start 'void (__builtin_va_list &, ...)' extern
+|-ParmVarDecl 0x4104be0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4104c20 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitCallExpr CallExpr 0x4106528 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:89:16, col:53> 'int'
+|-ImplicitCastExpr 0x4106518 <col:16> 'int (*)(wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x41064c0 <col:16> 'int (wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, va_list)' lvalue Function 0x41035d0 '_vswprintf' 'int (wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, va_list)'
+|-ImplicitCastExpr 0x4106550 <col:27> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4106478 <col:27> 'wchar_t *' lvalue ParmVar 0x4106060 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x4106560 <col:36> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4106490 <col:36> 'const wchar_t *' lvalue ParmVar 0x41060a0 '_Format' 'const wchar_t *'
+`-ImplicitCastExpr 0x4106570 <col:45> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x41064a8 <col:45> 'va_list':'char *' lvalue Var 0x4106340 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x41035d0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:275:36, line:1958:150> C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:533:134 used _vswprintf 'int (wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, va_list)'
+|-ParmVarDecl 0x4103460 <col:183, col:192> col:192 _Dest 'wchar_t *'
+|-ParmVarDecl 0x41034a0 <col:229, col:246> col:246 _Format 'const wchar_t *'
+|-ParmVarDecl 0x41034e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:1958:137, col:145> col:145 _Args 'va_list':'char *'
+|-DeprecatedAttr 0x4103650 <line:275:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+|-DeprecatedAttr 0x4103740 <col:47, col:63> "This function or variable may be unsafe. Consider using vswprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+|-DeprecatedAttr 0x4103800 <col:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+`-DeprecatedAttr 0x41038d0 <col:47, col:63> "This function or variable may be unsafe. Consider using vswprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+ - VisitCallExpr CallExpr 0x41066d8 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34, col:53> 'void'
+|-ImplicitCastExpr 0x41066c8 <col:34> 'void (*)(__builtin_va_list &)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x4106590 <col:34> '<builtin fn type>' Function 0x4104f60 '__builtin_va_end' 'void (__builtin_va_list &)'
+`-DeclRefExpr 0x41066b0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:90:17> 'va_list':'char *' lvalue Var 0x4106340 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4104f60 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34> col:34 implicit used __builtin_va_end 'void (__builtin_va_list &)' extern
+|-ParmVarDecl 0x4104fd0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4105010 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitCallExpr CallExpr 0x4106eb8 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:99:12, col:44> 'int'
+|-ImplicitCastExpr 0x4106ea8 <col:12> 'int (*)(wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x4106e90 <col:12> 'int (wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, va_list)' lvalue Function 0x41035d0 '_vswprintf' 'int (wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, va_list)'
+|-ImplicitCastExpr 0x4106ee0 <col:23> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4106e48 <col:23> 'wchar_t *' lvalue ParmVar 0x4106960 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x4106ef0 <col:32> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4106e60 <col:32> 'const wchar_t *' lvalue ParmVar 0x41069a0 '_Format' 'const wchar_t *'
+`-ImplicitCastExpr 0x4106f00 <col:41> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x4106e78 <col:41> 'va_list':'char *' lvalue ParmVar 0x41069e0 '_Ap' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x41035d0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:275:36, line:1958:150> C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:533:134 used _vswprintf 'int (wchar_t *, const wchar_t *, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, va_list)'
+|-ParmVarDecl 0x4103460 <col:183, col:192> col:192 _Dest 'wchar_t *'
+|-ParmVarDecl 0x41034a0 <col:229, col:246> col:246 _Format 'const wchar_t *'
+|-ParmVarDecl 0x41034e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:1958:137, col:145> col:145 _Args 'va_list':'char *'
+|-DeprecatedAttr 0x4103650 <line:275:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+|-DeprecatedAttr 0x4103740 <col:47, col:63> "This function or variable may be unsafe. Consider using vswprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+|-DeprecatedAttr 0x4103800 <col:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+`-DeprecatedAttr 0x41038d0 <col:47, col:63> "This function or variable may be unsafe. Consider using vswprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+ - VisitCallExpr CallExpr 0x41074f8 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34, col:62> 'void'
+|-ImplicitCastExpr 0x41074e8 <col:34> 'void (*)(__builtin_va_list &, ...)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x41074a0 <col:34> '<builtin fn type>' Function 0x4104b70 '__builtin_va_start' 'void (__builtin_va_list &, ...)'
+|-DeclRefExpr 0x41074b8 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:108:19> 'va_list':'char *' lvalue Var 0x4107460 '_Arglist' 'va_list':'char *'
+`-DeclRefExpr 0x41074d0 <col:29> '_locale_t':'struct localeinfo_struct *' lvalue ParmVar 0x41071c0 '_Plocinfo' '_locale_t':'struct localeinfo_struct *'
+
+   - Callee decl:
+:FunctionDecl 0x4104b70 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:37:34> col:34 implicit used __builtin_va_start 'void (__builtin_va_list &, ...)' extern
+|-ParmVarDecl 0x4104be0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4104c20 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitCallExpr CallExpr 0x4107658 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:109:16, col:67> 'int'
+|-ImplicitCastExpr 0x4107648 <col:16> 'int (*)(wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x41075f8 <col:16> 'int (wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, _locale_t, va_list)' lvalue Function 0x41044e0 '__vswprintf_l' 'int (wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, _locale_t, va_list)'
+|-ImplicitCastExpr 0x4107688 <col:30> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4107598 <col:30> 'wchar_t *' lvalue ParmVar 0x4107140 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x4107698 <col:39> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x41075b0 <col:39> 'const wchar_t *' lvalue ParmVar 0x4107180 '_Format' 'const wchar_t *'
+|-ImplicitCastExpr 0x41077b8 <col:48> '_locale_t':'struct localeinfo_struct *' <LValueToRValue>
+| `-DeclRefExpr 0x41075c8 <col:48> '_locale_t':'struct localeinfo_struct *' lvalue ParmVar 0x41071c0 '_Plocinfo' '_locale_t':'struct localeinfo_struct *'
+`-ImplicitCastExpr 0x41077c8 <col:59> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x41075e0 <col:59> 'va_list':'char *' lvalue Var 0x4107460 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x41044e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:275:36, line:1962:166> C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:534:124 used __vswprintf_l 'int (wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, _locale_t, va_list)'
+|-ParmVarDecl 0x4104220 <col:211, col:220> col:220 _Dest 'wchar_t *'
+|-ParmVarDecl 0x4104260 <col:267, col:284> col:284 _Format 'const wchar_t *'
+|-ParmVarDecl 0x41042a0 <col:293, col:304> col:304 _Plocinfo '_locale_t':'struct localeinfo_struct *'
+|-ParmVarDecl 0x41042e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:1962:153, col:161> col:161 _Args 'va_list':'char *'
+|-DeprecatedAttr 0x4104560 <line:275:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+|-DeprecatedAttr 0x4104650 <col:47, col:63> "This function or variable may be unsafe. Consider using _vswprintf_s_l instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+|-DeprecatedAttr 0x4104710 <col:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+`-DeprecatedAttr 0x41047e0 <col:47, col:63> "This function or variable may be unsafe. Consider using _vswprintf_s_l instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+ - VisitCallExpr CallExpr 0x4107828 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34, col:53> 'void'
+|-ImplicitCastExpr 0x4107818 <col:34> 'void (*)(__builtin_va_list &)' <BuiltinFnToFnPtr>
+| `-DeclRefExpr 0x41077e8 <col:34> '<builtin fn type>' Function 0x4104f60 '__builtin_va_end' 'void (__builtin_va_list &)'
+`-DeclRefExpr 0x4107800 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:110:17> 'va_list':'char *' lvalue Var 0x4107460 '_Arglist' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x4104f60 <C:\Users\Tim\Source\cwork-3.6.1\build\Debug\bin\..\lib\clang\3.6.1\include\vadefs.h:41:34> col:34 implicit used __builtin_va_end 'void (__builtin_va_list &)' extern
+|-ParmVarDecl 0x4104fd0 <<invalid sloc>> <invalid sloc> '__builtin_va_list &'
+`-NoThrowAttr 0x4105010 <col:34> Implicit
+
+   - Attr on callee decl:nothrow
+ - VisitCallExpr CallExpr 0x4108060 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\swprintf.inl:119:12, col:58> 'int'
+|-ImplicitCastExpr 0x4108050 <col:12> 'int (*)(wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x4108038 <col:12> 'int (wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, _locale_t, va_list)' lvalue Function 0x41044e0 '__vswprintf_l' 'int (wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, _locale_t, va_list)'
+|-ImplicitCastExpr 0x4108090 <col:26> 'wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4107fd8 <col:26> 'wchar_t *' lvalue ParmVar 0x4107ab0 '_String' 'wchar_t *'
+|-ImplicitCastExpr 0x41080a0 <col:35> 'const wchar_t *' <LValueToRValue>
+| `-DeclRefExpr 0x4107ff0 <col:35> 'const wchar_t *' lvalue ParmVar 0x4107af0 '_Format' 'const wchar_t *'
+|-ImplicitCastExpr 0x41080b0 <col:44> '_locale_t':'struct localeinfo_struct *' <LValueToRValue>
+| `-DeclRefExpr 0x4108008 <col:44> '_locale_t':'struct localeinfo_struct *' lvalue ParmVar 0x4107b30 '_Plocinfo' '_locale_t':'struct localeinfo_struct *'
+`-ImplicitCastExpr 0x41080c0 <col:55> 'va_list':'char *' <LValueToRValue>
+  `-DeclRefExpr 0x4108020 <col:55> 'va_list':'char *' lvalue ParmVar 0x4107b70 '_Ap' 'va_list':'char *'
+
+   - Callee decl:
+:FunctionDecl 0x41044e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:275:36, line:1962:166> C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:534:124 used __vswprintf_l 'int (wchar_t *, const wchar_t *, _locale_t, va_list) __attribute__((cdecl))':'int (wchar_t *, const wchar_t *, _locale_t, va_list)'
+|-ParmVarDecl 0x4104220 <col:211, col:220> col:220 _Dest 'wchar_t *'
+|-ParmVarDecl 0x4104260 <col:267, col:284> col:284 _Format 'const wchar_t *'
+|-ParmVarDecl 0x41042a0 <col:293, col:304> col:304 _Plocinfo '_locale_t':'struct localeinfo_struct *'
+|-ParmVarDecl 0x41042e0 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h:1962:153, col:161> col:161 _Args 'va_list':'char *'
+|-DeprecatedAttr 0x4104560 <line:275:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+|-DeprecatedAttr 0x4104650 <col:47, col:63> "This function or variable may be unsafe. Consider using _vswprintf_s_l instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+|-DeprecatedAttr 0x4104710 <col:47, col:63> "swprintf has been changed to conform with the ISO C standard, adding an extra character count parameter. To use traditional Microsoft swprintf, set _CRT_NON_CONFORMING_SWPRINTFS."
+`-DeprecatedAttr 0x41047e0 <col:47, col:63> "This function or variable may be unsafe. Consider using _vswprintf_s_l instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details."
+
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+   - Attr on callee decl:deprecated
+ - VisitFunctionDecl _wtempnam
+ - VisitFunctionDecl _vscwprintf
+ - VisitFunctionDecl _vscwprintf_l
+ - VisitFunctionDecl fwscanf_s
+ - VisitFunctionDecl _fwscanf_s_l
+ - VisitFunctionDecl swscanf_s
+ - VisitFunctionDecl _swscanf_s_l
+ - VisitFunctionDecl _snwscanf_s
+ - VisitFunctionDecl _snwscanf_s_l
+ - VisitFunctionDecl wscanf_s
+ - VisitFunctionDecl _wscanf_s_l
+ - VisitFunctionDecl _wfdopen
+ - VisitFunctionDecl _wfopen_s
+ - VisitFunctionDecl _wfreopen_s
+ - VisitFunctionDecl _wperror
+ - VisitFunctionDecl _wpopen
+ - VisitFunctionDecl _wremove
+ - VisitFunctionDecl _wtmpnam_s
+ - VisitFunctionDecl _fgetwc_nolock
+ - VisitFunctionDecl _fputwc_nolock
+ - VisitFunctionDecl _ungetwc_nolock
+ - VisitFunctionDecl getwchar
+ - VisitCallExpr CallExpr 0x410e308 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:622:18, col:30> 'wint_t':'unsigned short'
+|-ImplicitCastExpr 0x410e2f8 <col:18> 'wint_t (*)(FILE *) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x410e29c <col:18> 'wint_t (FILE *) __attribute__((cdecl))':'wint_t (FILE *)' lvalue Function 0x40b2a60 'fgetwc' 'wint_t (FILE *) __attribute__((cdecl))':'wint_t (FILE *)'
+`-ParenExpr 0x410e288 <line:149:16, col:33> 'FILE *'
+  `-UnaryOperator 0x410e270 <col:17, col:32> 'FILE *' prefix '&'
+    `-ArraySubscriptExpr 0x410e258 <col:18, col:32> 'FILE':'struct _iobuf' lvalue
+      |-CallExpr 0x410e218 <col:18, col:29> 'FILE *'
+      | `-ImplicitCastExpr 0x410e208 <col:18> 'FILE *(*)(void) __attribute__((cdecl))' <FunctionToPointerDecay>
+      |   `-DeclRefExpr 0x410e1b0 <col:18> 'FILE *(void) __attribute__((cdecl))':'FILE *(void)' lvalue Function 0x4065400 '__iob_func' 'FILE *(void) __attribute__((cdecl))':'FILE *(void)'
+      `-IntegerLiteral 0x410e238 <col:31> 'int' 0
+
+   - Callee decl:
+:FunctionDecl 0x40b2a60 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:417:28, col:70> col:43 used fgetwc 'wint_t (FILE *) __attribute__((cdecl))':'wint_t (FILE *)'
+`-ParmVarDecl 0x40b29a0 <col:58, col:65> col:65 _File 'FILE *'
+
+ - VisitCallExpr CallExpr 0x410e218 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:149:18, col:29> 'FILE *'
+`-ImplicitCastExpr 0x410e208 <col:18> 'FILE *(*)(void) __attribute__((cdecl))' <FunctionToPointerDecay>
+  `-DeclRefExpr 0x410e1b0 <col:18> 'FILE *(void) __attribute__((cdecl))':'FILE *(void)' lvalue Function 0x4065400 '__iob_func' 'FILE *(void) __attribute__((cdecl))':'FILE *(void)'
+
+   - Callee decl:
+:FunctionDecl 0x4065400 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:137:9, col:39> col:24 used __iob_func 'FILE *(void) __attribute__((cdecl))':'FILE *(void)'
+
+ - VisitFunctionDecl putwchar
+ - VisitCallExpr CallExpr 0x410e5e8 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:624:18, col:35> 'wint_t':'unsigned short'
+|-ImplicitCastExpr 0x410e5d8 <col:18> 'wint_t (*)(wchar_t, FILE *) __attribute__((cdecl))' <FunctionToPointerDecay>
+| `-DeclRefExpr 0x410e57c <col:18> 'wint_t (wchar_t, FILE *) __attribute__((cdecl))':'wint_t (wchar_t, FILE *)' lvalue Function 0x40b2d10 'fputwc' 'wint_t (wchar_t, FILE *) __attribute__((cdecl))':'wint_t (wchar_t, FILE *)'
+|-ImplicitCastExpr 0x410e610 <col:25> 'wchar_t' <LValueToRValue>
+| `-DeclRefExpr 0x410e480 <col:25> 'wchar_t' lvalue ParmVar 0x410e370 '_C' 'wchar_t'
+`-ParenExpr 0x410e568 <line:150:16, col:33> 'FILE *'
+  `-UnaryOperator 0x410e550 <col:17, col:32> 'FILE *' prefix '&'
+    `-ArraySubscriptExpr 0x410e538 <col:18, col:32> 'FILE':'struct _iobuf' lvalue
+      |-CallExpr 0x410e4f8 <col:18, col:29> 'FILE *'
+      | `-ImplicitCastExpr 0x410e4e8 <col:18> 'FILE *(*)(void) __attribute__((cdecl))' <FunctionToPointerDecay>
+      |   `-DeclRefExpr 0x410e4d0 <col:18> 'FILE *(void) __attribute__((cdecl))':'FILE *(void)' lvalue Function 0x4065400 '__iob_func' 'FILE *(void) __attribute__((cdecl))':'FILE *(void)'
+      `-IntegerLiteral 0x410e518 <col:31> 'int' 1
+
+   - Callee decl:
+:FunctionDecl 0x40b2d10 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:419:28, col:88> col:43 used fputwc 'wint_t (wchar_t, FILE *) __attribute__((cdecl))':'wint_t (wchar_t, FILE *)'
+|-ParmVarDecl 0x40b2c10 <col:55, col:63> col:63 _Ch 'wchar_t'
+`-ParmVarDecl 0x40b2c50 <col:76, col:83> col:83 _File 'FILE *'
+
+ - VisitCallExpr CallExpr 0x410e4f8 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:150:18, col:29> 'FILE *'
+`-ImplicitCastExpr 0x410e4e8 <col:18> 'FILE *(*)(void) __attribute__((cdecl))' <FunctionToPointerDecay>
+  `-DeclRefExpr 0x410e4d0 <col:18> 'FILE *(void) __attribute__((cdecl))':'FILE *(void)' lvalue Function 0x4065400 '__iob_func' 'FILE *(void) __attribute__((cdecl))':'FILE *(void)'
+
+   - Callee decl:
+:FunctionDecl 0x4065400 <C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h:137:9, col:39> col:24 used __iob_func 'FILE *(void) __attribute__((cdecl))':'FILE *(void)'
+
+ - VisitFunctionDecl _lock_file
+ - VisitFunctionDecl _unlock_file
+ - VisitFunctionDecl _fclose_nolock
+ - VisitFunctionDecl _fflush_nolock
+ - VisitFunctionDecl _fread_nolock
+ - VisitFunctionDecl _fread_nolock_s
+ - VisitFunctionDecl _fseek_nolock
+ - VisitFunctionDecl _ftell_nolock
+ - VisitFunctionDecl _fseeki64_nolock
+ - VisitFunctionDecl _ftelli64_nolock
+ - VisitFunctionDecl _fwrite_nolock
+ - VisitFunctionDecl _ungetc_nolock
+ - VisitCXXRecordDecl Point
+ - VisitFunctionDecl Point
+ - VisitFunctionDecl getX
+   - Looking at attr on getX: starts
+   - Got @Starts: nothing
+ - VisitAttr starts
+ - VisitFunctionDecl getY
+   - Looking at attr on getY: starts
+   - Got @Starts: nothing
+ - VisitAttr starts
+ - VisitAttr valueObject
+ - VisitCXXRecordDecl UniqueID
+ - VisitAttr referenceObject
+ - VisitFunctionDecl main
+ - VisitCallExpr CXXMemberCallExpr 0x4113800 <C:\Users\Tim\Source\cwork-3.6.1\llvm\tools\clang\csure\stuff\csure-example\test.cpp:26:10, col:17> 'int'
+`-MemberExpr 0x41137e0 <col:10, col:12> '<bound member function type>' .getX 0x4112df0
+  `-DeclRefExpr 0x41137c8 <col:10> 'class Point' lvalue Var 0x41134c0 'p' 'class Point'
+
+   - Callee decl:
+:CXXMethodDecl 0x4112df0 <C:\Users\Tim\Source\cwork-3.6.1\llvm\tools\clang\csure\stuff\csure-example\test.cpp:11:24, line:13:2> line:11:28 used getX 'int (void) __attribute__((thiscall))'
+|-CompoundStmt 0x41130d8 <col:35, line:13:2>
+| `-ReturnStmt 0x41130c8 <line:12:3, col:10>
+|   `-ImplicitCastExpr 0x41130b8 <col:10> 'int' <LValueToRValue>
+|     `-MemberExpr 0x4113098 <col:10> 'const int' lvalue ->x 0x4112b10
+|       `-CXXThisExpr 0x4113088 <col:10> 'class Point *' this
+`-SureLogicStartsAttr 0x4112e60 <line:11:4, col:20> "nothing"
+
+   - Attr on callee decl:starts

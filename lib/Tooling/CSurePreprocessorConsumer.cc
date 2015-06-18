@@ -1,4 +1,5 @@
-#include"sl/Tooling/CSurePreprocessorConsumer.h"
+#include "sl/Common/SLUtil.h"
+#include "sl/Tooling/CSurePreprocessorConsumer.h"
 
 namespace sl {
 
@@ -11,7 +12,7 @@ namespace sl {
 		llvm::StringRef SearchPath,
 		llvm::StringRef RelativePath,
 		const clang::Module *Imported) {
-		llvm::errs() << " #include " << SearchPath << '/' << RelativePath << '\n';
+		l() << "#include of " << SearchPath << '/' << RelativePath << '\n';
 	}
 
 }

@@ -14,16 +14,17 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Lex/Preprocessor.h"
 
+#include "sl/Common/SLUtil.h"
 #include "sl/Analysis/ExampleVisitor.h"
 
 namespace sl {
 
-	bool ExampleVisitor::isInLocalFile(SourceRange range) {
-		FileID file = astContext.getSourceManager().getFileID(range.getBegin());
-		const FileEntry* entry = astContext.getSourceManager().getFileEntryForID(file);
+	bool ExampleVisitor::isInLocalFile(clang::SourceRange range) {
+		clang::FileID file = astContext.getSourceManager().getFileID(range.getBegin());
+		const clang::FileEntry* entry = astContext.getSourceManager().getFileEntryForID(file);
 		if (entry == NULL) {
 			/*
-			errs() << "** Unable to get file entry for " <<
+			l() << "** Unable to get file entry for " <<
 			range.getBegin().printToString(astContext->getSourceManager()) << "\n";
 			*/
 			return false;
@@ -35,20 +36,20 @@ namespace sl {
 		return (name[0] != '/');
 	}
 
-	bool ExampleVisitor::VisitAttr(Attr *a) {
+	bool ExampleVisitor::VisitAttr(clang::Attr *a) {
 		if (isInLocalFile(a->getRange())) {
-			errs() << "** Looking at attr: " << a->getSpelling() << "\n";
+			l() << " - VisitAttr " << a->getSpelling() << "\n";
 		}
 		return true;
 	}
 
-	bool ExampleVisitor::VisitFunctionDecl(FunctionDecl *func) {
-		string funcName = func->getNameInfo().getName().getAsString();
-		SourceRange range = func->getSourceRange();
+	bool ExampleVisitor::VisitFunctionDecl(clang::FunctionDecl *func) {
+		std::string funcName = func->getNameInfo().getName().getAsString();
+		clang::SourceRange range = func->getSourceRange();
 
 		if (isInLocalFile(range)) {
 			/*
-			errs() << "** " << funcName << ": "
+			l() << "** " << funcName << ": "
 			<< range.getBegin().printToString(rewriter.getSourceMgr())
 			<< ", "
 			<< range.getEnd().printToString(rewriter.getSourceMgr())
@@ -56,49 +57,47 @@ namespace sl {
 
 			rewriter.ReplaceText(func->getLocation(), funcName.length(), "add5");
 			*/
-			errs() << "** Looking at function def: " << funcName << "\n";
+			l() << " - VisitFunctionDecl " << funcName << "\n";
 
 			for (auto a : func->attrs()) {
-				errs() << "  ** Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
+				sl::l() << "   - Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
 				switch (a->getKind()) {
 				default:
 					break;
-				case attr::SureLogicStarts:
-					SureLogicStartsAttr* sa = func->getAttr<SureLogicStartsAttr>();
-					errs() << "  ** Got @Starts: " << sa->getValue() << "\n";
+				case clang::attr::SureLogicStarts:
+					clang::SureLogicStartsAttr* sa = func->getAttr<clang::SureLogicStartsAttr>();
+					sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
 					break;
 				}
 			}
-			//
 		}
 		return true;
 	}
 
-	bool ExampleVisitor::VisitCallExpr(CallExpr *c) {
-		errs() << "** Looking at call:\n";
-		c->dump(errs(), astContext.getSourceManager());
-		errs() << "\n";
+	bool ExampleVisitor::VisitCallExpr(clang::CallExpr *c) {
+		sl::l() << " - VisitCallExpr ";
+		c->dump(sl::l(), astContext.getSourceManager());
+		sl::l() << "\n";
 
-		errs() << "Callee decl:\n:";
-		Decl* d = c->getCalleeDecl();
-		d->dump(errs());
-		errs() << "\n";
-
+		sl::l() << "   - Callee decl ";
+		clang::Decl* d = c->getCalleeDecl();
+		d->dump(l());
+		l() << "\n";
 		for (auto a : d->attrs()) {
-			errs() << "** Looking at attr on callee decl:" << a->getSpelling() << "\n";
+			l() << "     - Attr on callee decl " << a->getSpelling() << "\n";
 		}
 		return true;
 	}
 
-	bool ExampleVisitor::VisitStmt(Stmt *st) {
+	bool ExampleVisitor::VisitStmt(clang::Stmt *st) {
 		/*
 		if (ReturnStmt *ret = dyn_cast<ReturnStmt>(st)) {
 		rewriter.ReplaceText(ret->getRetValue()->getLocStart(), 6, "val");
-		errs() << "** Rewrote ReturnStmt\n";
+		l() << "** Rewrote ReturnStmt\n";
 		}
 		if (CallExpr *call = dyn_cast<CallExpr>(st)) {
 		rewriter.ReplaceText(call->getLocStart(), 7, "add5");
-		errs() << "** Rewrote function call\n";
+		l() << "** Rewrote function call\n";
 		}
 		*/
 		return true;
@@ -107,27 +106,27 @@ namespace sl {
 	/*
 		virtual bool VisitReturnStmt(ReturnStmt *ret) {
 		rewriter.ReplaceText(ret->getRetValue()->getLocStart(), 6, "val");
-		errs() << "** Rewrote ReturnStmt\n";
+		l() << "** Rewrote ReturnStmt\n";
 		return true;
 		}
 
 		virtual bool VisitCallExpr(CallExpr *call) {
 		rewriter.ReplaceText(call->getLocStart(), 7, "add5");
-		errs() << "** Rewrote function call\n";
+		l() << "** Rewrote function call\n";
 		return true;
 		}
 		*/
 
 	/*
 	virtual bool VisitRecordDecl(RecordDecl *r) {
-	errs() << "Found record: " << r->getDeclName().getAsString() << "\n";
+	l() << "Found record: " << r->getDeclName().getAsString() << "\n";
 	return true;
 	}
 	*/
 
-	bool ExampleVisitor::VisitCXXRecordDecl(CXXRecordDecl *r) {
+	bool ExampleVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl *r) {
 		if (isInLocalFile(r->getSourceRange())) {
-			errs() << "Found CXX record: " << r->getDeclName().getAsString() << "\n";
+			l() << " - VisitCXXRecordDecl " << r->getDeclName().getAsString() << "\n";
 		}
 		return true;
 	}
