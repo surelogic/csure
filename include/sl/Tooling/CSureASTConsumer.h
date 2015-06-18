@@ -5,10 +5,7 @@
 
 namespace sl {
 
-	class CSureASTConsumer : public clang::ASTConsumer {
-
-		virtual void HandleTranslationUnit(clang::ASTContext &Ctx) override;
-
-	};
-
+class CSureASTConsumer : public clang::ASTConsumer {
+  virtual void HandleTranslationUnit(clang::ASTContext &Ctx) override;
+};
 }

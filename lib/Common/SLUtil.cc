@@ -2,9 +2,5 @@
 
 namespace sl {
 
-	llvm::raw_ostream& l() {
-		return llvm::errs();
-	}
-
+llvm::raw_ostream& l() { return llvm::errs(); }
 }
-

@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <vector>
 
 class [[valueObject]] Point {
 	const int x, y;
