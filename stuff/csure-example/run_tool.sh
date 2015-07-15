@@ -1,2 +1,2 @@
 #!/bin/bash
-../../../../../../build/Debug/bin/surelogic-csure test.cpp -- clang++ -std=c++11 -c
+surelogic-csure test.cc -- clang++ -std=c++14 -c
