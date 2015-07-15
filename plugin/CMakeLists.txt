@@ -9,7 +9,7 @@ if( NOT MSVC ) # MSVC mangles symbols differently, and
   endif()
 endif()
 
-add_llvm_loadable_module(CSurePlugin plugin.cpp
+add_llvm_loadable_module(CSurePlugin plugin.cc
   LINK_LIBS
   csureAnalysis
 )

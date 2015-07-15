@@ -20,4 +20,5 @@ using namespace std;
 using namespace clang;
 using namespace llvm;
 
-static FrontendPluginRegistry::Add<PluginExampleAction> MyPlugin("-example-plugin", "simple Plugin example");
+static FrontendPluginRegistry::Add<PluginExampleAction> MyPlugin("-example-plugin",
+                                                                 "simple Plugin example");

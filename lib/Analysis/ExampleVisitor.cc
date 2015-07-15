@@ -20,10 +20,8 @@
 namespace sl {
 
 bool ExampleVisitor::isInLocalFile(clang::SourceRange range) {
-  clang::FileID file =
-      astContext.getSourceManager().getFileID(range.getBegin());
-  const clang::FileEntry *entry =
-      astContext.getSourceManager().getFileEntryForID(file);
+  clang::FileID file = astContext.getSourceManager().getFileID(range.getBegin());
+  const clang::FileEntry *entry = astContext.getSourceManager().getFileEntryForID(file);
   if (entry == NULL) {
     /*
     l() << "** Unable to get file entry for " <<
@@ -62,14 +60,12 @@ bool ExampleVisitor::VisitFunctionDecl(clang::FunctionDecl *func) {
     l() << " - VisitFunctionDecl " << funcName << "\n";
 
     for (auto a : func->attrs()) {
-      sl::l() << "   - Looking at attr on " << funcName << ": "
-              << a->getSpelling() << "\n";
+      sl::l() << "   - Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
       switch (a->getKind()) {
         default:
           break;
         case clang::attr::SureLogicStarts:
-          clang::SureLogicStartsAttr *sa =
-              func->getAttr<clang::SureLogicStartsAttr>();
+          clang::SureLogicStartsAttr *sa = func->getAttr<clang::SureLogicStartsAttr>();
           sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
           break;
       }
