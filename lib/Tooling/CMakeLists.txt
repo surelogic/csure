@@ -14,6 +14,7 @@ add_clang_library(csureTooling
   LINK_LIBS
   csureAnalysis
   csureCommon
+  csureSea
   clangAST
   clangBasic
   clangFrontend
