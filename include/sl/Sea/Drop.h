@@ -19,8 +19,6 @@ class Drop : public std::enable_shared_from_this<Drop> {
  public:
   static std::shared_ptr<Drop> create() { return std::shared_ptr<Drop>{new Drop{}}; }
 
-  std::shared_ptr<Drop> get_shared_ptr() { return shared_from_this(); }
-
   std::string getMessage() { return "todo"; }
 
   std::string getMessageCanonical() { return "todo"; }
@@ -28,8 +26,6 @@ class Drop : public std::enable_shared_from_this<Drop> {
   // TODO: getCRef
 
   bool isFromSrc() { return false; }
-
-  
 
   virtual ~Drop() { std::cout << "~Drop invoked\n"; };
 };
