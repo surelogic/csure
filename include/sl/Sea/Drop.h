@@ -6,6 +6,11 @@
 
 namespace sl {
 
+/**
+ * \brief The base class for all drops within the sea, intended to allow multiple implementations.
+ *
+ * All access to instances is via a shared_ptr.
+ */
 class Drop : public std::enable_shared_from_this<Drop> {
   // remove copy constructor and assignment (move as well)
   Drop(const Drop&) = delete;
