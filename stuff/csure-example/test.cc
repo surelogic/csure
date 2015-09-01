@@ -1,13 +1,9 @@
-//#include <vector>
 #include <iostream>
 #include <thread>
 
-[[starts("nothing")]] 
-void hello() {
-  std::cout << "hello, world!" << std::endl;
-}
+[[starts("nothing")]] void hello() { std::cout << "hello, world!" << std::endl; }
 
-class[[valueObject]] Point {
+class Point {
   const int x, y;
 
  public:
@@ -19,20 +15,14 @@ class[[valueObject]] Point {
 
   [[starts("nothing")]] int getY() { return y; }
 
-  [[starts("nothing")]] // illegal annotation
-  void unusual() {
-    std::thread t {hello};
+  [[starts("nothing")]] void unusual() {
+    std::thread t{hello};
     t.join();
   }
-
 };
 
-class[[referenceObject]] UniqueID{
-
-};
-
-[[starts("nothing")]] // unsafe because constructor of Point is not annotated
-int main() {
-  Point p(1, 2); 
+[[starts("nothing")]] int main() {
+  Point p(1, 2);
+  p.unusual();
   return p.getX();
 }
