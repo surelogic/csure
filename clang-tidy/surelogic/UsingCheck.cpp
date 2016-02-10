@@ -47,7 +47,7 @@ void UsingCheck::registerMatchers(clang::ast_matchers::MatchFinder *Finder) {
 }
 
 std::string UsingCheck::getNamespaceOf(const std::string &qualifiedName) {
-  auto pos{qualifiedName.rfind("::")};
+  auto pos = qualifiedName.rfind("::");
   if (pos == std::string::npos)
     return "";
   else
