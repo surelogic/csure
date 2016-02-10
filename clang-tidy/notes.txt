@@ -1,0 +1,2 @@
+files in ./surlogic (including the directoy) go in llvm/tools/clang/tools/extra/clang-tidy
+files in ./test go in llvm/tools/clang/tools/extra/test/clang-tidy
