@@ -3,7 +3,7 @@ set(LLVM_LINK_COMPONENTS
   )
 
 add_csure_unittest(CommonTests
-  SLUtilTest.cc
+  SLUtilTest.cpp
   )
 
 target_link_libraries(CommonTests

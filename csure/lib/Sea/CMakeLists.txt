@@ -4,12 +4,8 @@ file( GLOB_RECURSE headers
     ../../include/sl/Sea/*.h
 )
 
-file( GLOB_RECURSE sources
-    *.cc
-)
-
 add_clang_library(csureSea
-  ${sources}
+  test.cpp
 
   LINK_LIBS
   csureCommon

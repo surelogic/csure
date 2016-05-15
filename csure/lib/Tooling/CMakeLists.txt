@@ -4,12 +4,10 @@ file( GLOB_RECURSE headers
     ../../include/sl/Tooling/*.h
 )
 
-file( GLOB_RECURSE sources
-    *.cc
-)
-
 add_clang_library(csureTooling
-  ${sources}
+  CSureASTConsumer.cpp
+  CSurePreprocessorConsumer.cpp
+  CSureToolAction.cpp
   
   LINK_LIBS
   csureAnalysis

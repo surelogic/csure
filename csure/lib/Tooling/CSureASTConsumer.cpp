@@ -1,8 +1,8 @@
-#include <iostream>
-#include "sl/Common/SLUtil.h"
 #include "sl/Tooling/CSureASTConsumer.h"
+#include <iostream>
 #include "sl/Analysis/ExampleVisitor.h"
 #include "sl/Analysis/StartThreadAnalysis.h"
+#include "sl/Common/SLUtil.h"
 
 namespace sl {
 
@@ -14,5 +14,4 @@ void CSureASTConsumer::HandleTranslationUnit(clang::ASTContext &Ctx) {
   sl::l() << "\nStarting analysis.\n";
   analysis.TraverseDecl(Ctx.getTranslationUnitDecl());
 }
-
 }

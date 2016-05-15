@@ -4,12 +4,9 @@ file( GLOB_RECURSE headers
     ../../include/sl/Analysis/*.h
 )
 
-file( GLOB_RECURSE sources
-    *.cc
-)
-
 add_clang_library(csureAnalysis
-  ${sources}
+  ExampleVisitor.cpp
+  StartThreadAnalysis.cpp
 
   LINK_LIBS
   csureCommon

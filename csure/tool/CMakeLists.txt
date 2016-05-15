@@ -2,7 +2,7 @@ set(LLVM_LINK_COMPONENTS support)
 set(LLVM_USED_LIBS csureTooling csureAnalysis clangTooling clangBasic clangAST)
 
 add_clang_executable(surelogic-csure
-  main.cc
+  main.cpp
   )
 target_link_libraries(surelogic-csure
   csureTooling
@@ -11,3 +11,6 @@ target_link_libraries(surelogic-csure
   clangBasic
   clangASTMatchers
  )
+
+install(TARGETS surelogic-csure
+  RUNTIME DESTINATION bin)
