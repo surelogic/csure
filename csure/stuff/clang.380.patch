@@ -1,22 +1,23 @@
-Index: clang/CMakeLists.txt
+Index: CMakeLists.txt
 ===================================================================
---- clang/CMakeLists.txt	(revision 235525)
-+++ clang/CMakeLists.txt	(working copy)
-@@ -532,3 +532,5 @@
-     ${CLANG_BINARY_DIR}/share/clang/cmake/ClangConfig.cmake
-     COPYONLY)
- endif ()
-+
+--- CMakeLists.txt	(revision 269591)
++++ CMakeLists.txt	(working copy)
+@@ -536,6 +536,7 @@
+ add_subdirectory(lib)
+ add_subdirectory(tools)
+ add_subdirectory(runtime)
 +add_subdirectory(csure)
-Index: clang/include/clang/Basic/Attr.td
+ 
+ option(CLANG_BUILD_EXAMPLES "Build CLANG example programs by default." OFF)
+ if (CLANG_BUILD_EXAMPLES)
+Index: include/clang/Basic/Attr.td
 ===================================================================
---- clang/include/clang/Basic/Attr.td	(revision 235525)
-+++ clang/include/clang/Basic/Attr.td	(working copy)
-@@ -1975,3 +1975,25 @@
-   let SemaHandler = 0;
+--- include/clang/Basic/Attr.td	(revision 269591)
++++ include/clang/Basic/Attr.td	(working copy)
+@@ -2158,6 +2158,27 @@
    let Documentation = [Undocumented];
  }
-+
+ 
 +def SureLogicStarts : InheritableAttr {
 +  let Spellings = [GNU<"starts">,
 +                   CXX11<"","starts", 200809>];
@@ -38,12 +39,14 @@ Index: clang/include/clang/Basic/Attr.td
 +  let Subjects = SubjectList<[Record]>;                   
 +  let Documentation = [Undocumented];
 +}
-\ No newline at end of file
-Index: clang/lib/Sema/SemaDeclAttr.cpp
+ def OMPThreadPrivateDecl : InheritableAttr {
+   // This attribute has no spellings as it is only ever created implicitly.
+   let Spellings = [];
+Index: lib/Sema/SemaDeclAttr.cpp
 ===================================================================
---- clang/lib/Sema/SemaDeclAttr.cpp	(revision 235525)
-+++ clang/lib/Sema/SemaDeclAttr.cpp	(working copy)
-@@ -592,6 +592,40 @@
+--- lib/Sema/SemaDeclAttr.cpp	(revision 269591)
++++ lib/Sema/SemaDeclAttr.cpp	(working copy)
+@@ -617,6 +617,40 @@
    return true;
  }
  
@@ -84,7 +87,7 @@ Index: clang/lib/Sema/SemaDeclAttr.cpp
  static void handleGuardedByAttr(Sema &S, Decl *D, const AttributeList &Attr) {
    Expr *Arg = nullptr;
    if (!checkGuardedByAttrCommon(S, D, Attr, Arg))
-@@ -4780,6 +4814,15 @@
+@@ -5466,6 +5500,15 @@
    case AttributeList::AT_TypeTagForDatatype:
      handleTypeTagForDatatypeAttr(S, D, Attr);
      break;
