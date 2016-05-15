@@ -1,6 +1,6 @@
 Index: clang-tidy/CMakeLists.txt
 ===================================================================
---- clang-tidy/CMakeLists.txt	(revision 260343)
+--- clang-tidy/CMakeLists.txt	(revision 269591)
 +++ clang-tidy/CMakeLists.txt	(working copy)
 @@ -30,6 +30,7 @@
  add_subdirectory(llvm)
@@ -12,7 +12,7 @@ Index: clang-tidy/CMakeLists.txt
  add_subdirectory(performance)
 Index: clang-tidy/tool/CMakeLists.txt
 ===================================================================
---- clang-tidy/tool/CMakeLists.txt	(revision 260343)
+--- clang-tidy/tool/CMakeLists.txt	(revision 269591)
 +++ clang-tidy/tool/CMakeLists.txt	(working copy)
 @@ -13,6 +13,7 @@
    clangTidyCERTModule
@@ -24,9 +24,9 @@ Index: clang-tidy/tool/CMakeLists.txt
    clangTidyModernizeModule
 Index: clang-tidy/tool/ClangTidyMain.cpp
 ===================================================================
---- clang-tidy/tool/ClangTidyMain.cpp	(revision 260343)
+--- clang-tidy/tool/ClangTidyMain.cpp	(revision 269591)
 +++ clang-tidy/tool/ClangTidyMain.cpp	(working copy)
-@@ -408,6 +408,11 @@
+@@ -367,6 +367,11 @@
  static int LLVM_ATTRIBUTE_UNUSED GoogleModuleAnchorDestination =
      GoogleModuleAnchorSource;
  
