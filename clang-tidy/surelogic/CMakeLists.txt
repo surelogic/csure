@@ -6,6 +6,7 @@ add_clang_library(clangTidySureLogicModule
   UsingCheck.cpp
   NullStmtCheck.cpp
   EmptyDeclCheck.cpp
+  HeaderFileExtensionsUtils.cpp
 
   LINK_LIBS
   clangAST

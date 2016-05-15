@@ -1,13 +1,14 @@
 #ifndef LLVM_CLANG_TOOLS_EXTRA_CLANG_TIDY_SURELOGIC_USINGCHECK_H
 #define LLVM_CLANG_TOOLS_EXTRA_CLANG_TIDY_SURELOGIC_USINGCHECK_H
 
-#include "../ClangTidy.h"
-#include "../utils/HeaderFileExtensionsUtils.h"
-#include "clang/Basic/Diagnostic.h"
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include <utility>
+
+#include "../ClangTidy.h"
+#include "HeaderFileExtensionsUtils.h"
+#include "clang/Basic/Diagnostic.h"
 
 namespace clang {
 namespace tidy {

@@ -1,4 +1,4 @@
-//===--- HeaderFileExtensionsUtils.cpp - clang-tidy--------------*- C++ -*-===//
+//===--- HeaderFileExtensionsUtils.h - clang-tidy----------------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //
@@ -7,59 +7,45 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "HeaderFileExtensionsUtils.h"
-#include "clang/Basic/CharInfo.h"
+#ifndef LLVM_CLANG_TOOLS_EXTRA_CLANG_TIDY_UTILS_HEADER_FILE_EXTENSIONS_UTILS_H
+#define LLVM_CLANG_TOOLS_EXTRA_CLANG_TIDY_UTILS_HEADER_FILE_EXTENSIONS_UTILS_H
+
+#include <string>
+
+#include "clang/Basic/SourceLocation.h"
+#include "clang/Basic/SourceManager.h"
+#include "llvm/ADT/StringRef.h"
+#include "llvm/ADT/SmallSet.h"
+#include "llvm/Support/Path.h"
 
 namespace clang {
 namespace tidy {
 namespace utils {
 
+typedef llvm::SmallSet<llvm::StringRef, 5> HeaderFileExtensionsSet;
+
+/// \brief Checks whether expansion location of Loc is in header file.
 bool isExpansionLocInHeaderFile(
     SourceLocation Loc, const SourceManager &SM,
-    const HeaderFileExtensionsSet &HeaderFileExtensions) {
-  SourceLocation ExpansionLoc = SM.getExpansionLoc(Loc);
-  StringRef FileExtension =
-      llvm::sys::path::extension(SM.getFilename(ExpansionLoc));
-  return HeaderFileExtensions.count(FileExtension.substr(1)) > 0;
-}
+    const HeaderFileExtensionsSet &HeaderFileExtensions);
 
+/// \brief Checks whether presumed location of Loc is in header file.
 bool isPresumedLocInHeaderFile(
     SourceLocation Loc, SourceManager &SM,
-    const HeaderFileExtensionsSet &HeaderFileExtensions) {
-  PresumedLoc PresumedLocation = SM.getPresumedLoc(Loc);
-  StringRef FileExtension =
-      llvm::sys::path::extension(PresumedLocation.getFilename());
-  return HeaderFileExtensions.count(FileExtension.substr(1)) > 0;
-}
+    const HeaderFileExtensionsSet &HeaderFileExtensions);
 
+/// \brief Checks whether spelling location of Loc is in header file.
 bool isSpellingLocInHeaderFile(
     SourceLocation Loc, SourceManager &SM,
-    const HeaderFileExtensionsSet &HeaderFileExtensions) {
-  SourceLocation SpellingLoc = SM.getSpellingLoc(Loc);
-  StringRef FileExtension =
-      llvm::sys::path::extension(SM.getFilename(SpellingLoc));
+    const HeaderFileExtensionsSet &HeaderFileExtensions);
 
-  return HeaderFileExtensions.count(FileExtension.substr(1)) > 0;
-}
-
+/// \brief Parses header file extensions from a semicolon-separated list.
 bool parseHeaderFileExtensions(StringRef AllHeaderFileExtensions,
                                HeaderFileExtensionsSet &HeaderFileExtensions,
-                               char delimiter) {
-  SmallVector<StringRef, 5> Suffixes;
-  AllHeaderFileExtensions.split(Suffixes, delimiter);
-  HeaderFileExtensions.clear();
-  for (StringRef Suffix : Suffixes) {
-    StringRef Extension = Suffix.trim();
-    for (StringRef::const_iterator it = Extension.begin();
-         it != Extension.end(); ++it) {
-      if (!isAlphanumeric(*it))
-        return false;
-    }
-    HeaderFileExtensions.insert(Extension);
-  }
-  return true;
-}
+                               char delimiter);
 
 } // namespace utils
 } // namespace tidy
 } // namespace clang
+
+#endif // LLVM_CLANG_TOOLS_EXTRA_CLANG_TIDY_UTILS_HEADER_FILE_EXTENSIONS_UTILS_H

@@ -1,4 +1,8 @@
 #include "UsingCheck.h"
+
+#include <iostream>
+#include <string>
+
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclBase.h"
@@ -10,8 +14,6 @@
 #include "clang/Basic/SourceLocation.h"
 #include "clang/Basic/SourceManager.h"
 #include "clang/Lex/Lexer.h"
-#include <iostream>
-#include <string>
 
 namespace clang {
 namespace tidy {
@@ -20,8 +22,7 @@ namespace readability {
 
 UsingCheck::UsingCheck(StringRef Name, ClangTidyContext *Context)
     : ClangTidyCheck(Name, Context),
-      RawStringHeaderFileExtensions(
-          Options.getLocalOrGlobal("HeaderFileExtensions", "h,hh,hpp,hxx")) {
+      RawStringHeaderFileExtensions("h,hh,hpp,hxx") {
   if (!utils::parseHeaderFileExtensions(RawStringHeaderFileExtensions,
                                         HeaderFileExtensions, ',')) {
     llvm::errs() << "Invalid header file extension: "
