@@ -7,8 +7,9 @@
 
 namespace sl {
 
-std::unique_ptr<clang::ASTConsumer> CSureToolAction::CreateASTConsumer(
-    clang::CompilerInstance &CI, llvm::StringRef file) {
+std::unique_ptr<clang::ASTConsumer>
+CSureToolAction::CreateASTConsumer(clang::CompilerInstance &CI,
+                                   llvm::StringRef file) {
   CI.getPreprocessor().addPPCallbacks(
       std::unique_ptr<clang::PPCallbacks>{new CSurePreprocessorConsumer{}});
   return std::unique_ptr<clang::ASTConsumer>{new CSureASTConsumer{}};

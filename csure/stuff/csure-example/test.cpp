@@ -1,17 +1,23 @@
 #include <iostream>
 #include <thread>
 
-[[starts("nothing")]] void hello() { std::cout << "hello, world!" << std::endl; }
+[[starts("nothing")]] void hello() {
+  std::cout << "hello, world!" << std::endl;
+}
 
 class Point {
   const int x, y;
 
- public:
-  Point(int i, int j) : x(i), y(j) {
-    // Nothing else to do
-  }
+public:
+  Point(int i, int j)
+      : x(i),
+        y(j){
+            // Nothing else to do
+        }
 
-  [[starts("nothing")]] int getX() { return x; }
+            [[starts("nothing")]] int getX() {
+    return x;
+  }
 
   [[starts("nothing")]] int getY() { return y; }
 

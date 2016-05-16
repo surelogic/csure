@@ -224,15 +224,16 @@ void UsingCheck::handleVarDecl(
     const clang::TypedefType *tdty = UT->getAs<clang::TypedefType>();
     const clang::TypedefNameDecl *tdnd = tdty->getDecl();
     clang::SourceRange range55 = tdnd->getSourceRange();
-  CharSourceRange CSR = Lexer::makeFileCharRange(
-      CharSourceRange::getTokenRange(range55), *Result.SourceManager,
-      Result.Context->getLangOpts());
-  std::string typedef55 = Lexer::getSourceText(CSR, *Result.SourceManager,
-                                                  Result.Context->getLangOpts())
-                                 .str();
-  std::cerr << " ** THE TYPEDEF : " << typedef55 << "\n";
-  std::cerr << " -=- getNameAsString() = " << tdnd->getNameAsString() << "\n";
-    std::cout << "-=- getQualifiedNameAsString() = " << tdty->getDecl()->getQualifiedNameAsString() << " "
+    CharSourceRange CSR = Lexer::makeFileCharRange(
+        CharSourceRange::getTokenRange(range55), *Result.SourceManager,
+        Result.Context->getLangOpts());
+    std::string typedef55 = Lexer::getSourceText(CSR, *Result.SourceManager,
+                                                 Result.Context->getLangOpts())
+                                .str();
+    std::cerr << " ** THE TYPEDEF : " << typedef55 << "\n";
+    std::cerr << " -=- getNameAsString() = " << tdnd->getNameAsString() << "\n";
+    std::cout << "-=- getQualifiedNameAsString() = "
+              << tdty->getDecl()->getQualifiedNameAsString() << " "
               << VD->getNameAsString() << "\n";
   }
 

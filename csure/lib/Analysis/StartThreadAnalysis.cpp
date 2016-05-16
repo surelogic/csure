@@ -46,13 +46,13 @@ bool StartThreadAnalysis::isInLocalFile(clang::SourceRange range) {
 bool StartThreadAnalysis::declaresStartsNothing(clang::FunctionDecl *func) {
   for (auto a : func->attrs()) {
     switch (a->getKind()) {
-      default:
-        break;
-      case clang::attr::SureLogicStarts:
-        clang::SureLogicStartsAttr *sa =
-            func->getAttr<clang::SureLogicStartsAttr>();
-        sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
-        return sa->getValue() == "nothing";
+    default:
+      break;
+    case clang::attr::SureLogicStarts:
+      clang::SureLogicStartsAttr *sa =
+          func->getAttr<clang::SureLogicStartsAttr>();
+      sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
+      return sa->getValue() == "nothing";
     }
   }
   return false;
@@ -78,7 +78,8 @@ bool StartThreadAnalysis::isThreadType(clang::QualType qt) {
     bool isStd = false;
     if (clang::NamespaceDecl *ns = llvm::dyn_cast<clang::NamespaceDecl>(dc)) {
       sl::l() << "  in namespace " << ns->getName() << "\n";
-      if (ns->getName() == "std") isStd = true;
+      if (ns->getName() == "std")
+        isStd = true;
     }
     if (const clang::IdentifierInfo *ii = rd->getIdentifier()) {
       std::string name = ii->getName();
@@ -133,13 +134,13 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
       sl::l() << "   - Looking at attr on " << funcName << ": "
               << a->getSpelling() << "\n";
       switch (a->getKind()) {
-        default:
-          break;
-        case clang::attr::SureLogicStarts:
-          clang::SureLogicStartsAttr *sa =
-              func->getAttr<clang::SureLogicStartsAttr>();
-          sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
-          break;
+      default:
+        break;
+      case clang::attr::SureLogicStarts:
+        clang::SureLogicStartsAttr *sa =
+            func->getAttr<clang::SureLogicStartsAttr>();
+        sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
+        break;
       }
     }
   }

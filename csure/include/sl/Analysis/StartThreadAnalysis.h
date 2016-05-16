@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <utility>
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"
 #include "clang/AST/ASTContext.h"
@@ -15,18 +13,20 @@
 #include "clang/Frontend/FrontendPluginRegistry.h"
 #include "clang/Lex/Preprocessor.h"
 #include "clang/Rewrite/Core/Rewriter.h"
+#include <memory>
+#include <utility>
 
 namespace sl {
 
 class StartThreadAnalysis
     : public clang::RecursiveASTVisitor<StartThreadAnalysis> {
- private:
-  clang::ASTContext &astContext;  // used for getting additional AST info
+private:
+  clang::ASTContext &astContext; // used for getting additional AST info
 
-  bool contextStartsNothing;  // true while visiting a function declaring starts
-                              // nothing
+  bool contextStartsNothing; // true while visiting a function declaring starts
+                             // nothing
 
- public:
+public:
   explicit StartThreadAnalysis(clang::ASTContext &Ctx) : astContext{Ctx} {}
 
   ~StartThreadAnalysis() {}

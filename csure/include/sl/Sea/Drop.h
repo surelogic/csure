@@ -14,15 +14,15 @@ namespace sl {
  */
 class Drop : public std::enable_shared_from_this<Drop> {
   // remove copy constructor and assignment (move as well)
-  Drop(const Drop&) = delete;
-  Drop& operator=(const Drop&) = delete;
-  Drop(Drop&&) = delete;
-  Drop& operator=(Drop&&) = delete;
+  Drop(const Drop &) = delete;
+  Drop &operator=(const Drop &) = delete;
+  Drop(Drop &&) = delete;
+  Drop &operator=(Drop &&) = delete;
 
- public:
+public:
   Drop() = default;
 
- public:
+public:
   static std::shared_ptr<Drop> create() {
     return std::shared_ptr<Drop>{new Drop{}};
   }

@@ -1,8 +1,8 @@
 #include "sl/Tooling/CSureASTConsumer.h"
-#include <iostream>
 #include "sl/Analysis/ExampleVisitor.h"
 #include "sl/Analysis/StartThreadAnalysis.h"
 #include "sl/Common/SLUtil.h"
+#include <iostream>
 
 namespace sl {
 

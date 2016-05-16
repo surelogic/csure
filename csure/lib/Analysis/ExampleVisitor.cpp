@@ -1,5 +1,3 @@
-#include <memory>
-#include <utility>
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"
 #include "clang/AST/ASTContext.h"
@@ -13,6 +11,8 @@
 #include "clang/Frontend/FrontendPluginRegistry.h"
 #include "clang/Lex/Preprocessor.h"
 #include "clang/Rewrite/Core/Rewriter.h"
+#include <memory>
+#include <utility>
 
 #include "sl/Analysis/ExampleVisitor.h"
 #include "sl/Common/SLUtil.h"
@@ -65,13 +65,13 @@ bool ExampleVisitor::VisitFunctionDecl(clang::FunctionDecl *func) {
       sl::l() << "   - Looking at attr on " << funcName << ": "
               << a->getSpelling() << "\n";
       switch (a->getKind()) {
-        default:
-          break;
-        case clang::attr::SureLogicStarts:
-          clang::SureLogicStartsAttr *sa =
-              func->getAttr<clang::SureLogicStartsAttr>();
-          sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
-          break;
+      default:
+        break;
+      case clang::attr::SureLogicStarts:
+        clang::SureLogicStartsAttr *sa =
+            func->getAttr<clang::SureLogicStartsAttr>();
+        sl::l() << "   - Got @Starts: " << sa->getValue() << "\n";
+        break;
       }
     }
   }
