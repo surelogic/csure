@@ -9,6 +9,6 @@ void CSurePreprocessorConsumer::InclusionDirective(
     clang::CharSourceRange FilenameRange, const clang::FileEntry *File,
     llvm::StringRef SearchPath, llvm::StringRef RelativePath,
     const clang::Module *Imported) {
-  l() << "#include of " << SearchPath << '/' << RelativePath << '\n';
+  // l() << "#include of " << SearchPath << '/' << RelativePath << '\n';
 }
-}
+} // namespace sl

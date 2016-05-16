@@ -27,19 +27,19 @@ bool StartThreadAnalysis::isInLocalFile(clang::SourceRange range) {
   const clang::FileEntry *entry =
       astContext.getSourceManager().getFileEntryForID(file);
   if (entry == NULL) {
-    // l() << "** Unable to get file entry for " <<
-    // range.getBegin().printToString(astContext.getSourceManager()) << "\n";
-
+    //  sl::l() << "** Unable to get file entry for "
+    //      << range.getBegin().printToString(astContext.getSourceManager())
+    //      << "\n";
     return false;
   }
   const char *name = entry->getName();
-  // l() << "   name = " << name << "\n";
+  // sl::l() << "   name = " << name << "\n";
   if (name == NULL) {
     return false;
   }
   int n = std::strlen(name);
-  return (n < 3 ||
-          (name[n - 1] == 'c' && name[n - 2] == 'c' && name[n - 3] == '.'));
+  return (n < 4 || (name[n - 1] == 'p' && name[n - 2] == 'p' &&
+                    name[n - 3] == 'c' && name[n - 4] == '.'));
   // return (name[0] != '/');
 }
 
@@ -92,7 +92,7 @@ bool StartThreadAnalysis::isThreadType(clang::QualType qt) {
 
 bool StartThreadAnalysis::VisitAttr(clang::Attr *a) {
   if (isInLocalFile(a->getRange())) {
-    l() << " - VisitAttr " << a->getSpelling() << "\n";
+    sl::l() << " - VisitAttr " << a->getSpelling() << "\n";
   }
   return true;
 }
@@ -101,8 +101,8 @@ bool StartThreadAnalysis::TraverseFunctionDecl(clang::FunctionDecl *func) {
   if (isInLocalFile(func->getSourceRange())) {
     bool savedDeclaredStarts = contextStartsNothing;
     contextStartsNothing = declaresStartsNothing(func);
-    l() << "TraverseFunctionDecl " << func->getNameAsString()
-        << " @Starts nothing? " << contextStartsNothing << "\n";
+    sl::l() << "TraverseFunctionDecl " << func->getNameAsString()
+            << " @Starts nothing? " << contextStartsNothing << "\n";
     bool res =
         clang::RecursiveASTVisitor<StartThreadAnalysis>::TraverseFunctionDecl(
             func);
@@ -120,7 +120,7 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
 
   if (isInLocalFile(range)) {
     /*
-    l() << "** " << funcName << ": "
+    sl::l() << "** " << funcName << ": "
     << range.getBegin().printToString(rewriter.getSourceMgr())
     << ", "
     << range.getEnd().printToString(rewriter.getSourceMgr())
@@ -128,7 +128,7 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
 
     rewriter.ReplaceText(func->getLocation(), funcName.length(), "add5");
     */
-    l() << " - VisitFunctionDecl " << funcName << "\n";
+    sl::l() << " - VisitFunctionDecl " << funcName << "\n";
 
     for (auto a : func->attrs()) {
       sl::l() << "   - Looking at attr on " << funcName << ": "
@@ -158,18 +158,18 @@ bool StartThreadAnalysis::VisitCallExpr(clang::CallExpr *c) {
     if (!d) {
       sl::l() << "<null>";
     } else if (clang::NamedDecl *nd = llvm::dyn_cast<clang::NamedDecl>(d)) {
-      l() << nd->getNameAsString();
+      sl::l() << nd->getNameAsString();
     } else {
-      d->print(l());
+      d->print(sl::l());
     }
-    l() << "\n";
+    sl::l() << "\n";
     for (auto a : d->attrs()) {
-      l() << "     - Attr on callee decl " << a->getSpelling() << "\n";
+      sl::l() << "     - Attr on callee decl " << a->getSpelling() << "\n";
     }
     if (clang::FunctionDecl *func = llvm::dyn_cast<clang::FunctionDecl>(d)) {
       if (contextStartsNothing && !declaresStartsNothing(func)) {
-        l() << "!!! Found unsafe call to " << func->getNameAsString()
-            << " that may start a thread\n";
+        sl::l() << "!!! Found unsafe call to " << func->getNameAsString()
+                << " that may start a thread\n";
       }
     }
   }
@@ -195,11 +195,11 @@ bool StartThreadAnalysis::VisitStmt(clang::Stmt *st) {
   /*
   if (ReturnStmt *ret = dyn_cast<ReturnStmt>(st)) {
   rewriter.ReplaceText(ret->getRetValue()->getLocStart(), 6, "val");
-  l() << "** Rewrote ReturnStmt\n";
+  sl::l() << "** Rewrote ReturnStmt\n";
   }
   if (CallExpr *call = dyn_cast<CallExpr>(st)) {
   rewriter.ReplaceText(call->getLocStart(), 7, "add5");
-  l() << "** Rewrote function call\n";
+  sl::l() << "** Rewrote function call\n";
   }
   */
   return true;
@@ -208,27 +208,28 @@ bool StartThreadAnalysis::VisitStmt(clang::Stmt *st) {
 /*
         virtual bool VisitReturnStmt(ReturnStmt *ret) {
         rewriter.ReplaceText(ret->getRetValue()->getLocStart(), 6, "val");
-        l() << "** Rewrote ReturnStmt\n";
+        sl::l() << "** Rewrote ReturnStmt\n";
         return true;
         }
 
         virtual bool VisitCallExpr(CallExpr *call) {
         rewriter.ReplaceText(call->getLocStart(), 7, "add5");
-        l() << "** Rewrote function call\n";
+        sl::l() << "** Rewrote function call\n";
         return true;
         }
         */
 
 /*
 virtual bool VisitRecordDecl(RecordDecl *r) {
-l() << "Found record: " << r->getDeclName().getAsString() << "\n";
+sl::l() << "Found record: " << r->getDeclName().getAsString() << "\n";
 return true;
 }
 */
 
 bool StartThreadAnalysis::VisitCXXRecordDecl(clang::CXXRecordDecl *r) {
   if (isInLocalFile(r->getSourceRange())) {
-    l() << " - VisitCXXRecordDecl " << r->getDeclName().getAsString() << "\n";
+    sl::l() << " - VisitCXXRecordDecl " << r->getDeclName().getAsString()
+            << "\n";
   }
   return true;
 }

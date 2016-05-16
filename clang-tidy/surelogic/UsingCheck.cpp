@@ -1,8 +1,5 @@
 #include "UsingCheck.h"
 
-#include <iostream>
-#include <string>
-
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclBase.h"
@@ -14,6 +11,9 @@
 #include "clang/Basic/SourceLocation.h"
 #include "clang/Basic/SourceManager.h"
 #include "clang/Lex/Lexer.h"
+
+#include <iostream>
+#include <string>
 
 namespace clang {
 namespace tidy {

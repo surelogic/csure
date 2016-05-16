@@ -8,10 +8,9 @@ namespace sl {
 
 void CSureASTConsumer::HandleTranslationUnit(clang::ASTContext &Ctx) {
   // This is where our infrastructure for CSure begins
-  ExampleVisitor visitor{Ctx};
-  StartThreadAnalysis analysis{Ctx};
+  // ExampleVisitor visitor{Ctx};
   // visitor.TraverseDecl(Ctx.getTranslationUnitDecl());
-  sl::l() << "\nStarting analysis.\n";
+  StartThreadAnalysis analysis{Ctx};
   analysis.TraverseDecl(Ctx.getTranslationUnitDecl());
 }
-}
+} // namespace sl

@@ -28,4 +28,4 @@ bool CSureToolAction::BeginSourceFileAction(clang::CompilerInstance &CI,
   l() << "Source file " << Filename << "\n";
   return PluginASTAction::BeginSourceFileAction(CI, Filename);
 }
-}
+} // namespace sl
