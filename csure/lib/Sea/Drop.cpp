@@ -21,7 +21,8 @@ void Drop::AddDeponent(std::shared_ptr<Drop> deponent) {
 }
 
 void Drop::Invalidate() {
-  if (!is_valid_) return;
+  if (!is_valid_)
+    return;
   InvalidateInternal();
 
   is_valid_ = false;
@@ -37,8 +38,6 @@ void Drop::Invalidate() {
     dependent->removeDeponent(shared_from_this());
   }
   dependents_.erase(dependents_.begin(), dependents_.end());
-
-  // TODO Notify sea observers DropEvent.Invalidated
 }
 
 void Drop::removeDependent(std::shared_ptr<Drop> dependent) {
@@ -47,7 +46,6 @@ void Drop::removeDependent(std::shared_ptr<Drop> dependent) {
     return;
 
   dependents_.erase(dependent);
-  // TODO Notify sea observers DropEvent.DependentInvalidated
   DependentInvalidAction();
 }
 
@@ -56,7 +54,6 @@ void Drop::removeDeponent(std::shared_ptr<Drop> deponent) {
     return;
 
   deponents_.erase(deponent);
-  // TODO Notify sea observers DropEvent.DeponentInvalidated
   DeponentInvalidAction();
 }
 

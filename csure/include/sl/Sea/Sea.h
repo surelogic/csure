@@ -2,7 +2,7 @@
 #define SL_SEA_SEA_H_
 
 #include <memory>
-#include <vector>
+#include <unordered_set>
 
 #include "sl/Common/SLUtil.h"
 
@@ -45,15 +45,19 @@ public:
   std::shared_ptr<ProofDrop> NewProofDrop();
 
   // Gets all drops in this sea.
-  std::vector<std::shared_ptr<Drop>> Drops();
+  std::unordered_set<std::shared_ptr<Drop>> Drops();
 
 private:
   // Constructs a sea. Most analysis code should use Sea::Default().
   // This constructor is primarily intended for test use.
   Sea() = default;
 
-  // Holds all drops managed by this sea.
-  std::vector<std::shared_ptr<Drop>> drops_;
+  // Clears any invalid drops out of 'drops_'.
+  void ClearOutInvalidDrops();
+
+  // Holds all drops managed by this sea. Invalid drops are cleaned out
+  // at each call to a non-static member function.
+  std::unordered_set<std::shared_ptr<Drop>> drops_;
 
   // References the default sea.
   static std::shared_ptr<Sea> *default_;
