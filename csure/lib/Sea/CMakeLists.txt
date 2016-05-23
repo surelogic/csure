@@ -5,7 +5,8 @@ file( GLOB_RECURSE headers
 )
 
 add_clang_library(csureSea
-  test.cpp
+  Sea.cpp
+  Drop.cpp
 
   LINK_LIBS
   csureCommon

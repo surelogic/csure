@@ -4,6 +4,7 @@ set(LLVM_LINK_COMPONENTS
 
 add_csure_unittest(SeaTests
   DropTest.cpp
+  SeaTest.cpp
   )
 
 target_link_libraries(SeaTests
