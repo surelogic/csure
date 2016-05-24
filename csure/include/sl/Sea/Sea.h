@@ -31,12 +31,30 @@ namespace sl {
 // All access to instances is via a shared_ptr.
 class Sea final : public std::enable_shared_from_this<Sea> {
 public:
+  ///////////////
+  // ACCESSORS //
+  ///////////////
+
   // Gets the default sea.
   static std::shared_ptr<Sea> Default();
 
   // Gets a new sea. Most analysis code should use Sea::Default().
   // This constructor is primarily intended for test use.
   static std::shared_ptr<Sea> New();
+
+  ///////////////////////
+  // UTILITY FUNCTIONS //
+  ///////////////////////
+
+  // Returns a new set containing all the members of the passed set that are
+  // drops of type T.
+  template <typename T>
+  static std::unordered_set<std::shared_ptr<T>>
+  FilterDropsOfType(const std::unordered_set<std::shared_ptr<Drop>> &drops);
+
+  //////////////////////
+  // MEMBER FUNCTIONS //
+  //////////////////////
 
   // Constructs a new 'Drop' in this sea.
   std::shared_ptr<Drop> NewDrop();
@@ -45,14 +63,39 @@ public:
   std::shared_ptr<ProofDrop> NewProofDrop();
 
   // Gets all drops in this sea.
-  std::unordered_set<std::shared_ptr<Drop>> Drops();
+  std::unordered_set<std::shared_ptr<Drop>> GetDrops();
+
+  // Gets the count of drops in this sea.
+  unsigned int GetDropCount();
+
+  // Causes the proof of model/code consistency to be run on this sea
+  // of knowledge. Until this is done ProofDrop's do not contain valid
+  // information. Normally this function should be invoked after all analysis
+  // has been completed and results have been reported into this sea.
+  //
+  // This analysis is patterned after a reverse flow analysis. It uses the
+  // following lattice:
+  //
+  //        consistent
+  //   consistent / red-dot
+  //  inconsistent / red-dot
+  //       inconsistent
+  //
+  // Implementation Note: The methods ProofDrop::ProofInitialize() and
+  // ProofDrop::ProofTransfer() are invoked by this algorithm.
+  void UpdateConsistencyProof();
+
+  // Invalidates all drops of knowldege in this sea. Resets it to a
+  // empty sea instance.
+  void Reset();
 
 private:
-  // Constructs a sea. Most analysis code should use Sea::Default().
-  // This constructor is primarily intended for test use.
+  // Constructs a new sea of knowledge.
   Sea() = default;
 
-  // Clears any invalid drops out of 'drops_'.
+  // Clears any invalid drops out of 'drops_'. This is a lazy approach
+  // that is used to avoid drops having to know anything about the sea
+  // instance that they are contained within.
   void ClearOutInvalidDrops();
 
   // Holds all drops managed by this sea. Invalid drops are cleaned out
@@ -62,6 +105,23 @@ private:
   // References the default sea.
   static std::shared_ptr<Sea> *default_;
 };
+
+////////////////////////////
+// IMPLEMENTATION DETAILS //
+////////////////////////////
+
+// static
+template <typename T>
+std::unordered_set<std::shared_ptr<T>>
+Sea::FilterDropsOfType(const std::unordered_set<std::shared_ptr<Drop>> &drops) {
+  std::unordered_set<std::shared_ptr<T>> result;
+  for (auto drop : drops) {
+    std::shared_ptr<T> drop_t = std::dynamic_pointer_cast<T>(drop);
+    if (drop_t != nullptr)
+      result.insert(drop_t);
+  }
+  return result;
+}
 
 } // namespace sl
 

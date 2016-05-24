@@ -34,9 +34,30 @@ std::shared_ptr<ProofDrop> Sea::NewProofDrop() {
   return result;
 }
 
-std::unordered_set<std::shared_ptr<Drop>> Sea::Drops() {
+std::unordered_set<std::shared_ptr<Drop>> Sea::GetDrops() {
   ClearOutInvalidDrops();
   return drops_;
+}
+
+unsigned int Sea::GetDropCount() {
+  ClearOutInvalidDrops();
+  return drops_.size();
+}
+
+void Sea::UpdateConsistencyProof() {
+  // TODO
+}
+
+void Sea::Reset() {
+  for (auto drop : drops_) {
+    drop->Invalidate();
+  }
+  ClearOutInvalidDrops();
+  if (!drops_.empty()) {
+    l() << "Sea::Reset() did not clear out sea (code bug).";
+    // Forced removal of remaining drops.
+    drops_.erase(drops_.begin(), drops_.end());
+  }
 }
 
 void Sea::ClearOutInvalidDrops() {
