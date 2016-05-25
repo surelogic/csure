@@ -7,16 +7,16 @@
 #include "sl/Common/SLUtil.h"
 
 // Drops
-//#include "sl/Sea/AnalysisOutputDrop.h"
-//#include "sl/Sea/AnalysisResultDrop.h"
+#include "sl/Sea/AnalysisResultDrop.h"
 #include "sl/Sea/Drop.h"
-//#include "sl/Sea/HintDrop.h"
-//#include "sl/Sea/MetricDrop.h"
-//#include "sl/Sea/PromiseDrop.h"
+#include "sl/Sea/HintDrop.h"
+#include "sl/Sea/MetricDrop.h"
+#include "sl/Sea/PromiseDrop.h"
 #include "sl/Sea/ProofDrop.h"
-//#include "sl/Sea/ProposedPromiseDrop.h"
-//#include "sl/Sea/ResultDrop.h"
-//#include "sl/Sea/ResultFolderDrop.h"
+#include "sl/Sea/ProposedPromiseDrop.h"
+#include "sl/Sea/ResultDrop.h"
+#include "sl/Sea/ResultFolderDrop.h"
+#include "sl/Sea/StartsPromiseDrop.h"
 
 namespace sl {
 
@@ -59,8 +59,26 @@ public:
   // Constructs a new 'Drop' in this sea.
   std::shared_ptr<Drop> NewDrop();
 
-  // Constructs a new 'ProofDrop' in this sea.
-  std::shared_ptr<ProofDrop> NewProofDrop();
+  // Constructs a new 'HintDrop' in this sea.
+  std::shared_ptr<HintDrop> NewHint();
+
+  // Constructs a new 'MetricDrop' in this sea.
+  std::shared_ptr<MetricDrop> NewMetric();
+
+  // Constructs a new 'StartsPromiseDrop' in this sea.
+  std::shared_ptr<StartsPromiseDrop> NewStartsPromise();
+
+  // Constructs a new 'ProposedPromiseDrop' in this sea.
+  std::shared_ptr<ProposedPromiseDrop> NewProposedPromise();
+
+  // Constructs a new 'ResultDrop' in this sea.
+  std::shared_ptr<ResultDrop> NewResult();
+
+  // Constructs a new logical 'and' operator 'ResultFolderDrop' in this sea.
+  std::shared_ptr<ResultFolderDrop> NewAndFolder();
+
+  // Constructs a new logical 'or' operator 'ResultFolderDrop' in this sea.
+  std::shared_ptr<ResultFolderDrop> NewOrFolder();
 
   // Gets all drops in this sea.
   std::unordered_set<std::shared_ptr<Drop>> GetDrops();

@@ -4,5 +4,20 @@
 
 namespace sl {
 
-class ResultFolderDrop final : public AnalysisResultDrop {};
-}
+enum class LogicOp { AND, OR };
+
+class ResultFolderDrop final : public AnalysisResultDrop {
+  friend class Sea;
+
+public:
+  LogicOp GetLogicOp() { return op_; }
+
+protected:
+  // Invoked by the sea and subclass constructors.
+  ResultFolderDrop(std::shared_ptr<Sea> sea, LogicOp op)
+      : AnalysisResultDrop{sea}, op_{op} {}
+
+private:
+  const LogicOp op_;
+};
+} // namespace sl

@@ -5,6 +5,8 @@
 
 namespace sl {
 
+// \brief Represents a promise or a result used in the code/model
+// consistency proof.
 class ProofDrop : public Drop {
   friend class Sea;
 
@@ -21,9 +23,9 @@ protected:
   // Invoked by the sea and subclass constructors.
   ProofDrop(std::shared_ptr<Sea> sea) : Drop{sea} {}
 
-  virtual void ProofInitialize() {}
+  virtual void ProofInitialize() = 0;
 
-  virtual void ProofTransfer() {}
+  virtual void ProofTransfer() = 0;
 
 private:
   // True if this drop has been judged to be consistent.

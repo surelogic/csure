@@ -26,10 +26,60 @@ std::shared_ptr<Drop> Sea::NewDrop() {
   return result;
 }
 
-std::shared_ptr<ProofDrop> Sea::NewProofDrop() {
+std::shared_ptr<HintDrop> Sea::NewHint() {
   ClearOutInvalidDrops();
-  std::shared_ptr<ProofDrop> result =
-      std::shared_ptr<ProofDrop>{new ProofDrop{shared_from_this()}};
+  std::shared_ptr<HintDrop> result =
+      std::shared_ptr<HintDrop>{new HintDrop{shared_from_this()}};
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<MetricDrop> Sea::NewMetric() {
+  ClearOutInvalidDrops();
+  std::shared_ptr<MetricDrop> result =
+      std::shared_ptr<MetricDrop>{new MetricDrop{shared_from_this()}};
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<StartsPromiseDrop> Sea::NewStartsPromise() {
+  ClearOutInvalidDrops();
+  std::shared_ptr<StartsPromiseDrop> result =
+      std::shared_ptr<StartsPromiseDrop>{
+          new StartsPromiseDrop{shared_from_this()}};
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<ProposedPromiseDrop> Sea::NewProposedPromise() {
+  ClearOutInvalidDrops();
+  std::shared_ptr<ProposedPromiseDrop> result =
+      std::shared_ptr<ProposedPromiseDrop>{
+          new ProposedPromiseDrop{shared_from_this()}};
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<ResultDrop> Sea::NewResult() {
+  ClearOutInvalidDrops();
+  std::shared_ptr<ResultDrop> result =
+      std::shared_ptr<ResultDrop>{new ResultDrop{shared_from_this()}};
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<ResultFolderDrop> Sea::NewAndFolder() {
+  ClearOutInvalidDrops();
+  std::shared_ptr<ResultFolderDrop> result = std::shared_ptr<ResultFolderDrop>{
+      new ResultFolderDrop{shared_from_this(), LogicOp::AND}};
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<ResultFolderDrop> Sea::NewOrFolder() {
+  ClearOutInvalidDrops();
+  std::shared_ptr<ResultFolderDrop> result = std::shared_ptr<ResultFolderDrop>{
+      new ResultFolderDrop{shared_from_this(), LogicOp::OR}};
   drops_.insert(result);
   return result;
 }

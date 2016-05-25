@@ -1,6 +1,10 @@
 #include "sl/Sea/Sea.h"
 #include "gtest/gtest.h"
 
+///////////////////////////////////////
+// Test basic drop functionality works.
+///////////////////////////////////////
+
 TEST(DropTest, EmptyMessage) {
   std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
   EXPECT_EQ("", sea->NewDrop()->GetMessage());
@@ -175,3 +179,4 @@ TEST(DropTest, GetDeponentsIndirect) {
   EXPECT_EQ(1u, drop->GetDeponentCount());
   EXPECT_EQ(1u, second->GetDeponentCount());
 }
+
