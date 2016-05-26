@@ -114,6 +114,9 @@ private:
   // Clears any invalid drops out of 'drops_'. This is a lazy approach
   // that is used to avoid drops having to know anything about the sea
   // instance that they are contained within.
+  //
+  // In particular we don't wnat circular references that might make
+  // std::shared_ptr not release memory as we wish.
   void ClearOutInvalidDrops();
 
   // Holds all drops managed by this sea. Invalid drops are cleaned out

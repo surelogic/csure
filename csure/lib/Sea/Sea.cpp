@@ -1,6 +1,7 @@
 #include "sl/Sea/Sea.h"
 
 #include <algorithm>
+#include <chrono>
 
 namespace sl {
 
@@ -95,7 +96,45 @@ unsigned int Sea::GetDropCount() {
 }
 
 void Sea::UpdateConsistencyProof() {
-  // TODO
+  const std::chrono::steady_clock::time_point start =
+      std::chrono::steady_clock::now();
+
+  // Get all the proof drops.
+  std::unordered_set<std::shared_ptr<ProofDrop>> all_proof_drops =
+      FilterDropsOfType<ProofDrop>(GetDrops());
+
+  //
+  // INITIALIZE drop-sea flow analysis-based automated proof.
+  //
+  for (auto drop : all_proof_drops) {
+    drop->ProofInitialize();
+  }
+
+  //
+  // ITERATE unti we reach a fixed-point, i.e., no changes.
+  //
+  bool changed = true;
+  while (changed) {
+    changed = false;
+    for (auto drop : all_proof_drops) {
+      // Transfer from "higher" drops.
+      changed |= drop->ProofTransfer();
+    }
+  }
+
+  //
+  // FINALIZE drop-sea flow analysis-based automated proof.
+  //
+  for (auto drop : all_proof_drops) {
+    drop->ProofFinalize();
+  }
+
+  const std::chrono::steady_clock::time_point end =
+      std::chrono::steady_clock::now();
+  const unsigned int duration =
+      std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+          .count();
+  l() << "Done updating consistency proof: " << duration << " us";
 }
 
 void Sea::Reset() {

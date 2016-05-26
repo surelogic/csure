@@ -19,7 +19,7 @@ protected:
 
   virtual void ProofInitialize() {}
 
-  virtual void ProofTransfer() {}
+  virtual bool ProofTransfer() { return false; }
 };
 
 } // namespace sl
