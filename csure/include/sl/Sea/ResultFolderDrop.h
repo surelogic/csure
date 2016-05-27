@@ -17,6 +17,10 @@ protected:
   ResultFolderDrop(std::shared_ptr<Sea> sea, LogicOp op)
       : AnalysisResultDrop{sea}, op_{op} {}
 
+  virtual void ProofInitialize();
+
+  virtual bool ProofTransfer();
+
 private:
   const LogicOp op_;
 };

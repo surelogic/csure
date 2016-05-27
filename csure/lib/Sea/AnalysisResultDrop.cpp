@@ -61,4 +61,9 @@ AnalysisResultDrop::GetTrusted() {
 
 bool AnalysisResultDrop::HasTrusted() { return !trusts_.empty(); }
 
+void AnalysisResultDrop::ProofInitialize() {
+  // Analysis result drops, by definition, can not start off with a red dot.
+  proof_uses_reddot_ = false;
+}
+
 } // namespace sl

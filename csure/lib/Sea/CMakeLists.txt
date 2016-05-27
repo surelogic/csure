@@ -9,6 +9,8 @@ add_clang_library(csureSea
   Drop.cpp
   PromiseDrop.cpp
   ProofDrop.cpp
+  ResultDrop.cpp
+  ResultFolderDrop.cpp
   Sea.cpp
 
   LINK_LIBS

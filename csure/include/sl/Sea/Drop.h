@@ -69,6 +69,7 @@ public:
   // Invalidates, or makes false, the information that this drop represents.
   void Invalidate();
 
+  // Destructor of all drops.
   virtual ~Drop() {}
 
 protected:

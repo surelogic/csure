@@ -21,7 +21,7 @@ public:
 
   // Returns if the proof of this drop depends upon a "red dot" -- a
   // user vouching for or assuming something which may not be true.
-  bool ProofUsesRedDot() { return proof_uses_red_dot_; }
+  bool ProofUsesRedDot() { return proof_uses_reddot_; }
 
   // Set the message for this drop when consistency is proven.
   void SetMessageWhenProvedConsistent(const std::string &message) {
@@ -69,10 +69,20 @@ protected:
   // classes must invoked this one.
   virtual void ProofFinalize();
 
+  // Transfers data from all the passed proof drops.
+  // Returns true if something changes, false otherwise.
   bool ProofTransferHelper(
       std::unordered_set<std::shared_ptr<ProofDrop>> proof_drops);
 
+  // Transfers data from a single proof drop to this drop.
+  // Returns true if something changes, false otherwise.
   bool ProofTransferDropHelper(std::shared_ptr<ProofDrop> proof_drop);
+
+  // True if this drop has been judged to be consistent.
+  bool proved_consistent_;
+
+  // True if this drop depends upon a "red dot".
+  bool proof_uses_reddot_;
 
 private:
   // Output message when consistency is proven.
@@ -80,12 +90,6 @@ private:
 
   // Output message when consistency cannot be proven.
   std::string message_inconsistent_;
-
-  // True if this drop has been judged to be consistent.
-  bool proved_consistent_;
-
-  // True if this drop depends upon a "red dot".
-  bool proof_uses_red_dot_;
 };
 
 } // namespace sl
