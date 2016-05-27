@@ -5,11 +5,15 @@
 
 namespace sl {
 
+// Forward declaration to avoid circular #include.
+class AnalysisResultDrop;
+
 // \brief Represents a promise or a result used in the code/model
 // consistency proof.
 class ProofDrop : public Drop {
   friend class Sea;
 
+public:
   // Returns if this drop has been judged to be consistent by
   // Sea::UpdateConsistencyProof(): true if consistent, false otherwise
   // (consistency can't be proved).
@@ -36,6 +40,10 @@ class ProofDrop : public Drop {
   std::string GetMessageWhenNotProvedConsistent() {
     return message_inconsistent_;
   }
+
+  // Returns the set of results which directly trust (as an "and" or as
+  // an "or" precondition) of this proof drop.
+  std::unordered_set<std::shared_ptr<AnalysisResultDrop>> GetTrustedBy();
 
 protected:
   // Invoked by the sea and subclass constructors.

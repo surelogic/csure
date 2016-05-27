@@ -5,10 +5,11 @@ file( GLOB_RECURSE headers
 )
 
 add_clang_library(csureSea
-  Sea.cpp
+  AnalysisResultDrop.cpp
   Drop.cpp
-  ProofDrop.cpp
   PromiseDrop.cpp
+  ProofDrop.cpp
+  Sea.cpp
 
   LINK_LIBS
   csureCommon

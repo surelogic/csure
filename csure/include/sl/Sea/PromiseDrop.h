@@ -3,9 +3,10 @@
 
 #include "sl/Sea/ProofDrop.h"
 
-#include "sl/Sea/AnalysisResultDrop.h"
-
 namespace sl {
+
+// Forward declaration to avoid circular #include.
+class AnalysisResultDrop;
 
 // \brief Base class for all promises in the sea of knowledge. Within a
 // analysis-based verification system, promises represent models of design

@@ -1,5 +1,7 @@
 #include "sl/Sea/Drop.h"
 
+#include "sl/Sea/Sea.h"
+
 namespace sl {
 
 void Drop::AddDependent(std::shared_ptr<Drop> dependent) {
@@ -38,6 +40,7 @@ void Drop::Invalidate() {
     dependent->removeDeponent(shared_from_this());
   }
   dependents_.erase(dependents_.begin(), dependents_.end());
+  InSea()->NotifyDropInvalidated(shared_from_this());
 }
 
 void Drop::removeDependent(std::shared_ptr<Drop> dependent) {

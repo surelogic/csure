@@ -30,6 +30,8 @@ namespace sl {
 //
 // All access to instances is via a shared_ptr.
 class Sea final : public std::enable_shared_from_this<Sea> {
+  friend class Drop;
+
 public:
   ///////////////
   // ACCESSORS //
@@ -111,13 +113,8 @@ private:
   // Constructs a new sea of knowledge.
   Sea() = default;
 
-  // Clears any invalid drops out of 'drops_'. This is a lazy approach
-  // that is used to avoid drops having to know anything about the sea
-  // instance that they are contained within.
-  //
-  // In particular we don't wnat circular references that might make
-  // std::shared_ptr not release memory as we wish.
-  void ClearOutInvalidDrops();
+  // Clears an drop that is no longer true out of 'drops_'.
+  void NotifyDropInvalidated(std::shared_ptr<Drop> drop);
 
   // Holds all drops managed by this sea. Invalid drops are cleaned out
   // at each call to a non-static member function.

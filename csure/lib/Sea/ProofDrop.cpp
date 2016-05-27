@@ -1,6 +1,23 @@
 #include "sl/Sea/ProofDrop.h"
 
+#include "sl/Sea/AnalysisResultDrop.h"
+#include "sl/Sea/Sea.h"
+
 namespace sl {
+
+std::unordered_set<std::shared_ptr<AnalysisResultDrop>>
+ProofDrop::GetTrustedBy() {
+  std::unordered_set<std::shared_ptr<AnalysisResultDrop>> result;
+  std::unordered_set<std::shared_ptr<AnalysisResultDrop>> s =
+      Sea::FilterDropsOfType<AnalysisResultDrop>(GetDependents());
+  for (std::shared_ptr<AnalysisResultDrop> rd : s) {
+    if (rd->GetTrusted().count(
+            std::dynamic_pointer_cast<ProofDrop>(shared_from_this())) != 0) {
+      result.insert(rd);
+    }
+  }
+  return result;
+}
 
 bool ProofDrop::ProofTransferHelper(
     std::unordered_set<std::shared_ptr<ProofDrop>> proof_drops) {
