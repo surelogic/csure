@@ -4,6 +4,9 @@ set(LLVM_LINK_COMPONENTS
 
 add_csure_unittest(SeaTests
   DropTest.cpp
+  HintDropTest.cpp
+  MetricDropTest.cpp
+  ProposedPromiseDropTest.cpp
   SeaTest.cpp
   )
 

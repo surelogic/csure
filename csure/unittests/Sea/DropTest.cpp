@@ -179,4 +179,3 @@ TEST(DropTest, GetDeponentsIndirect) {
   EXPECT_EQ(1u, drop->GetDeponentCount());
   EXPECT_EQ(1u, second->GetDeponentCount());
 }
-
