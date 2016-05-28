@@ -39,6 +39,12 @@ public:
   // Returns true if this result has any prerequiste assertions.
   bool HasTrusted();
 
+  // Invalidates, or makes false, the information that this drop represents.
+  // It is critial that any std::shared_ptr instances pointing from this drop
+  // to other drops or from other drops to this drop be deleted.
+  // Any overrides must invoke this method.
+  virtual void Invalidate();
+
 protected:
   // Invoked by the sea and subclass constructors.
   AnalysisResultDrop(std::shared_ptr<Sea> sea) : ProofDrop{sea} {}

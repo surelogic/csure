@@ -12,7 +12,7 @@ class ResultDrop final : public AnalysisResultDrop {
   friend class Sea;
 
 public:
-  // Returns if this result is consistent.
+  // Returns if this result indicates a consistent result.
   bool IsConsistent() { return consistent_; }
 
   // Sets whether this result indicates model/code consistency.

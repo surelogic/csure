@@ -133,7 +133,8 @@ void Sea::UpdateConsistencyProof() {
 }
 
 void Sea::Reset() {
-  for (auto drop : drops_) {
+  while (!drops_.empty()) {
+    std::shared_ptr<Drop> drop = *drops_.begin();
     drop->Invalidate();
   }
   if (!drops_.empty()) {

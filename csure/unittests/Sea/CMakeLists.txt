@@ -8,6 +8,7 @@ add_csure_unittest(SeaTests
   MetricDropTest.cpp
   ProofDropTest.cpp
   ProposedPromiseDropTest.cpp
+  ResultDropTest.cpp
   SeaTest.cpp
   )
 

@@ -68,4 +68,10 @@ void AnalysisResultDrop::ProofInitialize() {
   proof_uses_reddot_ = false;
 }
 
+void AnalysisResultDrop::Invalidate() {
+  checks_.erase(checks_.begin(), checks_.end());
+  trusts_.erase(trusts_.begin(), trusts_.end());
+  Drop::Invalidate();
+}
+
 } // namespace sl

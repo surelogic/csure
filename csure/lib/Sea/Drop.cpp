@@ -25,8 +25,6 @@ void Drop::AddDeponent(std::shared_ptr<Drop> deponent) {
 void Drop::Invalidate() {
   if (!is_valid_)
     return;
-  InvalidateInternal();
-
   is_valid_ = false;
 
   // Inform all deponent drops.

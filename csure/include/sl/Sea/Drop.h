@@ -67,16 +67,14 @@ public:
   unsigned int GetDeponentCount() { return deponents_.size(); }
 
   // Invalidates, or makes false, the information that this drop represents.
-  void Invalidate();
+  // It is critial that any std::shared_ptr instances pointing from this drop
+  // to other drops or from other drops to this drop be deleted.
+  virtual void Invalidate();
 
   // Destructor of all drops.
   virtual ~Drop() {}
 
 protected:
-  // Invoked when this drop is invalidated. This function has no effect,
-  // however, a subclass may overried to change this behavior.
-  virtual void InvalidateInternal() {}
-
   // Invoked when a dependent drop is invalidated. This function has no effect,
   // however, a subclass may override to change this behavior. This function's
   // behavior is consistent with truth maintenance system use: the truth
