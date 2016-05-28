@@ -32,7 +32,7 @@ TEST(MetricDropTest, CheckPromiseMetric) {
 TEST(MetricDropTest, CheckResultMetric) {
   std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
   std::shared_ptr<sl::MetricDrop> metric = sea->NewMetric();
-  std::shared_ptr<sl::ResultDrop> result = sea->NewResult();
+  std::shared_ptr<sl::ResultDrop> result = sea->NewConsistentResult();
   result->AddDependent(metric);
   std::unordered_set<std::shared_ptr<sl::Drop>> deps = result->GetDependents();
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = metric->GetDeponents();

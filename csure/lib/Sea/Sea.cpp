@@ -56,9 +56,18 @@ std::shared_ptr<ProposedPromiseDrop> Sea::NewProposedPromise() {
   return result;
 }
 
-std::shared_ptr<ResultDrop> Sea::NewResult() {
+std::shared_ptr<ResultDrop> Sea::NewConsistentResult() {
   std::shared_ptr<ResultDrop> result =
       std::shared_ptr<ResultDrop>{new ResultDrop{shared_from_this()}};
+  result->SetConsistent(true);
+  drops_.insert(result);
+  return result;
+}
+
+std::shared_ptr<ResultDrop> Sea::NewInconsistentResult() {
+  std::shared_ptr<ResultDrop> result =
+      std::shared_ptr<ResultDrop>{new ResultDrop{shared_from_this()}};
+  result->SetConsistent(false);
   drops_.insert(result);
   return result;
 }

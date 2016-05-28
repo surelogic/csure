@@ -32,7 +32,7 @@ TEST(ProposedPromiseDropTest, CheckPromiseProposal) {
 TEST(ProposedPromiseDropTest, CheckResultProposal) {
   std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
   std::shared_ptr<sl::ProposedPromiseDrop> prop = sea->NewProposedPromise();
-  std::shared_ptr<sl::ResultDrop> result = sea->NewResult();
+  std::shared_ptr<sl::ResultDrop> result = sea->NewConsistentResult();
   result->AddDependent(prop);
   std::unordered_set<std::shared_ptr<sl::Drop>> deps = result->GetDependents();
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = prop->GetDeponents();
@@ -42,5 +42,4 @@ TEST(ProposedPromiseDropTest, CheckResultProposal) {
   EXPECT_FALSE(prop->IsValid());
   EXPECT_FALSE(result->IsValid());
   EXPECT_TRUE(sea->GetDrops().empty());
-
 }

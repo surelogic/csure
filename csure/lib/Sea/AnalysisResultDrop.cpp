@@ -6,6 +6,7 @@ namespace sl {
 
 void AnalysisResultDrop::AddChecked(std::shared_ptr<PromiseDrop> promise) {
   checks_.insert(promise);
+  promise->AddDependent(shared_from_this());
 }
 
 std::unordered_set<std::shared_ptr<PromiseDrop>>
@@ -52,6 +53,7 @@ bool AnalysisResultDrop::ChecksAPromise() {
 
 void AnalysisResultDrop::AddTrusted(std::shared_ptr<ProofDrop> proof_drop) {
   trusts_.insert(proof_drop);
+  proof_drop->AddDependent(shared_from_this());
 }
 
 std::unordered_set<std::shared_ptr<ProofDrop>>

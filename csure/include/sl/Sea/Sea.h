@@ -73,8 +73,11 @@ public:
   // Constructs a new 'ProposedPromiseDrop' in this sea.
   std::shared_ptr<ProposedPromiseDrop> NewProposedPromise();
 
-  // Constructs a new 'ResultDrop' in this sea.
-  std::shared_ptr<ResultDrop> NewResult();
+  // Constructs a new consistent 'ResultDrop' in this sea.
+  std::shared_ptr<ResultDrop> NewConsistentResult();
+
+  // Constructs a new inconsistent 'ResultDrop' in this sea.
+  std::shared_ptr<ResultDrop> NewInconsistentResult();
 
   // Constructs a new logical 'and' operator 'ResultFolderDrop' in this sea.
   std::shared_ptr<ResultFolderDrop> NewAndFolder();

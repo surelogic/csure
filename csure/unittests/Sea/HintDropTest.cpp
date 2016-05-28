@@ -32,7 +32,7 @@ TEST(HintDropTest, CheckPromiseHint) {
 TEST(HintDropTest, CheckResultHint) {
   std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
   std::shared_ptr<sl::HintDrop> hint = sea->NewHint();
-  std::shared_ptr<sl::ResultDrop> result = sea->NewResult();
+  std::shared_ptr<sl::ResultDrop> result = sea->NewConsistentResult();
   result->AddDependent(hint);
   std::unordered_set<std::shared_ptr<sl::Drop>> deps = result->GetDependents();
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = hint->GetDeponents();

@@ -110,9 +110,15 @@ TEST(SeaTest, ProposedPromiseDrop) {
   EXPECT_EQ(1u, sea->GetDropCount());
 }
 
-TEST(SeaTest, ResultDrop) {
+TEST(SeaTest, ConsistentResultDrop) {
   std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
-  std::shared_ptr<sl::ResultDrop> drop = sea->NewResult();
+  std::shared_ptr<sl::ResultDrop> drop = sea->NewConsistentResult();
+  EXPECT_EQ(1u, sea->GetDropCount());
+}
+
+TEST(SeaTest, InconsistentResultDrop) {
+  std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
+  std::shared_ptr<sl::ResultDrop> drop = sea->NewInconsistentResult();
   EXPECT_EQ(1u, sea->GetDropCount());
 }
 
