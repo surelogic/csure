@@ -48,11 +48,11 @@ public:
   // UTILITY FUNCTIONS //
   ///////////////////////
 
-  // Returns a new set containing all the members of the passed set that are
-  // drops of type T.
-  template <typename T>
+  // Returns a new set containing all the members of the passed set of
+  // drops of type D that are drops of type T.
+  template <typename T, typename D>
   static std::unordered_set<std::shared_ptr<T>>
-  FilterDropsOfType(const std::unordered_set<std::shared_ptr<Drop>> &drops);
+  FilterDropsOfType(const std::unordered_set<std::shared_ptr<D>> &drops);
 
   //////////////////////
   // MEMBER FUNCTIONS //
@@ -129,9 +129,9 @@ private:
 ////////////////////////////
 
 // static
-template <typename T>
+template <typename T, typename D>
 std::unordered_set<std::shared_ptr<T>>
-Sea::FilterDropsOfType(const std::unordered_set<std::shared_ptr<Drop>> &drops) {
+Sea::FilterDropsOfType(const std::unordered_set<std::shared_ptr<D>> &drops) {
   std::unordered_set<std::shared_ptr<T>> result;
   for (auto drop : drops) {
     std::shared_ptr<T> drop_t = std::dynamic_pointer_cast<T>(drop);

@@ -22,8 +22,16 @@ public:
   // well-formed then it should override this function and return false.
   virtual bool IsIntendedToBeCheckedByAnalysis() { return true; }
 
-  bool IsCheckedByAnalysis() { return false; }
+  // Returns if this promise has been checked by analysis or not. If this
+  // promise (or any deponent promise of this promise drop) has results
+  // it is considered to be checked, otherwise it is considered to be
+  // trusted.
+  //
+  // If a promise does not need to be checked by analysis you should
+  // override IsIntendedToBeCheckedByAnalysis() and return false;
+  bool IsCheckedByAnalysis();
 
+  // Returns the set of dependent results that directly check this promise.
   std::unordered_set<std::shared_ptr<AnalysisResultDrop>> GetCheckedBy();
 
 protected:
@@ -33,6 +41,11 @@ protected:
   virtual void ProofInitialize();
 
   virtual bool ProofTransfer();
+
+  // Helper for IsCheckedByAnalysis() that guards against cyclecs in the
+  // drop-sea graph.
+  bool IsCheckedByAnalysis(
+      std::unordered_set<std::shared_ptr<PromiseDrop>> *examined);
 };
 
 } // namespace sl

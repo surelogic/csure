@@ -5,6 +5,9 @@
 
 namespace sl {
 
+// \brief A model/code consistency result recording an analysis judgement in
+// terms of what promises are partially or wholly established in terms of a
+// (possibly empty) set of prerequisite assertion promises.
 class ResultDrop final : public AnalysisResultDrop {
   friend class Sea;
 
@@ -31,7 +34,9 @@ protected:
   virtual bool ProofTransfer();
 
 private:
+  // True if this result is consistent.
   bool consistent_;
+  // True if this result is vouched.
   bool vouched_;
 };
 

@@ -8,8 +8,6 @@ void ResultDrop::ProofInitialize() {
   proved_consistent_ = IsConsistent() || IsVouched();
 }
 
-bool ResultDrop::ProofTransfer() {
-  return ProofTransferHelper(GetTrusted());
-}
+bool ResultDrop::ProofTransfer() { return ProofTransferHelper(GetTrusted()); }
 
 } // namespace sl
