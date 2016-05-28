@@ -23,6 +23,10 @@ TEST(HintDropTest, CheckPromiseHint) {
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = hint->GetDeponents();
   EXPECT_EQ(1u, deps.count(hint));
   EXPECT_EQ(1u, depo.count(promise));
+  promise->Invalidate();
+  EXPECT_FALSE(hint->IsValid());
+  EXPECT_FALSE(promise->IsValid());
+  EXPECT_TRUE(sea->GetDrops().empty());
 }
 
 TEST(HintDropTest, CheckResultHint) {
@@ -34,4 +38,8 @@ TEST(HintDropTest, CheckResultHint) {
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = hint->GetDeponents();
   EXPECT_EQ(1u, deps.count(hint));
   EXPECT_EQ(1u, depo.count(result));
+  result->Invalidate();
+  EXPECT_FALSE(hint->IsValid());
+  EXPECT_FALSE(result->IsValid());
+  EXPECT_TRUE(sea->GetDrops().empty());
 }

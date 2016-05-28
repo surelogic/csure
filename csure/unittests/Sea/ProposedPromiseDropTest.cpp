@@ -23,6 +23,10 @@ TEST(ProposedPromiseDropTest, CheckPromiseProposal) {
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = prop->GetDeponents();
   EXPECT_EQ(1u, deps.count(prop));
   EXPECT_EQ(1u, depo.count(promise));
+  promise->Invalidate();
+  EXPECT_FALSE(prop->IsValid());
+  EXPECT_FALSE(promise->IsValid());
+  EXPECT_TRUE(sea->GetDrops().empty());
 }
 
 TEST(ProposedPromiseDropTest, CheckResultProposal) {
@@ -34,4 +38,9 @@ TEST(ProposedPromiseDropTest, CheckResultProposal) {
   std::unordered_set<std::shared_ptr<sl::Drop>> depo = prop->GetDeponents();
   EXPECT_EQ(1u, deps.count(prop));
   EXPECT_EQ(1u, depo.count(result));
+  result->Invalidate();
+  EXPECT_FALSE(prop->IsValid());
+  EXPECT_FALSE(result->IsValid());
+  EXPECT_TRUE(sea->GetDrops().empty());
+
 }
