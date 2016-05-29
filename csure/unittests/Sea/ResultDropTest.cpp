@@ -5,6 +5,14 @@
 // Test result drop functionality works.
 ////////////////////////////////////////
 
+TEST(ResultDropTest, IsVouched) {
+  std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
+  std::shared_ptr<sl::ResultDrop> r1 = sea->NewConsistentResult();
+  EXPECT_FALSE(r1->IsVouched());
+  r1->SetVouched(true);
+  EXPECT_TRUE(r1->IsVouched());
+}
+
 TEST(ResultDropTest, GetChecked) {
   std::shared_ptr<sl::Sea> sea{sl::Sea::New()};
   std::shared_ptr<sl::StartsPromiseDrop> p1 = sea->NewStartsPromise();

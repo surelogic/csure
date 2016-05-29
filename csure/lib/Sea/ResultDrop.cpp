@@ -3,9 +3,8 @@
 namespace sl {
 
 void ResultDrop::ProofInitialize() {
-  AnalysisResultDrop::ProofInitialize();
-
   proved_consistent_ = IsConsistent() || IsVouched();
+  proof_uses_reddot_ = IsVouched();
 }
 
 bool ResultDrop::ProofTransfer() { return ProofTransferHelper(GetTrusted()); }

@@ -36,10 +36,9 @@ bool ResultFolderDrop::ImmediatelyConsistent() {
 }
 
 void ResultFolderDrop::ProofInitialize() {
-  AnalysisResultDrop::ProofInitialize();
-
   proved_consistent_ = true;
   choice_of_or_folder_.reset();
+  proof_uses_reddot_ = false;
 }
 
 bool ResultFolderDrop::ProofTransfer() {

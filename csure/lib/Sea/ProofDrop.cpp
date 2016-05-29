@@ -42,8 +42,8 @@ bool ProofDrop::ProofTransferDropHelper(std::shared_ptr<ProofDrop> proof_drop) {
   }
 
   // Any red dot means this drop is contingent and is marked with a red dot.
-  if (proof_uses_reddot_ && !proof_drop->proof_uses_reddot_) {
-    proof_uses_reddot_ = false;
+  if (!proof_uses_reddot_ && proof_drop->proof_uses_reddot_) {
+    proof_uses_reddot_ = true;
     changed = true;
   }
 

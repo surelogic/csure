@@ -35,9 +35,9 @@ protected:
 
 private:
   // True if this result is consistent.
-  bool consistent_;
+  bool consistent_ = false;
   // True if this result is vouched.
-  bool vouched_;
+  bool vouched_ = false;
 };
 
 } // namespace sl

@@ -63,11 +63,6 @@ AnalysisResultDrop::GetTrusted() {
 
 bool AnalysisResultDrop::HasTrusted() { return !trusts_.empty(); }
 
-void AnalysisResultDrop::ProofInitialize() {
-  // Analysis result drops, by definition, can not start off with a red dot.
-  proof_uses_reddot_ = false;
-}
-
 void AnalysisResultDrop::Invalidate() {
   checks_.erase(checks_.begin(), checks_.end());
   trusts_.erase(trusts_.begin(), trusts_.end());

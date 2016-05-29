@@ -79,10 +79,10 @@ protected:
   bool ProofTransferDropHelper(std::shared_ptr<ProofDrop> proof_drop);
 
   // True if this drop has been judged to be consistent.
-  bool proved_consistent_;
+  bool proved_consistent_ = false;
 
   // True if this drop depends upon a "red dot".
-  bool proof_uses_reddot_;
+  bool proof_uses_reddot_ = false;
 
 private:
   // Output message when consistency is proven.

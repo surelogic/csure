@@ -66,7 +66,7 @@ void PromiseDrop::ProofInitialize() {
   std::unordered_set<std::shared_ptr<ResultDrop>> result_drops =
       Sea::FilterDropsOfType<ResultDrop>(GetCheckedBy());
   for (auto &result : result_drops) {
-    proved_consistent_ &= (result->IsConsistent() || result->IsVouched());
+    proved_consistent_ &= result->IsConsistent() || result->IsVouched();
   }
 }
 

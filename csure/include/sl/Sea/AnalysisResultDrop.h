@@ -49,10 +49,6 @@ protected:
   // Invoked by the sea and subclass constructors.
   AnalysisResultDrop(std::shared_ptr<Sea> sea) : ProofDrop{sea} {}
 
-  virtual void ProofInitialize();
-
-  virtual bool ProofTransfer() = 0;
-
 private:
   std::unordered_set<std::shared_ptr<PromiseDrop>> checks_;
   std::unordered_set<std::shared_ptr<ProofDrop>> trusts_;
