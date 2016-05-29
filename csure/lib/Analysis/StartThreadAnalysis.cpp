@@ -1,3 +1,5 @@
+#include "sl/Analysis/StartThreadAnalysis.h"
+
 #include <cstring>
 #include <memory>
 #include <utility>
@@ -16,31 +18,45 @@
 #include "clang/Lex/Preprocessor.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 
-#include "sl/Analysis/StartThreadAnalysis.h"
 #include "sl/Common/SLUtil.h"
+#include "sl/Sea/Sea.h"
 
 namespace sl {
 
-bool StartThreadAnalysis::isInLocalFile(clang::SourceRange range) {
+bool StartThreadAnalysis::InCppFile(clang::SourceRange range) {
   clang::FileID file =
-      astContext.getSourceManager().getFileID(range.getBegin());
+      ast_context_.getSourceManager().getFileID(range.getBegin());
   const clang::FileEntry *entry =
-      astContext.getSourceManager().getFileEntryForID(file);
-  if (entry == NULL) {
-    //  sl::l() << "** Unable to get file entry for "
-    //      << range.getBegin().printToString(astContext.getSourceManager())
-    //      << "\n";
-    return false;
-  }
+      ast_context_.getSourceManager().getFileEntryForID(file);
+  if (entry == NULL) return false;
+
   const char *name = entry->getName();
-  // sl::l() << "   name = " << name << "\n";
-  if (name == NULL) {
-    return false;
-  }
+  if (name == NULL) return false;
+
   int n = std::strlen(name);
+  // Return true if the name ends in ".cpp" or ".cc".
   return (n < 4 || (name[n - 1] == 'p' && name[n - 2] == 'p' &&
-                    name[n - 3] == 'c' && name[n - 4] == '.'));
-  // return (name[0] != '/');
+                    name[n - 3] == 'c' && name[n - 4] == '.') ||
+          (name[n - 1] == 'c' && name[n - 2] == 'c' && name[n - 3] == '.'));
+}
+
+namespace {
+
+std::string GetSignature(clang::FunctionDecl *func) {
+  std::string result{func->getNameInfo().getAsString()};
+  return result;
+}
+
+} // namespace
+
+void StartThreadAnalysis::SetPromiseOn(clang::FunctionDecl *func) {
+  std::shared_ptr<PromiseDrop> promise = Sea::Default()->NewStartsPromise();
+  promise->SetMessage("[[starts(\"nothing\")]]");
+  decl_to_promise_[GetSignature(func)] = promise;
+}
+
+std::shared_ptr<Drop> StartThreadAnalysis::GetPromiseOrNullOn(clang::FunctionDecl *func) {
+  return decl_to_promise_[GetSignature(func)];
 }
 
 bool StartThreadAnalysis::declaresStartsNothing(clang::FunctionDecl *func) {
@@ -91,22 +107,22 @@ bool StartThreadAnalysis::isThreadType(clang::QualType qt) {
 }
 
 bool StartThreadAnalysis::VisitAttr(clang::Attr *a) {
-  if (isInLocalFile(a->getRange())) {
+  if (InCppFile(a->getRange())) {
     sl::l() << " - VisitAttr " << a->getSpelling() << "\n";
   }
   return true;
 }
 
 bool StartThreadAnalysis::TraverseFunctionDecl(clang::FunctionDecl *func) {
-  if (isInLocalFile(func->getSourceRange())) {
-    bool savedDeclaredStarts = contextStartsNothing;
-    contextStartsNothing = declaresStartsNothing(func);
+  if (InCppFile(func->getSourceRange())) {
+    bool savedDeclaredStarts = context_starts_nothing_;
+    context_starts_nothing_ = declaresStartsNothing(func);
     sl::l() << "TraverseFunctionDecl " << func->getNameAsString()
-            << " @Starts nothing? " << contextStartsNothing << "\n";
+            << " @Starts nothing? " << context_starts_nothing_ << "\n";
     bool res =
         clang::RecursiveASTVisitor<StartThreadAnalysis>::TraverseFunctionDecl(
             func);
-    contextStartsNothing = savedDeclaredStarts;
+    context_starts_nothing_ = savedDeclaredStarts;
     return res;
   } else {
     return clang::RecursiveASTVisitor<
@@ -118,7 +134,7 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
   std::string funcName = func->getNameInfo().getName().getAsString();
   clang::SourceRange range = func->getSourceRange();
 
-  if (isInLocalFile(range)) {
+  if (InCppFile(range)) {
     /*
     sl::l() << "** " << funcName << ": "
     << range.getBegin().printToString(rewriter.getSourceMgr())
@@ -131,8 +147,7 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
     sl::l() << " - VisitFunctionDecl " << funcName << "\n";
 
     for (auto a : func->attrs()) {
-      sl::l() << "   - Looking at attr on " << funcName << ": "
-              << a->getSpelling() << "\n";
+      // sl::l() << "   - Looking at attr on " << funcName << ": " << a->getSpelling() << "\n";
       switch (a->getKind()) {
       default:
         break;
@@ -148,9 +163,9 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
 }
 
 bool StartThreadAnalysis::VisitCallExpr(clang::CallExpr *c) {
-  if (isInLocalFile(c->getSourceRange())) {
+  if (InCppFile(c->getSourceRange())) {
     sl::l() << " JTB - VisitCallExpr ";
-    c->dump(sl::l(), astContext.getSourceManager());
+    c->dump(sl::l(), ast_context_.getSourceManager());
     sl::l() << "\n";
 
     sl::l() << "   - Callee decl ";
@@ -167,7 +182,7 @@ bool StartThreadAnalysis::VisitCallExpr(clang::CallExpr *c) {
       sl::l() << "     - Attr on callee decl " << a->getSpelling() << "\n";
     }
     if (clang::FunctionDecl *func = llvm::dyn_cast<clang::FunctionDecl>(d)) {
-      if (contextStartsNothing && !declaresStartsNothing(func)) {
+      if (context_starts_nothing_ && !declaresStartsNothing(func)) {
         sl::l() << "!!! Found unsafe call to " << func->getNameAsString()
                 << " that may start a thread\n";
       }
@@ -177,12 +192,12 @@ bool StartThreadAnalysis::VisitCallExpr(clang::CallExpr *c) {
 }
 
 bool StartThreadAnalysis::VisitVarDecl(clang::VarDecl *decl) {
-  if (isInLocalFile(decl->getSourceRange())) {
+  if (InCppFile(decl->getSourceRange())) {
     if (decl->isLocalVarDecl() && decl->hasLocalStorage()) {
       clang::QualType t = decl->getType();
       sl::l() << "VarDecl(" << decl->getNameAsString() << ") of type "
               << t.getAsString() << "\n";
-      if (isThreadType(t) && contextStartsNothing) {
+      if (isThreadType(t) && context_starts_nothing_) {
         sl::l() << "!!!! Found thread " << decl->getNameAsString()
                 << " in code that is not supposed to have them\n";
       }
@@ -227,10 +242,11 @@ return true;
 */
 
 bool StartThreadAnalysis::VisitCXXRecordDecl(clang::CXXRecordDecl *r) {
-  if (isInLocalFile(r->getSourceRange())) {
+  if (InCppFile(r->getSourceRange())) {
     sl::l() << " - VisitCXXRecordDecl " << r->getDeclName().getAsString()
             << "\n";
   }
   return true;
 }
-}
+
+} // namespace sl

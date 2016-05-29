@@ -1,9 +1,10 @@
+#include "sl/Tooling/CSureToolAction.h"
+
 #include "clang/Lex/Preprocessor.h"
 
 #include "sl/Common/SLUtil.h"
 #include "sl/Tooling/CSureASTConsumer.h"
 #include "sl/Tooling/CSurePreprocessorConsumer.h"
-#include "sl/Tooling/CSureToolAction.h"
 
 namespace sl {
 
@@ -17,7 +18,8 @@ CSureToolAction::CreateASTConsumer(clang::CompilerInstance &CI,
 
 bool CSureToolAction::ParseArgs(const clang::CompilerInstance &CI,
                                 const std::vector<std::string> &args) {
-  // TODO this is not called?
+  // TODO(hallorant) Why is this is not called?
+  l() << "CSureToolAction::ParseArgs():";
   l() << "o Working dir " << CI.getFileSystemOpts().WorkingDir << "\n";
   l() << "o Output going to " << CI.getFrontendOpts().OutputFile << "\n";
   return true;
@@ -25,7 +27,8 @@ bool CSureToolAction::ParseArgs(const clang::CompilerInstance &CI,
 
 bool CSureToolAction::BeginSourceFileAction(clang::CompilerInstance &CI,
                                             llvm::StringRef Filename) {
-  l() << "Source file " << Filename << "\n";
+  l() << "CSure verifying " << Filename << "\n";
   return PluginASTAction::BeginSourceFileAction(CI, Filename);
 }
+
 } // namespace sl

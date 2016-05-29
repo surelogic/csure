@@ -21,13 +21,13 @@ namespace sl {
 
 bool ExampleVisitor::isInLocalFile(clang::SourceRange range) {
   clang::FileID file =
-      astContext.getSourceManager().getFileID(range.getBegin());
+      ast_context_.getSourceManager().getFileID(range.getBegin());
   const clang::FileEntry *entry =
-      astContext.getSourceManager().getFileEntryForID(file);
+      ast_context_.getSourceManager().getFileEntryForID(file);
   if (entry == NULL) {
     /*
     l() << "** Unable to get file entry for " <<
-    range.getBegin().printToString(astContext->getSourceManager()) << "\n";
+    range.getBegin().printToString(ast_context_->getSourceManager()) << "\n";
     */
     return false;
   }
@@ -80,7 +80,7 @@ bool ExampleVisitor::VisitFunctionDecl(clang::FunctionDecl *func) {
 
 bool ExampleVisitor::VisitCallExpr(clang::CallExpr *c) {
   sl::l() << " - VisitCallExpr ";
-  c->dump(sl::l(), astContext.getSourceManager());
+  c->dump(sl::l(), ast_context_.getSourceManager());
   sl::l() << "\n";
 
   sl::l() << "   - Callee decl ";

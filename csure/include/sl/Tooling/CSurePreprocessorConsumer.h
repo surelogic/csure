@@ -1,9 +1,13 @@
-#pragma once
+#ifndef SL_TOOLING_CSUREPREPROCESSORCONSUMER_H_
+#define SL_TOOLING_CSUREPREPROCESSORCONSUMER_H_
 
 #include "clang/Frontend/FrontendActions.h"
 
 namespace sl {
 
+// \brief Used to examine each "#include" that exists in a translation
+// unit and keep track of nested includes. This is not needed by all
+// analyses.
 class CSurePreprocessorConsumer : public clang::PPCallbacks {
   ~CSurePreprocessorConsumer() {}
 
@@ -16,4 +20,7 @@ class CSurePreprocessorConsumer : public clang::PPCallbacks {
                                   llvm::StringRef RelativePath,
                                   const clang::Module *Imported) override;
 };
-}
+
+} // namespace sl
+
+#endif // SL_TOOLING_CSUREPREPROCESSORCONSUMER_H_

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SL_TOOLING_CSURETOOLACTION_H_
+#define SL_TOOLING_CSURETOOLACTION_H_
 
 #include <memory>
 #include <string>
@@ -10,6 +11,8 @@
 
 namespace sl {
 
+// \brief The CSure analysis-based verification tool "main" within
+// the Clang compiler tool interface.
 class CSureToolAction : public clang::PluginASTAction {
 protected:
   std::unique_ptr<clang::ASTConsumer>
@@ -21,4 +24,7 @@ protected:
   virtual bool BeginSourceFileAction(clang::CompilerInstance &CI,
                                      llvm::StringRef Filename) override;
 };
-}
+
+} // namespace sl
+
+#endif // SL_TOOLING_CSURETOOLACTION_H_

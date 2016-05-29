@@ -10,14 +10,9 @@ class Point {
 
 public:
   Point(int i, int j)
-      : x(i),
-        y(j){
-            // Nothing else to do
-        }
+      : x(i), y(j){}
 
-            [[starts("nothing")]] int getX() {
-    return x;
-  }
+  [[starts("nothing")]] int getX() { return x; }
 
   [[starts("nothing")]] int getY() { return y; }
 

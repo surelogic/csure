@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SL_ANALYSIS_EXAMPLEVISITOR_H_
+#define SL_ANALYSIS_EXAMPLEVISITOR_H_
 
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"
@@ -18,12 +19,14 @@
 
 namespace sl {
 
+// \brief An example analysis visitor used for testing CSure analyses.
 class ExampleVisitor : public clang::RecursiveASTVisitor<ExampleVisitor> {
 private:
-  clang::ASTContext &astContext; // used for getting additional AST info
+  // Used for getting additional AST information.
+  clang::ASTContext &ast_context_;
 
 public:
-  explicit ExampleVisitor(clang::ASTContext &Ctx) : astContext{Ctx} {}
+  explicit ExampleVisitor(clang::ASTContext &Ctx) : ast_context_{Ctx} {}
 
   virtual ~ExampleVisitor() {}
 
@@ -39,4 +42,7 @@ public:
 
   virtual bool VisitCXXRecordDecl(clang::CXXRecordDecl *r);
 };
-}
+
+} // namespace sl
+
+#endif // SL_ANALYSIS_EXAMPLEVISITOR_H_
