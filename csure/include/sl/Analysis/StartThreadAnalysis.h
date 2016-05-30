@@ -43,8 +43,6 @@ public:
 
   bool VisitFunctionDecl(clang::FunctionDecl *func);
 
-  bool VisitCXXRecordDecl(clang::CXXRecordDecl *r);
-
 private:
   // Performs actual analysis of a function declaration.
   void FunctionDeclAnalysis(clang::FunctionDecl *func);
@@ -65,9 +63,11 @@ public:
   explicit FunctionAnalysis(
       clang::ASTContext &ctx,
       std::map<std::string, std::shared_ptr<PromiseDrop>> &decl_to_promise,
-      std::shared_ptr<PromiseDrop> promise)
+      std::shared_ptr<PromiseDrop> promise,
+      std::shared_ptr<ResultDrop> result_starts_no_threads)
       : ctx_{ctx}, decl_to_promise_{decl_to_promise},
-        context_promise_starts_nothing_{promise} {}
+        context_promise_starts_nothing_{promise},
+        result_starts_no_threads_{result_starts_no_threads} {}
 
   bool VisitVarDecl(clang::VarDecl *decl);
 
@@ -84,6 +84,10 @@ private:
 
   // Saves the promise drop while visiting a function annotated starts nothing.
   const std::shared_ptr<PromiseDrop> context_promise_starts_nothing_;
+
+  // Saves the function is consistent message to be possibly invalidated
+  // if  the function is found to start threads.
+  const std::shared_ptr<ResultDrop> result_starts_no_threads_;
 };
 
 } // namespace sl

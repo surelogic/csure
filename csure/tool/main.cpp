@@ -11,6 +11,8 @@
 #include "clang/Tooling/Tooling.h"
 #include "llvm/Support/CommandLine.h"
 
+#include "sl/Common/SLUtil.h"
+#include "sl/Sea/Sea.h"
 #include "sl/Tooling/CSureToolAction.h"
 
 static llvm::cl::OptionCategory csure_option_category{"CSure option category"};
@@ -24,5 +26,7 @@ int main(int argc, const char **argv) {
 
   const int result{tool.run(
       clang::tooling::newFrontendActionFactory<sl::CSureToolAction>().get())};
+  sl::Sea::Default()->UpdateConsistencyProof();
+  sl::l() << sl::Sea::Default()->ToString();
   return result;
 }

@@ -20,7 +20,7 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 
 // Uncomment the next line to get detailed diagnostic output from the analysis.
-#define SL_DEBUG
+//#define SL_DEBUG
 #include "sl/Common/SLDebug.h"
 #include "sl/Common/SLUtil.h"
 #include "sl/Sea/Sea.h"
@@ -33,7 +33,7 @@ namespace {
 // HELPER FUNCTIONS FOR ANALYSIS //
 ///////////////////////////////////
 
-const char *ID = "[start thread analysis] ";
+D(const char *ID = "[start thread analysis] ";)
 
 // Returns if the passed range is within a ".cc" or ".cpp" source file.
 bool InCppFile(clang::SourceRange range, clang::ASTContext &ctx) {
@@ -55,8 +55,8 @@ bool InCppFile(clang::SourceRange range, clang::ASTContext &ctx) {
 }
 
 // Returns user readable file location information for a source location.
-// For example:
-// TODO
+// For example: (filename:line:column)
+//   "/src/llvm-380/llvm/tools/clang/csure/stuff/csure-example/test.cpp:5:13"
 std::string GetLocationInfo(clang::SourceLocation src_loc,
                             clang::ASTContext &ctx) {
   std::ostringstream convert;
@@ -103,8 +103,8 @@ void SetPromiseOn(
     std::shared_ptr<PromiseDrop> promise = Sea::Default()->NewStartsPromise();
     std::string src_loc =
         GetLocationInfo(func->getSourceRange().getBegin(), ctx);
-    promise->SetMessage("[[starts(\"nothing\")]] on " +
-                        func->getQualifiedNameAsString() + " @ " + src_loc);
+    promise->SetMessage("[[starts(\"nothing\")]] on " + GetSignature(func) +
+                        " @ " + src_loc);
     decl_to_promise[GetSignature(func)] = promise;
     D(l() << ID << "-created promise\n";)
   } else {
@@ -192,8 +192,17 @@ void StartThreadAnalysis::FunctionDeclAnalysis(clang::FunctionDecl *func) {
       std::shared_ptr<PromiseDrop> promise =
           GetPromiseOrNullOn(func, decl_to_promise_);
 
+      // Setup optimistic function starts no threads result which
+      // might be invalidated if it is found to be wrong.
+      std::shared_ptr<ResultDrop> starts_no_threads =
+          Sea::Default()->NewConsistentResult();
+      starts_no_threads->SetMessage("The body of " + GetSignature(func) +
+                                    " starts no threads.");
+      starts_no_threads->AddChecked(promise);
+
       // Examine the function carefully and setup up proof structure.
-      FunctionAnalysis analysis{ctx_, decl_to_promise_, promise};
+      FunctionAnalysis analysis{ctx_, decl_to_promise_, promise,
+                                starts_no_threads};
       analysis.TraverseDecl(func);
     }
     D(l() << ID << "<<<<<<<<<< " << GetSignature(func) << "\n";)
@@ -214,14 +223,6 @@ bool StartThreadAnalysis::VisitFunctionDecl(clang::FunctionDecl *func) {
     D(l() << ID << "StartThreadAnalysis::VisitFunctionDecl("
           << GetSignature(func) << ")\n";)
     FunctionDeclAnalysis(func);
-  }
-  return true;
-}
-
-bool StartThreadAnalysis::VisitCXXRecordDecl(clang::CXXRecordDecl *r) {
-  if (InCppFile(r->getSourceRange(), ctx_)) {
-    sl::l() << " - VisitCXXRecordDecl " << r->getDeclName().getAsString()
-            << "\n";
   }
   return true;
 }
@@ -288,6 +289,9 @@ bool FunctionAnalysis::VisitVarDecl(clang::VarDecl *decl) {
         D(l() << ID << "-" << msg.str() << "\n");
         result->SetMessage(msg.str());
         result->AddChecked(context_promise_starts_nothing_);
+        // Also invaoidated the optimistic result that the function
+        // started no threads because we now know it does.
+        result_starts_no_threads_->Invalidate();
       }
     }
   }

@@ -12,7 +12,7 @@ public:
   Point(int i, int j)
       : x(i), y(j){}
 
-  [[starts("nothing")]] int getX() {
+                  [[starts("nothing")]] int getX() {
     return x;
   }
 

@@ -108,6 +108,10 @@ public:
   // ProofDrop::ProofTransfer() are invoked by this algorithm.
   void UpdateConsistencyProof();
 
+  // Returns a representations of the sea as a string suitable for
+  // presenting to the user (or for diagnostics).
+  std::string ToString();
+
   // Invalidates all drops of knowldege in this sea. Resets it to a
   // empty sea instance.
   void Reset();
