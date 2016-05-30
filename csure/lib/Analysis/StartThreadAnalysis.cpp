@@ -61,7 +61,12 @@ std::string GetLocationInfo(clang::SourceLocation src_loc,
                             clang::ASTContext &ctx) {
   std::ostringstream convert;
   clang::PresumedLoc pl = ctx.getSourceManager().getPresumedLoc(src_loc);
-  convert << pl.getFilename() << ":" << pl.getLine() << ":" << pl.getColumn();
+  std::string filename = pl.getFilename();
+  std::size_t pos = filename.find_last_of("/");
+  if (pos != std::string::npos) {
+    filename = filename.substr(pos + 1);
+  }
+  convert << filename << ":" << pl.getLine() << ":" << pl.getColumn();
   return convert.str();
 }
 

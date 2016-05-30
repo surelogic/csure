@@ -149,63 +149,111 @@ namespace {
 // | | |-msg3
 //
 // Warning: This method does not work with graphs yet! It will core dump.
-void printMsg(std::ostringstream &out, int level, const std::string &msg) {
+void PrintMsg(std::ostringstream &out, int level, const std::string &msg) {
+  static const char *line = u8"\u2502";
+  static const char *line_r_dash = u8"\u251c";
+  static const char *dash = u8"\u2500";
   if (level > 0)
     for (int i = 0; i < level; ++i)
-      out << "| ";
-  out << "|-" << msg << "\n";
+      out << line << " ";
+  out << line_r_dash << dash << msg << "\n";
 }
 
-// Forward declaration for recursive call.
-void printPromises(
-    std::ostringstream &out, int level,
-    const std::unordered_set<std::shared_ptr<PromiseDrop>> &promises);
+// Utility function to order the unordered sets commonly used by the sea.
+// This changes a std::unordered_set into a std::vector sorted by the
+// drop's message string.
+//
+// This function is used by the sea output functions below.
+template <typename T>
+std::vector<std::shared_ptr<T>>
+AlphaOrder(std::unordered_set<std::shared_ptr<T>> &drop_set) {
+  std::vector<std::pair<std::string, std::shared_ptr<T>>> msgs_and_drops;
+  for (auto &drop : drop_set)
+    msgs_and_drops.push_back(std::make_pair(drop->GetMessage(), drop));
+  std::sort(msgs_and_drops.begin(), msgs_and_drops.end());
+  std::vector<std::shared_ptr<T>> result;
+  for (auto &msg_and_drop : msgs_and_drops)
+    result.push_back(msg_and_drop.second);
+  return result;
+}
 
-// Streams into 'out' result drops and their consistency status.
-void printResults(
+// Forward declaration for mutually recursive calls below.
+void PrintResult(
     std::ostringstream &out, int level,
-    const std::unordered_set<std::shared_ptr<AnalysisResultDrop>> &results) {
-  for (auto &result : results) {
-    std::ostringstream msg;
-    msg << (result->ProvedConsistent() ? "[positive]" : "[negative]");
-    msg << " " << result->GetMessage();
-    printMsg(out, level, msg.str());
-    std::unordered_set<std::shared_ptr<PromiseDrop>> trusted_promises =
-        Sea::FilterDropsOfType<PromiseDrop>(result->GetTrusted());
-    printPromises(out, level + 1, trusted_promises);
-    std::unordered_set<std::shared_ptr<AnalysisResultDrop>> trusted_results =
-        Sea::FilterDropsOfType<AnalysisResultDrop>(result->GetTrusted());
-    printResults(out, level + 1, trusted_results);
+    std::shared_ptr<AnalysisResultDrop> result,
+    std::unordered_set<std::shared_ptr<PromiseDrop>> promises_already_printed);
+
+// Streams into 'out' a promise and its consistency status, recursively,
+// Mutually recursive with PrintResult() below.
+void PrintPromise(
+    std::ostringstream &out, int level, std::shared_ptr<PromiseDrop> promise,
+    std::unordered_set<std::shared_ptr<PromiseDrop>> promises_already_seen) {
+  bool recurse = true;
+  if (promises_already_seen.count(promise) == 0)
+    promises_already_seen.insert(promise);
+  else
+    recurse = false;
+
+  // Output the promise information.
+  static const char *arrow = u8"\u21ba";
+  std::ostringstream msg;
+  if (!recurse)
+    msg << arrow;
+  msg << (promise->ProvedConsistent() ? "[consistent]" : "[not proved]");
+  msg << " " << promise->GetMessage();
+  PrintMsg(out, level, msg.str());
+
+  // Output results this promise is checked by.
+  if (recurse) {
+    std::unordered_set<std::shared_ptr<AnalysisResultDrop>> checked_by_results =
+        promise->GetCheckedBy();
+    for (auto result : AlphaOrder(checked_by_results)) {
+      PrintResult(out, level + 1, result, promises_already_seen);
+    }
   }
 }
 
-// Streams into 'out' top-level promises and their consistency status.
-void printPromises(
+// Streams into 'out' a result and its consistency status, recursively,
+// Mutually recursive with PrintPromise() above.
+void PrintResult(
     std::ostringstream &out, int level,
-    const std::unordered_set<std::shared_ptr<PromiseDrop>> &promises) {
-  std::vector<std::pair<std::string, std::shared_ptr<PromiseDrop>>> sorted;
-  for (auto promise : promises) {
-    sorted.push_back(std::make_pair(promise->GetMessage(), promise));
-  }
-  std::sort(sorted.begin(), sorted.end());
+    std::shared_ptr<AnalysisResultDrop> result,
+    std::unordered_set<std::shared_ptr<PromiseDrop>> promises_already_seen) {
+  // Output the result information.
+  std::ostringstream msg;
+  msg << (result->ProvedConsistent() ? "[positive]" : "[negative]");
+  msg << " " << result->GetMessage();
+  PrintMsg(out, level, msg.str());
 
-  for (auto &pair : sorted) {
-    std::ostringstream msg;
-    auto promise = pair.second;
-    msg << (promise->ProvedConsistent() ? "[consistent]" : "[not proved]");
-    msg << " " << promise->GetMessage();
-    printMsg(out, level, msg.str());
-    printResults(out, level + 1, promise->GetCheckedBy());
-  }
+  // Output trusted promises.
+  std::unordered_set<std::shared_ptr<PromiseDrop>> trusted_promises =
+      Sea::FilterDropsOfType<PromiseDrop>(result->GetTrusted());
+  for (auto &trusted_promise : AlphaOrder(trusted_promises))
+    PrintPromise(out, level + 1, trusted_promise, promises_already_seen);
+
+  // Output trusted results.
+  std::unordered_set<std::shared_ptr<AnalysisResultDrop>> trusted_results =
+      Sea::FilterDropsOfType<AnalysisResultDrop>(result->GetTrusted());
+  for (auto &trusted_result : AlphaOrder(trusted_results))
+    PrintResult(out, level + 1, trusted_result, promises_already_seen);
 }
 
 } // namespace
 
 std::string Sea::ToString() {
   std::ostringstream out;
+  // Get all promises in the sea.
   std::unordered_set<std::shared_ptr<PromiseDrop>> promises =
       FilterDropsOfType<PromiseDrop>(GetDrops());
-  printPromises(out, 0, promises);
+  // We need to guard against infinite recursion so we keep track, for
+  // each promise, what other promises have been printed. We refer to
+  // this set as 'promises_already_seen'.
+  // The guard is seeing the same promise again.
+  for (auto promise : AlphaOrder(promises)) {
+    std::unordered_set<std::shared_ptr<PromiseDrop>>
+        empty_promises_already_seen;
+    PrintPromise(out, 0, promise, empty_promises_already_seen);
+  }
   return out.str();
 }
 

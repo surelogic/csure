@@ -110,6 +110,10 @@ public:
 
   // Returns a representations of the sea as a string suitable for
   // presenting to the user (or for diagnostics).
+  //
+  // Implementation note: the resulting string uses unicode characters
+  // show a tree structure and arrows to show back-links. This function
+  // is outputing the proof structure graph as a tree.
   std::string ToString();
 
   // Invalidates all drops of knowldege in this sea. Resets it to a

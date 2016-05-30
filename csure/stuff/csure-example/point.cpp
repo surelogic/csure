@@ -6,8 +6,6 @@
 }
 
 class Point {
-  int x, y;
-
 public:
   Point(int i, int j)
       : x(i), y(j){}
@@ -16,26 +14,22 @@ public:
     return x;
   }
 
-  [[starts("nothing")]] int setX(const int value) {
-    const int old = x;
-    x = value;
-    return old;
-  }
+  [[starts("nothing")]] void setX(const int value) { x = value; }
 
   [[starts("nothing")]] int getY() { return y; }
 
-  [[starts("nothing")]] int setY(const int value) {
-    const int old = y;
-    y = value;
-    return old;
-  }
+  [[starts("nothing")]] void setY(const int value) { y = value; }
 
   [[starts("nothing")]] void unusual() {
     setX(2);
     setY(3);
+    // BAD - starts thread!
     std::thread t{hello};
     t.join();
   }
+
+private:
+  int x, y;
 };
 
 [[starts("nothing")]] int main() {
