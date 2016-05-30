@@ -37,43 +37,53 @@ class StartThreadAnalysis final
     : public clang::RecursiveASTVisitor<StartThreadAnalysis> {
 public:
   // Constructs an instance of this analysis.
-  explicit StartThreadAnalysis(clang::ASTContext &Ctx) : ast_context_{Ctx} {}
-
-  // Returns true if the passed function declaration is
-  // annotated with "[[starts("nothing")]]".
-  bool declaresStartsNothing(clang::FunctionDecl *func);
-
-  // Returns true if the passed type is a thread.
-  bool isThreadType(clang::QualType);
-
-  // Returns if the passed range is within a ".cc" or ".cpp" source file.
-  bool InCppFile(clang::SourceRange range);
-
-  bool VisitAttr(clang::Attr *a);
+  explicit StartThreadAnalysis(clang::ASTContext &ctx) : ctx_{ctx} {}
 
   bool TraverseFunctionDecl(clang::FunctionDecl *func);
 
   bool VisitFunctionDecl(clang::FunctionDecl *func);
 
+  bool VisitCXXRecordDecl(clang::CXXRecordDecl *r);
+
+private:
+  // Performs actual analysis of a function declaration.
+  void FunctionDeclAnalysis(clang::FunctionDecl *func);
+
+  // Used for getting additional AST information.
+  clang::ASTContext &ctx_;
+
+  // Remembers promises on function declartions by function signature.
+  std::map<std::string, std::shared_ptr<PromiseDrop>> decl_to_promise_;
+};
+
+// \brief This analysis helps the main analysis by examining the contents
+// of each function and producing proof structures in drop-sea.
+class FunctionAnalysis final
+    : public clang::RecursiveASTVisitor<FunctionAnalysis> {
+public:
+  // Constructs an instance of this analysis.
+  explicit FunctionAnalysis(
+      clang::ASTContext &ctx,
+      std::map<std::string, std::shared_ptr<PromiseDrop>> &decl_to_promise,
+      std::shared_ptr<PromiseDrop> promise)
+      : ctx_{ctx}, decl_to_promise_{decl_to_promise},
+        context_promise_starts_nothing_{promise} {}
+
   bool VisitVarDecl(clang::VarDecl *decl);
 
   bool VisitCallExpr(clang::CallExpr *c);
-
-  bool VisitStmt(clang::Stmt *st);
 
   bool VisitCXXRecordDecl(clang::CXXRecordDecl *r);
 
 private:
   // Used for getting additional AST information.
-  clang::ASTContext &ast_context_;
+  clang::ASTContext &ctx_;
 
-  // True while visiting a function declaring starts nothing.
-  bool context_starts_nothing_;
+  // Remembers promises on function declartions by function signature.
+  std::map<std::string, std::shared_ptr<PromiseDrop>> &decl_to_promise_;
 
-  void SetPromiseOn(clang::FunctionDecl *func);
-  std::shared_ptr<Drop> GetPromiseOrNullOn(clang::FunctionDecl *func);
-
-  std::map<std::string, std::shared_ptr<Drop>> decl_to_promise_;
+  // Saves the promise drop while visiting a function annotated starts nothing.
+  const std::shared_ptr<PromiseDrop> context_promise_starts_nothing_;
 };
 
 } // namespace sl
