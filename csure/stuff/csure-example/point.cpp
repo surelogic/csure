@@ -2,17 +2,14 @@
 #include <thread>
 
 [[starts("nothing")]] void hello() {
-  std::cout << "hello, world!" << std::endl;
+  std::cout << "hello, world!\n";
 }
 
 class Point {
 public:
-  Point(int i, int j)
-      : x(i), y(j){}
+  Point(int i, int j) : x(i), y(j){}
 
-                  [[starts("nothing")]] int getX() {
-    return x;
-  }
+  [[starts("nothing")]] int getX() { return x; }
 
   [[starts("nothing")]] void setX(const int value) { x = value; }
 
@@ -33,7 +30,7 @@ private:
 };
 
 [[starts("nothing")]] int main() {
-  Point p(1, 2);
+  Point p(1, 1);
   p.unusual();
   return p.getX();
 }

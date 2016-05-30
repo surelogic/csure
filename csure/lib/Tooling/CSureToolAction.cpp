@@ -1,5 +1,7 @@
 #include "sl/Tooling/CSureToolAction.h"
 
+#include <string>
+
 #include "clang/Lex/Preprocessor.h"
 
 #include "sl/Common/SLUtil.h"
@@ -27,7 +29,15 @@ bool CSureToolAction::ParseArgs(const clang::CompilerInstance &CI,
 
 bool CSureToolAction::BeginSourceFileAction(clang::CompilerInstance &CI,
                                             llvm::StringRef Filename) {
-  l() << "CSure verifying " << Filename << "\n";
+  std::string filename = Filename;
+  std::size_t pos = filename.find_last_of("/");
+  if (pos != std::string::npos) {
+    filename = filename.substr(pos + 1);
+  }
+  l() << u8"\u2610 ";
+  l() << "\033[1;33mSureLogic CSure\033[0m ";
+  l() << u8"\u2727";
+  l() << " verifying " << filename << "\n";
   return PluginASTAction::BeginSourceFileAction(CI, Filename);
 }
 

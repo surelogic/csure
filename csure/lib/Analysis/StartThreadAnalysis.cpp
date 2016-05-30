@@ -140,10 +140,11 @@ bool IsAnnotatedWithStartsNothing(
       } else {
         // Output a warning about an unsupported starts annoation.
         clang::DiagnosticsEngine &Diags = ctx.getDiagnostics();
-        unsigned diagID = Diags.getCustomDiagID(
-            clang::DiagnosticsEngine::Warning,
-            "Only [[starts(\"nothing\")]] supported (unknown value)");
-        Diags.Report(sa->getLocation(), diagID);
+        unsigned diagID =
+            Diags.getCustomDiagID(clang::DiagnosticsEngine::Warning,
+                                  "Unknown promise [[starts(\"%0\")]], "
+                                  "only [[starts(\"nothing\")]] supported.");
+        Diags.Report(sa->getLocation(), diagID) << sa->getValue();
       }
     }
   }

@@ -199,8 +199,15 @@ void PrintPromise(
   std::ostringstream msg;
   if (!recurse)
     msg << arrow;
-  msg << (promise->ProvedConsistent() ? "[consistent]" : "[not proved]");
-  msg << " " << promise->GetMessage();
+  const bool consistent = promise->ProvedConsistent();
+  msg << (consistent ? "[\033[1;32mconsistent\033[0m]"
+                     : "[\033[1;31mnot proved\033[0m]");
+  std::string promise_msg = promise->GetMessage();
+  std::size_t pos = promise_msg.find("on");
+  // match promise with result color.
+  msg << " \033[1;37m" << promise_msg.substr(0, pos);
+  msg << (consistent ? "\033[0;33m" : "\033[0;31m");
+  msg << promise_msg.substr(pos) << "\033[0m";
   PrintMsg(out, level, msg.str());
 
   // Output results this promise is checked by.
@@ -221,8 +228,11 @@ void PrintResult(
     std::unordered_set<std::shared_ptr<PromiseDrop>> promises_already_seen) {
   // Output the result information.
   std::ostringstream msg;
-  msg << (result->ProvedConsistent() ? "[positive]" : "[negative]");
-  msg << " " << result->GetMessage();
+  const bool consistent = result->ProvedConsistent();
+  msg << (consistent ? "[\033[32mpositive\033[0m]"
+                     : "[\033[31mnegative\033[0m]");
+  msg << (consistent ? " \033[33m" : " \033[31m");
+  msg << result->GetMessage() << "\033[0m";
   PrintMsg(out, level, msg.str());
 
   // Output trusted promises.
@@ -254,6 +264,7 @@ std::string Sea::ToString() {
         empty_promises_already_seen;
     PrintPromise(out, 0, promise, empty_promises_already_seen);
   }
+  out << u8"\u2610" << "\n";
   return out.str();
 }
 
