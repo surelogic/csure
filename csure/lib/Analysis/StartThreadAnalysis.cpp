@@ -253,7 +253,7 @@ bool FunctionAnalysis::VisitCallExpr(clang::CallExpr *c) {
             GetPromiseOrNullOn(func, decl_to_promise_);
         std::ostringstream msg;
         msg << "Call to function '" << GetSignature(func)
-            << "()' promises to start no threads @ "
+            << "' promises to start no threads @ "
             << GetLocationInfo(c->getRParenLoc(), ctx_);
         D(l() << ID << "-" << msg.str() << "\n");
         result->SetMessage(msg.str());
@@ -266,7 +266,7 @@ bool FunctionAnalysis::VisitCallExpr(clang::CallExpr *c) {
             Sea::Default()->NewInconsistentResult();
         std::ostringstream msg;
         msg << "Unsafe call to function '" << GetSignature(func)
-            << "()' that may start a thread @ "
+            << "' that may start a thread @ "
             << GetLocationInfo(c->getRParenLoc(), ctx_);
         D(l() << ID << "-" << msg.str() << "\n");
         result->SetMessage(msg.str());
