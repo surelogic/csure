@@ -15,6 +15,10 @@
 #include <iostream>
 #include <string>
 
+// Uncomment the next line to get detailed diagnostic output from the analysis.
+//#define SL_DEBUG
+#include "SLDebug.h"
+
 namespace clang {
 namespace tidy {
 namespace surelogic {
@@ -67,7 +71,6 @@ void UsingCheck::check(
 }
 
 void UsingCheck::onStartOfTranslationUnit() {
-  std::cerr << "start\n";
   ClangTidyCheck::onStartOfTranslationUnit();
 }
 
@@ -100,7 +103,6 @@ void UsingCheck::handleUsingDirectiveDecl(
 
   std::string nsTryingToUse{
       U->getNominatedNamespaceAsWritten()->getQualifiedNameAsString()};
-  // std::cerr << "found using for " << nsTryingToUse << "\n";
 
   clang::SourceRange Range{U->getSourceRange()};
 
@@ -133,8 +135,8 @@ void UsingCheck::handleUsingDirectiveDecl(
   if (utils::isPresumedLocInHeaderFile(Loc, *Result.SourceManager,
                                        HeaderFileExtensions)) {
     // using directive is in a header file...we report this and do not
-    // generate a FixIt
-    // because we do not know where it could be included.
+    // generate a FixIt because we do not know where it could be
+    // included.
     diag(Range.getBegin(),
          "do not use namespace using-directives; use using-declarations "
          "instead (in header file)");
@@ -146,8 +148,7 @@ void UsingCheck::handleUsingDirectiveDecl(
   } else {
     // duplicate using directive in the translation unit...we report this and
     // generate a FixIt to remove the directive. The first occurance found
-    // will
-    // fix all the uses.
+    // will fix all the uses.
     diag(Range.getBegin(),
          "do not use namespace using-directives; use using-declarations "
          "instead")
@@ -189,17 +190,17 @@ void UsingCheck::handleDeclRefExpr(
                                                 Result.Context->getLangOpts())
                                .str();
   std::string newText = actualNS + "::" + sourceText;
-  // std::cerr << " ** replace " << sourceText << " with " << newText << "\n";
   if (namespaceToDiag.count(actualNS)) {
     std::pair<clang::SourceRange, std::string> u1{Range, newText};
     namespaceToDiag[actualNS]->use.push_back(u1);
   }
 }
 
-/// Handle types in variable declarations
-///   string s;
-///  becomes
-///    std::string s;
+// Handle types in variable declarations. For example:
+//   string s;
+//  becomes
+//    std::string s;
+// When "useing namespace std;" is removed.
 void UsingCheck::handleVarDecl(
     const clang::ast_matchers::MatchFinder::MatchResult &Result) {
   const VarDecl *VD = Result.Nodes.getNodeAs<VarDecl>("varDecl");
@@ -212,54 +213,75 @@ void UsingCheck::handleVarDecl(
                                        HeaderFileExtensions))
     return;
   clang::SourceRange Range{VD->getSourceRange()};
+  clang::SourceRange RangeForString{Range};
   clang::QualType QT = VD->getType();
-
   const clang::Type *UT = QT.getTypePtr();
   if (!UT)
     return;
 
   if (UT->isBuiltinType())
     return;
+
+  // TODO(hallorant) This is really a best effort. We need a lot more
+  // knowledge of how Clang deals with the complex C++ type sytem to
+  // make this transformation sound. However, the below code empirically
+  // covers a lot of common cases in real C++ code.
   if (UT->getTypeClass() == clang::Type::TypeClass::Typedef) {
+    // Handle the common case of a typedef as well as we can.
     const clang::TypedefType *tdty = UT->getAs<clang::TypedefType>();
     const clang::TypedefNameDecl *tdnd = tdty->getDecl();
-    clang::SourceRange range55 = tdnd->getSourceRange();
+    std::string actualNS = tdnd->getQualifiedNameAsString();
+    D(std::cerr << "[TypeClass::Typedef] "
+                   "clang::TypedefNameDecl->getQualifiedNameAsString() = "
+                << actualNS << "\n";)
+    std::size_t pos = actualNS.find_last_of("::");
+    if (pos == std::string::npos)
+      return;
+    actualNS = actualNS.substr(0, pos - 1);
+    // special case for std:: to fix stuff like "std::__cxx11::string"
+    // The standard library uses odd namespace aliases.
+    std::string std_prefix{"std::_"};
+    if (actualNS.compare(0, std_prefix.length(), std_prefix) == 0)
+      actualNS = "std";
+    D(std::cerr << "[TypeClass::Typedef] namespace " << actualNS << "\n";)
+
     CharSourceRange CSR = Lexer::makeFileCharRange(
-        CharSourceRange::getTokenRange(range55), *Result.SourceManager,
+        CharSourceRange::getTokenRange(RangeForString), *Result.SourceManager,
         Result.Context->getLangOpts());
-    std::string typedef55 = Lexer::getSourceText(CSR, *Result.SourceManager,
-                                                 Result.Context->getLangOpts())
-                                .str();
-    std::cerr << " ** THE TYPEDEF : " << typedef55 << "\n";
-    std::cerr << " -=- getNameAsString() = " << tdnd->getNameAsString() << "\n";
-    std::cout << "-=- getQualifiedNameAsString() = "
-              << tdty->getDecl()->getQualifiedNameAsString() << " "
-              << VD->getNameAsString() << "\n";
-  }
-
-  std::cerr << " ** QT.getAsString() =  " << QT.getAsString() << "\n";
-  std::cerr << " ** QT.getCanonicalType().getAsString() =  "
-            << QT.getCanonicalType().getAsString() << "\n";
-  std::cerr << " ** QT.getUnqualifiedType().getAsString() =  "
-            << QT.getUnqualifiedType().getAsString() << "\n";
-
-  clang::QualType ds = UT->getLocallyUnqualifiedSingleStepDesugaredType();
-
-  std::cerr << " ** ds.getAsString() =  " << ds.getAsString() << "\n";
-
-  const clang::IdentifierInfo *idinfo = QT.getBaseTypeIdentifier();
-  if (idinfo)
-    std::cerr << " ** QT.getBaseTypeIdentifier() = " << idinfo->getName().str()
-              << "\n";
-
-  clang::SourceRange RangeForString{Range};
-  CharSourceRange CSR = Lexer::makeFileCharRange(
-      CharSourceRange::getTokenRange(RangeForString), *Result.SourceManager,
-      Result.Context->getLangOpts());
-  std::string possibleSemi = Lexer::getSourceText(CSR, *Result.SourceManager,
+    std::string sourceText = Lexer::getSourceText(CSR, *Result.SourceManager,
                                                   Result.Context->getLangOpts())
                                  .str();
-  std::cerr << " ** VarDecl: " << possibleSemi << "\n";
+    std::string newText = actualNS + "::" + sourceText;
+    if (namespaceToDiag.count(actualNS)) {
+      std::pair<clang::SourceRange, std::string> u1{Range, newText};
+      namespaceToDiag[actualNS]->use.push_back(u1);
+    }
+  } else {
+    // Make a best-effort on every other kind of type use.
+    std::string qt = clang::QualType::getAsString(QT.split());
+    D(std::cerr << "[TypeClass::OTHER] type string " << qt << "\n";)
+    std::size_t pos = qt.find_last_of("::");
+    if (pos == std::string::npos)
+      return;
+    std::string actualNS = qt.substr(0, pos - 1);
+    pos = actualNS.find_last_of(" ");
+    if (pos == std::string::npos)
+      return;
+    actualNS = actualNS.substr(pos + 1);
+    D(std::cerr << "[TypeClass::OTHER] namespace " << actualNS << "\n";)
+
+    CharSourceRange CSR = Lexer::makeFileCharRange(
+        CharSourceRange::getTokenRange(RangeForString), *Result.SourceManager,
+        Result.Context->getLangOpts());
+    std::string sourceText = Lexer::getSourceText(CSR, *Result.SourceManager,
+                                                  Result.Context->getLangOpts())
+                                 .str();
+    std::string newText = actualNS + "::" + sourceText;
+    if (namespaceToDiag.count(actualNS)) {
+      std::pair<clang::SourceRange, std::string> u1{Range, newText};
+      namespaceToDiag[actualNS]->use.push_back(u1);
+    }
+  }
 }
 
 } // namespace readability
