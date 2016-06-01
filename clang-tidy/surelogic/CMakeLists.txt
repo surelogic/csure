@@ -2,11 +2,12 @@ set(LLVM_LINK_COMPONENTS support)
 
 add_clang_library(clangTidySureLogicModule
   SureLogicTidyModule.cpp
-  FixedCommentCheck.cpp
-  UsingCheck.cpp
-  NullStmtCheck.cpp
-  EmptyDeclCheck.cpp
   HeaderFileExtensionsUtils.cpp
+  EmptyDeclCheck.cpp
+  FixedCommentCheck.cpp
+  NullStmtCheck.cpp
+  UsingCheck.cpp
+  VoidReturnCheck.cpp
 
   LINK_LIBS
   clangAST

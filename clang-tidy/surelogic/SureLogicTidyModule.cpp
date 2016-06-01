@@ -9,6 +9,7 @@
 #include "FixedCommentCheck.h"
 #include "NullStmtCheck.h"
 #include "UsingCheck.h"
+#include "VoidReturnCheck.h"
 
 using namespace clang::ast_matchers;
 
@@ -19,14 +20,16 @@ namespace surelogic {
 class SureLogicModule : public ClangTidyModule {
 public:
   void addCheckFactories(ClangTidyCheckFactories &CheckFactories) override {
-    CheckFactories.registerCheck<readability::FixedCommentCheck>(
-        "surelogic-readability-fixed");
-    CheckFactories.registerCheck<readability::UsingCheck>(
-        "surelogic-readability-using");
-    CheckFactories.registerCheck<readability::NullStmtCheck>(
-        "surelogic-readability-nullstmt");
     CheckFactories.registerCheck<readability::EmptyDeclCheck>(
         "surelogic-readability-emptydecl");
+    CheckFactories.registerCheck<readability::FixedCommentCheck>(
+        "surelogic-readability-fixed");
+    CheckFactories.registerCheck<readability::NullStmtCheck>(
+        "surelogic-readability-nullstmt");
+    CheckFactories.registerCheck<readability::UsingCheck>(
+        "surelogic-readability-using");
+    CheckFactories.registerCheck<readability::VoidReturnCheck>(
+        "surelogic-readability-voidreturn");
   }
 };
 

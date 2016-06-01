@@ -1,4 +1,5 @@
 #include "EmptyDeclCheck.h"
+
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/Decl.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"

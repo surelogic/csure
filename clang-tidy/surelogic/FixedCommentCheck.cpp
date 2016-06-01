@@ -1,4 +1,5 @@
 #include "FixedCommentCheck.h"
+
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/Lex/Preprocessor.h"
 

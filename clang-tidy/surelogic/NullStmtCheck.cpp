@@ -1,4 +1,5 @@
 #include "NullStmtCheck.h"
+
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/Stmt.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
