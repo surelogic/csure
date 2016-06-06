@@ -5,17 +5,14 @@
 
 namespace sl {
 
-// \brief Base class for all promises in the sea of knowledge. Within a
-// analysis-based verification system, promises represent models of design
-// intent or cutpoints for the analyses.
+/// \brief Base class for all promises in the sea of knowledge. Within a
+/// analysis-based verification system, promises represent models of design
+/// intent or cutpoints for the analyses.
 class StartsPromiseDrop final : public PromiseDrop {
   friend class Sea;
 
-public:
-  bool IsCheckedByAnalysis() { return false; }
-
 protected:
-  // Invoked by the sea and subclass constructors.
+  /// Invoked by the sea and subclass constructors.
   StartsPromiseDrop(std::shared_ptr<Sea> sea) : PromiseDrop{sea} {}
 };
 

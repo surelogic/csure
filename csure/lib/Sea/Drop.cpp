@@ -2,6 +2,8 @@
 
 #include "sl/Sea/Sea.h"
 
+/// @file
+
 namespace sl {
 
 void Drop::AddDependent(std::shared_ptr<Drop> dependent) {

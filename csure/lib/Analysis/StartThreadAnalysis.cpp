@@ -25,6 +25,8 @@
 #include "sl/Common/SLUtil.h"
 #include "sl/Sea/Sea.h"
 
+/// @file
+
 namespace sl {
 
 namespace {

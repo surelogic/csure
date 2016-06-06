@@ -6,7 +6,7 @@
 
 namespace sl {
 
-// \brief Used to examine each translation unit passed to CSure.
+/// \brief Used to examine each translation unit passed to CSure.
 class CSureASTConsumer : public clang::ASTConsumer {
   virtual void HandleTranslationUnit(clang::ASTContext &Ctx) override;
 };

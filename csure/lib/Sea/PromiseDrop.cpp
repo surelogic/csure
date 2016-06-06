@@ -4,6 +4,8 @@
 #include "sl/Sea/ResultDrop.h"
 #include "sl/Sea/Sea.h"
 
+/// @file
+
 namespace sl {
 
 bool PromiseDrop::IsCheckedByAnalysis() {

@@ -5,13 +5,13 @@
 
 namespace sl {
 
-// \brief Allows the analysis to output metrics about the code or
-// the analysis of the code to the tool user.
+/// \brief Allows the analysis to output metrics about the code or
+/// the analysis of the code to the tool user.
 class MetricDrop final : public Drop {
   friend class Sea;
 
 protected:
-  // Invoked by the sea and subclass constructors.
+  /// Invoked by the sea and subclass constructors.
   MetricDrop(std::shared_ptr<Sea> sea) : Drop{sea} {}
 };
 

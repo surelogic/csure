@@ -1,5 +1,7 @@
 #include "sl/Sea/ResultDrop.h"
 
+/// @file
+
 namespace sl {
 
 void ResultDrop::ProofInitialize() {

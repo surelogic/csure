@@ -4,6 +4,8 @@
 #include "sl/Common/SLUtil.h"
 #include <iostream>
 
+/// @file
+
 namespace sl {
 
 void CSureASTConsumer::HandleTranslationUnit(clang::ASTContext &Ctx) {

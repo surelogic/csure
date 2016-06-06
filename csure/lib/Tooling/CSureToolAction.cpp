@@ -8,6 +8,8 @@
 #include "sl/Tooling/CSureASTConsumer.h"
 #include "sl/Tooling/CSurePreprocessorConsumer.h"
 
+/// @file
+
 namespace sl {
 
 std::unique_ptr<clang::ASTConsumer>

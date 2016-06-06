@@ -5,13 +5,13 @@
 
 namespace sl {
 
-// \brief Allows the analysis to give "hints" (suggestions and warnings) to
-// the tool user.
+/// \brief Allows the analysis to give "hints" (suggestions and warnings) to
+/// the tool user.
 class HintDrop final : public Drop {
   friend class Sea;
 
 protected:
-  // Invoked by the sea and subclass constructors.
+  /// Invoked by the sea and subclass constructors.
   HintDrop(std::shared_ptr<Sea> sea) : Drop{sea} {}
 };
 

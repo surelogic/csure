@@ -11,8 +11,8 @@
 
 namespace sl {
 
-// \brief The CSure analysis-based verification tool "main" within
-// the Clang compiler tool interface.
+/// \brief The CSure analysis-based verification tool "main" within
+/// the Clang compiler tool interface.
 class CSureToolAction : public clang::PluginASTAction {
 protected:
   std::unique_ptr<clang::ASTConsumer>

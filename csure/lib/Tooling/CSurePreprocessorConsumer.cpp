@@ -2,6 +2,8 @@
 
 #include "sl/Common/SLUtil.h"
 
+/// @file
+
 namespace sl {
 
 void CSurePreprocessorConsumer::InclusionDirective(

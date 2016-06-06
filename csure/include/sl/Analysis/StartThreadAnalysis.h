@@ -24,19 +24,19 @@
 
 namespace sl {
 
-// \brief Verifies that a function does not start a new thread of execution.
-// For example the below C++ snippet would verify in the CSure tool:
-//
-// [[starts("nothing")]] void hello() {
-//   std::cout << "hello, world!" << std::endl;
-// }
-//
-// Results are reported into the drop-sea truth maintence system for later
-// output to the user.
+/// \brief Verifies that a function does not start a new thread of execution.
+/// For example the below C++ snippet would verify in the CSure tool:
+///
+/// [[starts("nothing")]] void hello() {
+///   std::cout << "hello, world!" << std::endl;
+/// }
+///
+/// Results are reported into the drop-sea truth maintence system for later
+/// output to the user.
 class StartThreadAnalysis final
     : public clang::RecursiveASTVisitor<StartThreadAnalysis> {
 public:
-  // Constructs an instance of this analysis.
+  /// Constructs an instance of this analysis.
   explicit StartThreadAnalysis(clang::ASTContext &ctx) : ctx_{ctx} {}
 
   bool TraverseFunctionDecl(clang::FunctionDecl *func);
@@ -44,22 +44,22 @@ public:
   bool VisitFunctionDecl(clang::FunctionDecl *func);
 
 private:
-  // Performs actual analysis of a function declaration.
+  /// Performs actual analysis of a function declaration.
   void FunctionDeclAnalysis(clang::FunctionDecl *func);
 
-  // Used for getting additional AST information.
+  /// Used for getting additional AST information.
   clang::ASTContext &ctx_;
 
-  // Remembers promises on function declartions by function signature.
+  /// Remembers promises on function declartions by function signature.
   std::map<std::string, std::shared_ptr<PromiseDrop>> decl_to_promise_;
 };
 
-// \brief This analysis helps the main analysis by examining the contents
-// of each function and producing proof structures in drop-sea.
+/// \brief This analysis helps the main analysis by examining the contents
+/// of each function and producing proof structures in drop-sea.
 class FunctionAnalysis final
     : public clang::RecursiveASTVisitor<FunctionAnalysis> {
 public:
-  // Constructs an instance of this analysis.
+  /// Constructs an instance of this analysis.
   explicit FunctionAnalysis(
       clang::ASTContext &ctx,
       std::map<std::string, std::shared_ptr<PromiseDrop>> &decl_to_promise,
@@ -76,17 +76,17 @@ public:
   bool VisitCXXRecordDecl(clang::CXXRecordDecl *r);
 
 private:
-  // Used for getting additional AST information.
+  /// Used for getting additional AST information.
   clang::ASTContext &ctx_;
 
-  // Remembers promises on function declartions by function signature.
+  /// Remembers promises on function declartions by function signature.
   std::map<std::string, std::shared_ptr<PromiseDrop>> &decl_to_promise_;
 
-  // Saves the promise drop while visiting a function annotated starts nothing.
+  /// Saves the promise drop while visiting a function annotated starts nothing.
   const std::shared_ptr<PromiseDrop> context_promise_starts_nothing_;
 
-  // Saves the function is consistent message to be possibly invalidated
-  // if  the function is found to start threads.
+  /// Saves the function is consistent message to be possibly invalidated
+  /// if  the function is found to start threads.
   const std::shared_ptr<ResultDrop> result_starts_no_threads_;
 };
 

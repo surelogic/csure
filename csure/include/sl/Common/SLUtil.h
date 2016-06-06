@@ -5,8 +5,8 @@
 
 namespace sl {
 
-// \brief This is a helper to return llvm::errs() for debug output within
-// the SureLogic tools.
+/// \brief This is a helper to return llvm::errs() for debug output within
+/// the SureLogic tools.
 llvm::raw_ostream &l();
 
 } // namespace sl

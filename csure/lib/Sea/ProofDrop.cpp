@@ -3,6 +3,8 @@
 #include "sl/Sea/AnalysisResultDrop.h"
 #include "sl/Sea/Sea.h"
 
+/// @file
+
 namespace sl {
 
 std::unordered_set<std::shared_ptr<AnalysisResultDrop>>

@@ -17,6 +17,8 @@
 #include "sl/Analysis/ExampleVisitor.h"
 #include "sl/Common/SLUtil.h"
 
+/// @file
+
 namespace sl {
 
 bool ExampleVisitor::isInLocalFile(clang::SourceRange range) {

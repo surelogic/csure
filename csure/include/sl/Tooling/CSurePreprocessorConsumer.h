@@ -5,9 +5,9 @@
 
 namespace sl {
 
-// \brief Used to examine each "#include" that exists in a translation
-// unit and keep track of nested includes. This is not needed by all
-// analyses.
+/// \brief Used to examine each "#include" that exists in a translation
+/// unit and keep track of nested includes. This is not needed by all
+/// analyses.
 class CSurePreprocessorConsumer : public clang::PPCallbacks {
   ~CSurePreprocessorConsumer() {}
 

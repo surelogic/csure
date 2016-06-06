@@ -2,6 +2,8 @@
 
 #include "sl/Sea/PromiseDrop.h"
 
+/// @file
+
 namespace sl {
 
 void AnalysisResultDrop::AddChecked(std::shared_ptr<PromiseDrop> promise) {

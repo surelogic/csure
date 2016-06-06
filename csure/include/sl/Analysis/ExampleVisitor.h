@@ -19,10 +19,10 @@
 
 namespace sl {
 
-// \brief An example analysis visitor used for testing CSure analyses.
+/// \brief An example analysis visitor used for testing CSure analyses.
 class ExampleVisitor : public clang::RecursiveASTVisitor<ExampleVisitor> {
 private:
-  // Used for getting additional AST information.
+  /// Used for getting additional AST information.
   clang::ASTContext &ast_context_;
 
 public:
